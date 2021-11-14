@@ -13,7 +13,7 @@ export const createFlights = async (req,res)=>{
      //model..variable
      const newFlight= new FlightData(flight);
     try{
-        await newStudent.save();
+        await newFlight.save();
         res.status(201).json(newFlight);
     }catch(error){
         res.status(409).json({message:error.message});
