@@ -1,13 +1,15 @@
 import cors from 'cors';
 import mongoose from 'mongoose';
 import express from 'express';
-
+import flightRoutes from './routes/flight.js';
 const app=express();
 
 app.use(express.json({limit:"20mb", extended:true}));
 app.use(express.urlencoded({limit:"20mb", extended:true}));
 
 app.use(cors());
+
+app.use('/flights',flightRoutes);
 
 const CONNECTION_URL=
 'mongodb+srv://vscode1357:vscode1357@cluster0.kxzfh.mongodb.net/myFirstDatabase?retryWrites=true&w=majority';
