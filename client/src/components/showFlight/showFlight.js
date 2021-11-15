@@ -11,16 +11,7 @@ import IconButton from '@material-ui/core/IconButton';
 import DeleteIcon from '@material-ui/icons/Delete';
 import Stack from '@mui/material/Stack';
 import Button from '@mui/material/Button';
-// function createData(name, flightNo,departureTime,arrivalTime,ecoSeatNo,businessSeatNo,airport,terminal) {
-//   return { name, flightNo,departureTime,arrivalTime,ecoSeatNo,businessSeatNo,airport,terminal};
-// }
 
-// const rows = [
-//   createData('EgyptAir',731,"10:25","12:15",120,40,'CAI','E3'),
-//   createData('Lufthansa',731,"9:15","13:45",130,35,'LAX','T2'),
-//   createData('RaynAir',5364,"12:55","14:35",140,45,'SXF','7'),
-//   createData('Emirates',721,"11:45","13:15",145,40,'FRA','A1'),
-//   createData('Egyptair',71
 export default function ShowFlight() {
   const[flightList, setFlightList]=useState([])
 

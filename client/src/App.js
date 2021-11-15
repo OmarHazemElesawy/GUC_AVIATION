@@ -1,4 +1,3 @@
-import logo from './logo.svg';
 import './App.css';
 import {Container , AppBar,Typography,Grow,Grid} from '@material-ui/core';
 import Show from './components/showFlight/showFlight.js';
