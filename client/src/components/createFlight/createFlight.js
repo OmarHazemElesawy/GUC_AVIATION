@@ -4,14 +4,15 @@ import TextField from '@mui/material/TextField';
 import Stack from '@mui/material/Stack';
 import Button from '@mui/material/Button';
 import axios from 'axios';
+
 export default function Create() {
     //update date
     const [flight,setFlight]=useState({
-      flightNo: 0,
-      departureTime:0,
-      arrivalTime:0,
-      ecoSeatNo:0,
-      businessSeatNo:0,
+      flightNo:'',
+      departureTime:'',
+      arrivalTime:'',
+      ecoSeatNo:'',
+      businessSeatNo:'',
       airport:'',
       terminal:''
        });
@@ -31,29 +32,29 @@ export default function Create() {
       noValidate
       autoComplete="off"
     >
-      <TextField id="outlined-basic" label="flightNo" variant="outlined" value={flight.flightNo}onChange={(event)=>{
+      <TextField id="outlined-basic" label="Flight Number" variant="outlined" value={flight.flightNo}onChange={(event)=>{
           setFlight({ ...flight,flightNo:event.target.value})
         }}/>
-      <TextField id="outlined-basic" label="departureTime" variant="outlined" value={flight.departureTime}onChange={(event)=>{
+      <TextField id="outlined-basic" label="Departure Time" variant="outlined" value={flight.departureTime}onChange={(event)=>{
           setFlight({ ...flight,departureTime:event.target.value})
         }}/>
-      <TextField id="outlined-basic" label="arrivalTime" variant="outlined" value={flight.arrivalTime}onChange={(event)=>{
+      <TextField id="outlined-basic" label="Arrival Time" variant="outlined" value={flight.arrivalTime}onChange={(event)=>{
           setFlight({ ...flight,arrivalTime:event.target.value})
         }}/>
-      <TextField id="outlined-basic" label="ecoSeatNo" variant="outlined"value={flight.ecoSeatNo}onChange={(event)=>{
+      <TextField id="outlined-basic" label="Economic Seat Number" variant="outlined"value={flight.ecoSeatNo}onChange={(event)=>{
           setFlight({ ...flight,ecoSeatNo:event.target.value})
         }}/>
-              <TextField id="outlined-basic" label="businessSeatNo" variant="outlined" value={flight.businessSeatNo}onChange={(event)=>{
+              <TextField id="outlined-basic" label="Business Seat Number" variant="outlined" value={flight.businessSeatNo}onChange={(event)=>{
           setFlight({ ...flight,businessSeatNo:event.target.value})
         }}/>
-      <TextField id="outlined-basic" label="airport" variant="outlined" value={flight.airport}onChange={(event)=>{
+      <TextField id="outlined-basic" label="Airport" variant="outlined" value={flight.airport}onChange={(event)=>{
           setFlight({ ...flight,airport:event.target.value})
         }}/>
-      <TextField id="outlined-basic" label="terminal" variant="outlined"value={flight.terminal}onChange={(event)=>{
+      <TextField id="outlined-basic" label="Terminal" variant="outlined"value={flight.terminal}onChange={(event)=>{
           setFlight({ ...flight,terminal:event.target.value})
         }}/>
       <Stack spacing={2} direction="row">
-      <Button variant="outlined" align="center" onClick={createFlight}>Create Flight</Button>
+        <Button variant="outlined" onClick={createFlight}>Create Flight</Button>
     </Stack>
     </Box>
     </>

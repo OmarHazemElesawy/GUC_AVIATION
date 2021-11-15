@@ -7,17 +7,16 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 
-
 function createData(name, flightNo,departureTime,arrivalTime,ecoSeatNo,businessSeatNo,airport,terminal) {
   return { name, flightNo,departureTime,arrivalTime,ecoSeatNo,businessSeatNo,airport,terminal};
 }
 
 const rows = [
-  createData('Frozen yoghurt', 159, 6.0, 24, 4.0),
-  createData('Ice cream sandwich', 237, 9.0, 37, 4.3),
-  createData('Eclair', 262, 16.0, 24, 6.0),
-  createData('Cupcake', 305, 3.7, 67, 4.3),
-  createData('Gingerbread', 356, 16.0, 49, 3.9),
+  createData('EgyptAir',731,"10:25","12:15",120,40,'CAI','E3'),
+  createData('Lufthansa',731,"9:15","13:45",130,35,'LAX','T2'),
+  createData('RaynAir',5364,"12:55","14:35",140,45,'SXF','7'),
+  createData('Emirates',721,"11:45","13:15",145,40,'FRA','A1'),
+  createData('Egyptair',711,"10:45","11:25",130,50,'MUC','F3'),
 ];
 
 export default function BasicTable() {
@@ -27,17 +26,17 @@ export default function BasicTable() {
           All Flights
       </h2>
     <TableContainer component={Paper}>
-      <Table sx={{ minWidth: 650 }} aria-label="simple table">
+      <Table style={{width : 650}} aria-label="simple table">
         <TableHead>
           <TableRow>
             <TableCell>Flight details</TableCell>
-            <TableCell align="right" style={{width:'30%'}}>FlightNo</TableCell>
-            <TableCell align="right" style={{width:'30%'}}>DepartureTime</TableCell>
-            <TableCell align="right" style={{width:'30%'}}>ArrivalTime</TableCell>
-            <TableCell align="right" style={{width:'30%'}}>EcoSeatNo</TableCell>
-            <TableCell align="right" style={{width:'30%'}}>BusinessSeatNo</TableCell>
-            <TableCell align="right" style={{width:'30%'}}>Airport</TableCell>
-            <TableCell align="right" style={{width:'30%'}}>Terminal</TableCell>
+            <TableCell align="right" >FlightNo</TableCell>
+            <TableCell align="right" >DepartureTime</TableCell>
+            <TableCell align="right" >ArrivalTime</TableCell>
+            <TableCell align="right" >EcoSeatNo</TableCell>
+            <TableCell align="right" >BusinessSeatNo</TableCell>
+            <TableCell align="right" >Airport</TableCell>
+            <TableCell align="right" >Terminal</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
