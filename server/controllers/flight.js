@@ -18,4 +18,18 @@ export const createFlights = async (req,res)=>{
     }catch(error){
         res.status(409).json({message:error.message});
     }
-};
+}
+
+export const deleteFlight = async (req,res)=>{
+   const id =req.params.id;
+
+   try{
+       await FlightData.findByIdAndRemove(id).exec();
+        res.send('Successfully deleted')
+   }catch(error){
+       console.log(error);
+   }
+}
+
+
+

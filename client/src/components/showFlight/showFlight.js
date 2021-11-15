@@ -7,7 +7,10 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import axios from 'axios';
-
+import IconButton from '@material-ui/core/IconButton';
+import DeleteIcon from '@material-ui/icons/Delete';
+import Stack from '@mui/material/Stack';
+import Button from '@mui/material/Button';
 // function createData(name, flightNo,departureTime,arrivalTime,ecoSeatNo,businessSeatNo,airport,terminal) {
 //   return { name, flightNo,departureTime,arrivalTime,ecoSeatNo,businessSeatNo,airport,terminal};
 // }
@@ -17,13 +20,20 @@ import axios from 'axios';
 //   createData('Lufthansa',731,"9:15","13:45",130,35,'LAX','T2'),
 //   createData('RaynAir',5364,"12:55","14:35",140,45,'SXF','7'),
 //   createData('Emirates',721,"11:45","13:15",145,40,'FRA','A1'),
-//   createData('Egyptair',711,"10:45","11:25",130,50,'MUC','F3'),
-// ];
-
-
+//   createData('Egyptair',71
 export default function ShowFlight() {
   const[flightList, setFlightList]=useState([])
 
+const deleteFlight=(id)=>{
+  axios.delete(`http://localhost:5000/flights/${id}`).then(()=>{
+    window.location.reload(false);
+  })
+}
+const updateFlight=(id)=>{
+  axios.post(`http://localhost:5000/flights/${id}`).then(()=>{
+    window.location.reload(false);
+  })
+}
   useEffect(()=>{
     axios.get('http://localhost:5000/flights').then((allFlights)=>{
       setFlightList(allFlights.data);
@@ -36,16 +46,18 @@ export default function ShowFlight() {
           All Flights
       </h2>
     <TableContainer component={Paper}>
-      <Table style={{width : 650}} aria-label="simple table">
+      <Table style={{width : 900}} aria-label="simple table">
         <TableHead>
           <TableRow>
-            <TableCell align="right" >FlightNo</TableCell>
-            <TableCell align="right" >DepartureTime</TableCell>
-            <TableCell align="right" >ArrivalTime</TableCell>
-            <TableCell align="right" >EcoSeatNo</TableCell>
-            <TableCell align="right" >BusinessSeatNo</TableCell>
+            <TableCell align="right" >Flight No.</TableCell>
+            <TableCell align="right" >Departure Time</TableCell>
+            <TableCell align="right" >Arrival Time</TableCell>
+            <TableCell align="right" >Economic Seats No.</TableCell>
+            <TableCell align="right" >Business Seats No.</TableCell>
             <TableCell align="right" >Airport</TableCell>
             <TableCell align="right" >Terminal</TableCell>
+            <TableCell align="right" >Delete</TableCell>
+            <TableCell align="right" >Update</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
@@ -63,6 +75,21 @@ export default function ShowFlight() {
               <TableCell align="right">{flight.businessSeatNo}</TableCell>
               <TableCell align="right">{flight.airport}</TableCell>
               <TableCell align="right">{flight.terminal}</TableCell>
+              <TableCell align="right">
+              <IconButton aria-label="delete" onClick={()=>{
+                const confirmBox = window.confirm("Do you really want to delete this entry?")
+                if(confirmBox===true){
+                  deleteFlight(flight._id)
+                }
+              }}>
+                <DeleteIcon />
+                </IconButton>
+              </TableCell>
+              <TableCell align="right">
+              <Stack spacing={2} direction="row">
+                <Button variant="outlined" onClick={()=>updateFlight(flight._id)}>Select</Button>
+        </Stack>
+              </TableCell>
             </TableRow>
           ))}
         </TableBody>

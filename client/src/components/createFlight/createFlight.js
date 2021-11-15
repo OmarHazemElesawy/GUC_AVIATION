@@ -17,7 +17,9 @@ export default function Create() {
       terminal:''
        });
     const createFlight=()=>{
-        axios.post('http://localhost:5000/flights',flight);
+        axios.post('http://localhost:5000/flights',flight).then(()=>{
+          window.location.reload(false);
+        })
     };
   return (
       <>
