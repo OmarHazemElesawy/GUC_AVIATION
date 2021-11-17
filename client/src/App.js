@@ -1,7 +1,7 @@
 import React from 'react';
 import {Router,Routes,Route} from 'react-router-dom';
-import LandingPage from './components/LandingPage';
-import Update from './components/update';
+import LandingPage from './LandingPage';
+import Update from './Update';
 const App=()=> {
   return (
    <div>
