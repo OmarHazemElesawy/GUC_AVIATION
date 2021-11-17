@@ -1,7 +1,7 @@
 import React from 'react';
 import {Container , AppBar,Typography,Grow,Grid} from '@material-ui/core';
-import Show from './components/showFlight.js';
-import Create from './components/createFlight.js';
+import Show from './components/showFlights/showFlight.js';
+import Create from './components/createFlights/createFlight.js';
 import useStyles from './styles';
 
 const LandingPage=()=> {
