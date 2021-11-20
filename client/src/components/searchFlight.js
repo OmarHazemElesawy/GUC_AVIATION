@@ -24,7 +24,7 @@ export default function Create() {
   return (
       <>
       <h2>
-          Search For Flight
+          Search For Flights
       </h2>
     <Box
       component="form"
