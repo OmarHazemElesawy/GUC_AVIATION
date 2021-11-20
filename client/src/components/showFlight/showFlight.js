@@ -9,37 +9,24 @@ import Paper from '@mui/material/Paper';
 import axios from 'axios';
 import IconButton from '@material-ui/core/IconButton';
 import DeleteIcon from '@material-ui/icons/Delete';
-import Stack from '@mui/material/Stack';
-import Button from '@mui/material/Button';
-// function createData(name, flightNo,departureTime,arrivalTime,ecoSeatNo,businessSeatNo,airport,terminal) {
-//   return { name, flightNo,departureTime,arrivalTime,ecoSeatNo,businessSeatNo,airport,terminal};
-// }
+import EditIcon from '@material-ui/icons/Edit';
+import {useNavigate} from 'react-router-dom';
 
-// const rows = [
-//   createData('EgyptAir',731,"10:25","12:15",120,40,'CAI','E3'),
-//   createData('Lufthansa',731,"9:15","13:45",130,35,'LAX','T2'),
-//   createData('RaynAir',5364,"12:55","14:35",140,45,'SXF','7'),
-//   createData('Emirates',721,"11:45","13:15",145,40,'FRA','A1'),
-//   createData('Egyptair',71
 export default function ShowFlight() {
-  const[flightList, setFlightList]=useState([])
+  const[flightList, setFlightList]=useState([]);
 
 const deleteFlight=(id)=>{
   axios.delete(`http://localhost:5000/flights/${id}`).then(()=>{
     window.location.reload(false);
   })
 }
-const updateFlight=(id)=>{
-  axios.delete(`http://localhost:5000/flights/${id}`).then(()=>{
-    window.location.reload(false);
-  })
-}
+
   useEffect(()=>{
     axios.get('http://localhost:5000/flights').then((allFlights)=>{
       setFlightList(allFlights.data);
     })
   },[])
-  
+  const navigate=useNavigate();
   return (
       <>
       <h2>
@@ -86,15 +73,18 @@ const updateFlight=(id)=>{
                 </IconButton>
               </TableCell>
               <TableCell align="right">
-              <Stack spacing={2} direction="row">
-                <Button variant="outlined" onClick={()=>updateFlight(flight._id)}>Select</Button>
-        </Stack>
+              <IconButton aria-label="update" onClick={()=>{navigate(`update/${flight._id}`)
+              }}>
+                <EditIcon />
+                </IconButton>
               </TableCell>
             </TableRow>
+             
           ))}
         </TableBody>
       </Table>
     </TableContainer>
+   
     </>
   );
 }

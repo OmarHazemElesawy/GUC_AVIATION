@@ -31,5 +31,21 @@ export const deleteFlight = async (req,res)=>{
    }
 }
 
-
+export const updateFlight = async (req,res)=>{
+    const id =req.params.id;
+    try{
+        await FlightData.findByIdAndUpdate(id,{
+            flightNo:req.body.flightNo||0,
+            departureTime:req.body.departureTime||'',
+            arrivalTime:req.body.arrivalTime||'',
+            ecoSeatNo:req.body.ecoSeatNo||'',
+            businessSeatNo:req.body.businessSeatNo||'',
+            airport:req.body.airport||'',
+            terminal:req.body.terminal||''
+        }).exec();
+         res.send('Successfully updated')
+    }catch(error){
+        console.log(error);
+    }
+ }
 
