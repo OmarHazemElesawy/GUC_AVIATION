@@ -53,6 +53,7 @@ export default function Create() {
         <Button variant="outlined" onClick={()=>{const confirmBox = window.confirm("redirect to another page to search?")
                 if(confirmBox===true){
                   searchFlight()
+                  localStorage["flight"]=JSON.stringify(flight);
                   navigate("/searchData")}}}>show results</Button>
     </Stack>
     </Box>

@@ -27,7 +27,7 @@ function Update() {
       <TextField id="standard-basic" label="departureTime" variant="standard" />
       <TextField id="standard-basic" label="ArrivalTime" variant="standard" />
       <TextField id="standard-basic" label="EconomicSeaNo" variant="standard" />
-      <TextField id="standard-basic" label="BuisnessSeatNo" variant="standard" />
+      <TextField id="standard-basic" label="BusinessSeatNo" variant="standard" />
       <TextField id="standard-basic" label="Airport" variant="standard" />
       <TextField id="standard-basic" label="Terminal" variant="standard" />
       <Stack spacing={2} direction="row">
