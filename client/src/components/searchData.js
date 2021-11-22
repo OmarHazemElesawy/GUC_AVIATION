@@ -2,7 +2,8 @@ import {React,useEffect,useState} from 'react';
 import axios from 'axios';
 
 export default function SearchData() {
-    var flight=JSON.parse(localStorage['flight']);
+  //retrieving the data from the localstorage cache
+    var flight=JSON.stringify(JSON.parse(localStorage['flight']));
     const[flightList, setFlightList]=useState([]);
 
       useEffect(()=>{
@@ -12,15 +13,13 @@ export default function SearchData() {
       },[])
       var FlightList=JSON.stringify(flightList);
       console.log(flightList);
-    //   var FlightList1=[{}];
-    //   for(var i=0;FlightList.length;i++){ 
-    //   }
-
     return(
         <div>
+          the data from the text field:
             {flight}
             <br/>
             <br/>
+            all flights
             {FlightList}
             )}
         </div>

@@ -1,17 +1,27 @@
-import React  from 'react';
+import{ React,useState} from 'react';
 import TextField from '@mui/material/TextField';
 import { useParams,useNavigate } from 'react-router-dom';
 import { Button,Stack,Box } from '@mui/material';
 import axios from 'axios';
+
 function Update() {
     const {id}:{id:string}=useParams();
     const navigate=useNavigate();
+    const [flight,setFlight]=useState({
+        flightNo:'',
+        departureTime:'',
+        arrivalTime:'',
+        ecoSeatNo:'',
+        businessSeatNo:'',
+        airport:'',
+        terminal:''
+         });
 
-    const updateFlight=(ID)=>{
-        axios.post(`http://localhost:5000/flights/${ID}`).then(()=>{
+      const updateFlight=(ID)=>{
+        axios.post(`http://localhost:5000/flights/${ID}`,flight).then(()=>{
           window.location.reload(false);
         })
-      }
+      };
     return (
     <div>
         update:{id}
@@ -23,13 +33,27 @@ function Update() {
       noValidate
       autoComplete="off"
     >
-      <TextField id="standard-basic" label="FlightNo" variant="standard" />
-      <TextField id="standard-basic" label="departureTime" variant="standard" />
-      <TextField id="standard-basic" label="ArrivalTime" variant="standard" />
-      <TextField id="standard-basic" label="EconomicSeaNo" variant="standard" />
-      <TextField id="standard-basic" label="BusinessSeatNo" variant="standard" />
-      <TextField id="standard-basic" label="Airport" variant="standard" />
-      <TextField id="standard-basic" label="Terminal" variant="standard" />
+    <TextField id="outlined-basic" label="Flight Number" variant="outlined" value={flight.flightNo}onChange={(event)=>{
+        setFlight({ ...flight,flightNo:event.target.value})
+      }}/>
+    <TextField id="outlined-basic" label="Departure Time" variant="outlined" value={flight.departureTime}onChange={(event)=>{
+        setFlight({ ...flight,departureTime:event.target.value})
+      }}/>
+    <TextField id="outlined-basic" label="Arrival Time" variant="outlined" value={flight.arrivalTime}onChange={(event)=>{
+        setFlight({ ...flight,arrivalTime:event.target.value})
+      }}/>
+    <TextField id="outlined-basic" label="Economic Seat Number" variant="outlined"value={flight.ecoSeatNo}onChange={(event)=>{
+        setFlight({ ...flight,ecoSeatNo:event.target.value})
+      }}/>
+            <TextField id="outlined-basic" label="Business Seat Number" variant="outlined" value={flight.businessSeatNo}onChange={(event)=>{
+        setFlight({ ...flight,businessSeatNo:event.target.value})
+      }}/>
+    <TextField id="outlined-basic" label="Airport" variant="outlined" value={flight.airport}onChange={(event)=>{
+        setFlight({ ...flight,airport:event.target.value})
+      }}/>
+    <TextField id="outlined-basic" label="Terminal" variant="outlined"value={flight.terminal}onChange={(event)=>{
+        setFlight({ ...flight,terminal:event.target.value})
+      }}/>
       <Stack spacing={2} direction="row">
         <Button variant="outlined" onClick={()=>{const confirmBox = window.confirm("Are you sure you want to update?")
                 if(confirmBox===true){
