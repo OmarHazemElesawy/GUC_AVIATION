@@ -34,25 +34,25 @@ export default function Create() {
       noValidate
       autoComplete="off"
     >
-      <TextField id="outlined-basic" label="Flight Number" variant="outlined" value={flight.flightNo}onChange={(event)=>{
+      <TextField id="outlined-basic" label="Flight Number" variant="outlined" helperText="Ex:MS731" value={flight.flightNo}onChange={(event)=>{
           setFlight({ ...flight,flightNo:event.target.value})
         }}/>
-      <TextField id="outlined-basic" label="Departure Time" variant="outlined" value={flight.departureTime}onChange={(event)=>{
+      <TextField id="outlined-basic" label="Departure Time" variant="outlined" helperText="Ex:2021-1-1" value={flight.departureTime}onChange={(event)=>{
           setFlight({ ...flight,departureTime:event.target.value})
         }}/>
-      <TextField id="outlined-basic" label="Arrival Time" variant="outlined" value={flight.arrivalTime}onChange={(event)=>{
+      <TextField id="outlined-basic" label="Arrival Time" variant="outlined" helperText="Ex:2021-1-1" value={flight.arrivalTime}onChange={(event)=>{
           setFlight({ ...flight,arrivalTime:event.target.value})
         }}/>
-      <TextField id="outlined-basic" label="Economic Seat Number" variant="outlined"value={flight.ecoSeatNo}onChange={(event)=>{
+      <TextField id="outlined-basic" label="Economic Seat Number" variant="outlined" helperText="Ex:175" value={flight.ecoSeatNo}onChange={(event)=>{
           setFlight({ ...flight,ecoSeatNo:event.target.value})
         }}/>
-              <TextField id="outlined-basic" label="Business Seat Number" variant="outlined" value={flight.businessSeatNo}onChange={(event)=>{
+              <TextField id="outlined-basic" label="Business Seat Number" variant="outlined" helperText="Ex:50" value={flight.businessSeatNo}onChange={(event)=>{
           setFlight({ ...flight,businessSeatNo:event.target.value})
         }}/>
-      <TextField id="outlined-basic" label="Airport" variant="outlined" value={flight.airport}onChange={(event)=>{
+      <TextField id="outlined-basic" label="Airport" variant="outlined" helperText="Ex:SXF" value={flight.airport}onChange={(event)=>{
           setFlight({ ...flight,airport:event.target.value})
         }}/>
-      <TextField id="outlined-basic" label="Terminal" variant="outlined"value={flight.terminal}onChange={(event)=>{
+      <TextField id="outlined-basic" label="Terminal" variant="outlined" helperText="Ex:E1" value={flight.terminal}onChange={(event)=>{
           setFlight({ ...flight,terminal:event.target.value})
         }}/>
       <Stack spacing={2} direction="row">

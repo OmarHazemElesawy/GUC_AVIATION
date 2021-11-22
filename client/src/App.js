@@ -5,7 +5,6 @@ import Create from './components/createFlight/createFlight';
 import Search from './components/searchFlight';
 import useStyles from './styles';
 import { Outlet } from 'react-router-dom';
-
 function App() {
   const classes =useStyles();
 
