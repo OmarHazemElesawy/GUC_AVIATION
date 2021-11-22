@@ -1,7 +1,7 @@
 import {React,useEffect,useState} from 'react';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
-import TableCell from '@mui/material/TableCell';
+import TableCell,{ tableCellClasses } from '@mui/material/TableCell';
 import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
@@ -11,6 +11,7 @@ import IconButton from '@material-ui/core/IconButton';
 import DeleteIcon from '@material-ui/icons/Delete';
 import EditIcon from '@material-ui/icons/Edit';
 import {useNavigate} from 'react-router-dom';
+import { styled } from '@mui/material/styles';
 
 export default function ShowFlight() {
   const[flightList, setFlightList]=useState([]);
@@ -26,6 +27,25 @@ const deleteFlight=(id)=>{
       setFlightList(allFlights.data);
     })
   },[])
+  const StyledTableCell = styled(TableCell)(({ theme }) => ({
+    [`&.${tableCellClasses.head}`]: {
+      backgroundColor: theme.palette.common.black,
+      color: theme.palette.common.white,
+    },
+    [`&.${tableCellClasses.body}`]: {
+      fontSize: 14,
+    },
+  }));
+  const StyledTableRow = styled(TableRow)(({ theme }) => ({
+    '&:nth-of-type(odd)': {
+      backgroundColor: theme.palette.action.hover,
+    },
+    // hide last border
+    '&:last-child td, &:last-child th': {
+      border: 0,
+    },
+  }));
+  
   const navigate=useNavigate();
   return (
       <>
@@ -36,33 +56,33 @@ const deleteFlight=(id)=>{
       <Table style={{width : 900}} aria-label="simple table">
         <TableHead>
           <TableRow>
-            <TableCell align="right" >Flight No.</TableCell>
-            <TableCell align="right" >Departure Time</TableCell>
-            <TableCell align="right" >Arrival Time</TableCell>
-            <TableCell align="right" >Economic Seats No.</TableCell>
-            <TableCell align="right" >Business Seats No.</TableCell>
-            <TableCell align="right" >Airport</TableCell>
-            <TableCell align="right" >Terminal</TableCell>
-            <TableCell align="right" >Delete</TableCell>
-            <TableCell align="right" >Update</TableCell>
+            <StyledTableCell align="right" >Flight No.</StyledTableCell>
+            <StyledTableCell align="right" >Departure Time</StyledTableCell>
+            <StyledTableCell align="right" >Arrival Time</StyledTableCell>
+            <StyledTableCell align="right" >Economic Seats No.</StyledTableCell>
+            <StyledTableCell align="right" >Business Seats No.</StyledTableCell>
+            <StyledTableCell align="right" >Airport</StyledTableCell>
+            <StyledTableCell align="right" >Terminal</StyledTableCell>
+            <StyledTableCell align="right" >Delete</StyledTableCell>
+            <StyledTableCell align="right" >Update</StyledTableCell>
           </TableRow>
         </TableHead>
         <TableBody>
           {flightList.map((flight,key) => (
-            <TableRow
+            <StyledTableRow
               key={key}
               sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
             >
-              <TableCell component="th" scope="row">
+              <StyledTableCell component="th" scope="row">
                 {flight.flightNo}
-              </TableCell>
-              <TableCell align="right">{flight.departureTime}</TableCell>
-              <TableCell align="right">{flight.arrivalTime}</TableCell>
-              <TableCell align="right">{flight.ecoSeatNo}</TableCell>
-              <TableCell align="right">{flight.businessSeatNo}</TableCell>
-              <TableCell align="right">{flight.airport}</TableCell>
-              <TableCell align="right">{flight.terminal}</TableCell>
-              <TableCell align="right">
+              </StyledTableCell>
+              <StyledTableCell align="right">{flight.departureTime}</StyledTableCell>
+              <StyledTableCell align="right">{flight.arrivalTime}</StyledTableCell>
+              <StyledTableCell align="right">{flight.ecoSeatNo}</StyledTableCell>
+              <StyledTableCell align="right">{flight.businessSeatNo}</StyledTableCell>
+              <StyledTableCell align="right">{flight.airport}</StyledTableCell>
+              <StyledTableCell align="right">{flight.terminal}</StyledTableCell>
+              <StyledTableCell align="right">
               <IconButton aria-label="delete" onClick={()=>{
                 const confirmBox = window.confirm("Do you really want to delete this entry?")
                 if(confirmBox===true){
@@ -71,14 +91,14 @@ const deleteFlight=(id)=>{
               }}>
                 <DeleteIcon />
                 </IconButton>
-              </TableCell>
-              <TableCell align="right">
+              </StyledTableCell>
+              <StyledTableCell align="right">
               <IconButton aria-label="update" onClick={()=>{navigate(`update/${flight._id}`)
               }}>
                 <EditIcon />
                 </IconButton>
-              </TableCell>
-            </TableRow>
+              </StyledTableCell>
+            </StyledTableRow>
              
           ))}
         </TableBody>
