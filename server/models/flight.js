@@ -2,8 +2,8 @@ import mongoose from 'mongoose';
 
 const flightSchema = mongoose.Schema({
     flightNo: String,
-    departureTime:Date,
-    arrivalTime:Date,
+    departureTime:String,
+    arrivalTime:String,
     ecoSeatNo:String,
     businessSeatNo:String,
     airport:String,
