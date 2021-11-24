@@ -2,9 +2,12 @@ import{ React,useState} from 'react';
 import TextField from '@mui/material/TextField';
 import { useParams,useNavigate } from 'react-router-dom';
 import { Button,Stack,Box } from '@mui/material';
+import useStyles from './styles';
 import axios from 'axios';
-
+import "./Update.css"
+import {AppBar,Typography} from '@material-ui/core';
 function Update() {
+    const classes =useStyles();
     const {id}:{id:string}=useParams();
     const navigate=useNavigate();
     const [flight,setFlight]=useState({
@@ -23,8 +26,10 @@ function Update() {
         })
       };
     return (
-    <div>
-        update:{id}
+     <div className="Update">
+        <AppBar className={classes.appBar} position="static" color="inherit">
+          <Typography className= {classes.heading} variant= "h4" align="center" >Search Results</Typography>
+        </AppBar>
           <Box
       component="form"
       sx={{
@@ -54,12 +59,15 @@ function Update() {
     <TextField id="outlined-basic" label="Terminal" variant="outlined"value={flight.terminal}onChange={(event)=>{
         setFlight({ ...flight,terminal:event.target.value})
       }}/>
-      <Stack spacing={2} direction="row">
+      <div className="Button">
+      <Stack spacing={2} direction="row" alignItems="center" alignSelf="center">
         <Button variant="outlined" onClick={()=>{const confirmBox = window.confirm("Are you sure you want to update?")
                 if(confirmBox===true){
                   updateFlight(id)
                   navigate("/")}}}>Update Flight</Button>
+          
     </Stack>
+    </div>
     </Box>
     </div>
     );
