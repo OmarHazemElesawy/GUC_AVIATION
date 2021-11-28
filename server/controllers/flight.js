@@ -1,3 +1,4 @@
+
 import FlightData from '../models/flight.js';
 export const getFlights = async(req,res)=>{
     try{
@@ -35,13 +36,13 @@ export const updateFlight = async (req,res)=>{
     const id =req.params.id;
     try{
         await FlightData.findOneAndUpdate({_id:id},{
-            flightNo:req.body.flightNo||'',
-            departureTime:req.body.departureTime,
-            arrivalTime:req.body.arrivalTime,
-            ecoSeatNo:req.body.ecoSeatNo||'',
-            businessSeatNo:req.body.businessSeatNo||'',
-            airport:req.body.airport||'',
-            terminal:req.body.terminal||''
+            flightNo:req.body.flightNo||FlightData.flightNo,
+            departureTime:req.body.departureTime||FlightData.departureTime,
+            arrivalTime:req.body.arrivalTime||FlightData.arrivalTime,
+            ecoSeatNo:req.body.ecoSeatNo||FlightData.ecoSeatNo,
+            businessSeatNo:req.body.businessSeatNo||FlightData.businessSeatNo,
+            airport:req.body.airport||FlightData.airport,
+            terminal:req.body.terminal||FlightData.terminal
         }).exec();
          res.send('Successfully updated')
     }catch(error){
