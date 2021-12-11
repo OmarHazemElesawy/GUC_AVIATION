@@ -13,8 +13,10 @@ export default function Create() {
       arrivalTime:'',
       ecoSeatNo:'',
       businessSeatNo:'',
-      airport:'',
-      terminal:''
+      departureAirport:'',
+      arrivalAirport:'',
+      departureTerminal:'',
+      arrivalTerminal:''
        });
     const createFlight=()=>{
         axios.post('http://localhost:5000/flights',flight).then(()=>{
@@ -49,11 +51,17 @@ export default function Create() {
               <TextField id="outlined-basic" label="Business Seat Number" variant="outlined" helperText="Ex:50" value={flight.businessSeatNo}onChange={(event)=>{
           setFlight({ ...flight,businessSeatNo:event.target.value})
         }}/>
-      <TextField id="outlined-basic" label="Airport" variant="outlined" helperText="Ex:SXF" value={flight.airport}onChange={(event)=>{
-          setFlight({ ...flight,airport:event.target.value})
+        <TextField id="outlined-basic" label=" Departure Airport" variant="outlined" helperText="Ex:SXF" value={flight.departureAirport}onChange={(event)=>{
+          setFlight({ ...flight,departureAirport:event.target.value})
         }}/>
-      <TextField id="outlined-basic" label="Terminal" variant="outlined" helperText="Ex:F4" value={flight.terminal}onChange={(event)=>{
-          setFlight({ ...flight,terminal:event.target.value})
+      <TextField id="outlined-basic" label=" Arrival Airport" variant="outlined" helperText="Ex:SXF" value={flight.arrivalAirport}onChange={(event)=>{
+          setFlight({ ...flight,arrivalAirport:event.target.value})
+        }}/>
+        <TextField id="outlined-basic" label="Departure Terminal" variant="outlined" helperText="Ex:F4" value={flight.departureTerminal}onChange={(event)=>{
+          setFlight({ ...flight,departureTerminal:event.target.value})
+        }}/>
+      <TextField id="outlined-basic" label="Arrival Terminal" variant="outlined" helperText="Ex:F4" value={flight.arrivalTerminal}onChange={(event)=>{
+          setFlight({ ...flight,arrivalTerminal:event.target.value})
         }}/>
       <Stack spacing={2} direction="row">
         <Button variant="outlined" onClick={createFlight}>Create Flight</Button>

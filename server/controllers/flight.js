@@ -41,8 +41,10 @@ export const updateFlight = async (req,res)=>{
             arrivalTime:req.body.arrivalTime||FlightData.arrivalTime,
             ecoSeatNo:req.body.ecoSeatNo||FlightData.ecoSeatNo,
             businessSeatNo:req.body.businessSeatNo||FlightData.businessSeatNo,
-            airport:req.body.airport||FlightData.airport,
-            terminal:req.body.terminal||FlightData.terminal
+            departureAirport:req.body.departureAirport||FlightData.departureAirport,
+            arrivalAirport:req.body.arrivalAirport||FlightData.arrivalAirport,
+            departureTerminal:req.body.departureTerminal||FlightData.departureTerminal,
+            arrivalTerminal:req.body.arrivalTerminal||FlightData.arrivalTerminal
         }).exec();
          res.send('Successfully updated')
     }catch(error){

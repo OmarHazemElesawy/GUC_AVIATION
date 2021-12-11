@@ -12,8 +12,10 @@ export default function Create() {
       flightNo:'',
       departureTime:'',
       arrivalTime:'',
-      airport:'',
-      terminal:''
+      departureAirport:'',
+      arrivalAirport:'',
+      departureTerminal:'',
+      arrivalTerminal:''
        });
        const searchFlight=()=>{
            axios.get('http://localhost:5000/flights').then((allFlights)=>{
@@ -43,11 +45,17 @@ export default function Create() {
       <TextField id="outlined-basic" label="Arrival Time" variant="outlined" helperText="Ex: 14:30" value={flight.arrivalTime}onChange={(event)=>{
           setFlight({ ...flight,arrivalTime:event.target.value})
         }}/>
-      <TextField id="outlined-basic" label="Airport" variant="outlined" helperText="Ex: CAI" value={flight.airport}onChange={(event)=>{
-          setFlight({ ...flight,airport:event.target.value})
+      <TextField id="outlined-basic" label="departure Airport" variant="outlined" helperText="Ex: CAI" value={flight.departureAirport}onChange={(event)=>{
+          setFlight({ ...flight,departureAirport:event.target.value})
         }}/>
-      <TextField id="outlined-basic" label="Terminal" variant="outlined" helperText="Ex: A2" value={flight.terminal}onChange={(event)=>{
-          setFlight({ ...flight,terminal:event.target.value})
+      <TextField id="outlined-basic" label="arrival Airport" variant="outlined" helperText="Ex: A2" value={flight.arrivalAirport}onChange={(event)=>{
+          setFlight({ ...flight,arrivalAirport:event.target.value})
+        }}/>
+         <TextField id="outlined-basic" label="Departure Terminal" variant="outlined" helperText="Ex: CAI" value={flight.departureTerminal}onChange={(event)=>{
+          setFlight({ ...flight,departureTerminal:event.target.value})
+        }}/>
+      <TextField id="outlined-basic" label="Arrival Terminal" variant="outlined" helperText="Ex: A2" value={flight.arrivalTerminal}onChange={(event)=>{
+          setFlight({ ...flight,arrivalTerminal:event.target.value})
         }}/>
       <Stack spacing={2} direction="row">
         <Button variant="outlined" onClick={()=>{const confirmBox = window.confirm("redirect to another page to search?")

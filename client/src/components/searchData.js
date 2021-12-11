@@ -30,8 +30,10 @@ export default function SearchData() {
           "departureTime":item.departureTime,
           "arrivalTime":item.arrivalTime,
 
-          "airport":item.airport,
-          "terminal":item.terminal
+          "departureAirport":item.departureAirport,
+          "arrivalAirport":item.arrivalAirport,
+          "departureTerminal":item.departureTerminal,
+          "arrivalTerminal":item.arrivalTerminal
         })
       }
       for (var k in flightList){
@@ -42,8 +44,10 @@ export default function SearchData() {
           "arrivalTime":Item.arrivalTime,
           "ecoSeatNo":Item.ecoSeatNo,
           "businessSeatNo":Item.businessSeatNo,
-          "airport":Item.airport,
-          "terminal":Item.terminal
+          "departureAirport":Item.departureAirport,
+          "arrivalAirport":Item.arrivalAirport,
+          "departureTerminal":Item.departureTerminal,
+          "arrivalTerminal":Item.arrivalTerminal
         })
       }
       for (var j in filteredFlights){
@@ -88,8 +92,12 @@ export default function SearchData() {
             <TableCell align="right">Arrival Time</TableCell>
             <TableCell align="right">Economic Seat No.</TableCell>
             <TableCell align="right">Business Seat No.</TableCell>
-            <TableCell align="right">Airport</TableCell>
-            <TableCell align="right">Terminal</TableCell>
+            <TableCell align="right">Departure Airport</TableCell>
+            <TableCell align="right">Arrival Airport</TableCell>
+            <TableCell align="right">Departure Terminal</TableCell>
+            <TableCell align="right">Arrival Terminal</TableCell>
+            
+          
           </TableRow>
         </TableHead>
         <TableBody>
@@ -101,10 +109,12 @@ export default function SearchData() {
               <TableCell align="right">{flight.flightNo}</TableCell>
               <TableCell align="right">{flight.departureTime}</TableCell>
               <TableCell align="right">{flight.arrivalTime}</TableCell>
-              <TableCell align="right">{flight.airport}</TableCell>
               <TableCell align="right">{flight.ecoSeatNo}</TableCell>
               <TableCell align="right">{flight.businessSeatNo}</TableCell>
-              <TableCell align="right">{flight.terminal}</TableCell>
+              <TableCell align="right">{flight.departureAirport}</TableCell>
+              <TableCell align="right">{flight.arrivalAirport}</TableCell>
+              <TableCell align="right">{flight.departureTerminal}</TableCell>
+              <TableCell align="right">{flight.arrivalTerminal}</TableCell>
             </TableRow>
           ))}
         </TableBody>

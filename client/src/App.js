@@ -1,47 +1,30 @@
 import React from 'react';
-import {Container , AppBar,Typography,Grow,Grid} from '@material-ui/core';
-import Show from './components/showFlight/showFlight';
-import Create from './components/createFlight/createFlight';
-import Search from './components/searchFlight';
+import {Container , AppBar,Typography} from '@material-ui/core';
 import useStyles from './styles';
-import { Outlet } from 'react-router-dom';
+import { Button,Stack} from '@mui/material';
+import {useNavigate} from 'react-router-dom';
 import "./App.css"
 function App() {
   const classes =useStyles();
-
+  const navigate=useNavigate();
   return (
 
     <div className="App">
       <Container maxWidth="lg"> 
         <AppBar className={classes.appBar} position="static" color="inherit">
-          <Typography className= {classes.heading} variant= "h4" align="center" >Show and Create flights</Typography>
-        </AppBar>
-      <Grow in>
-        <Container>
-          <Grid container justify="space-between" alignItems="stretch">
-           <Grid item xs={12} sm={7}>
-             <AppBar className={classes.appBar}position="static" color="inherit">
-               <Show>
-               </Show>
-             </AppBar>
-             <AppBar className={classes.appBar}position="static" color="inherit">
-             <Search>
-             </Search>
-             </AppBar>
-           </Grid>
-           <Grid item xs={12} sm={4}>
-           <AppBar className={classes.appBar}position="static" color="inherit">
-             <Create>
-             </Create>
-             </AppBar>
-           </Grid>
-          </Grid>
-        </Container>
-      </Grow>
+          <Typography className= {classes.heading} variant= "h4" align="center" >Home Page</Typography>
+          </AppBar>
       </Container>
-      <Outlet/>
+      <Container maxWidth="lg" align="center"> 
+      <div className="Button">
+      <Stack spacing={2} direction="row" alignItems="center" alignSelf="center">
+        <Button variant="outlined" onClick={()=>{navigate("admin")}}>Admin page</Button>
+    </Stack>
+    </div>
+    </Container>
     </div>
   );
 }
-
-export default App;
+// <Button variant="outlined" onClick={()=>{navigate("update")}}>update page</Button>
+// <Button variant="outlined" onClick={()=>{navigate("searchData")}}>Search page</Button>
+export default App
