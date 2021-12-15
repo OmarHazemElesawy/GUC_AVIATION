@@ -1,0 +1,11 @@
+.Update {
+    text-align: center;
+    align-items: center;
+    display: grid;
+    
+  }
+  .Button{
+      margin: right;
+      align-items: center;
+      align-self: center;
+  }
