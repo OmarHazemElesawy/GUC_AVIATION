@@ -1,7 +1,8 @@
 import React from 'react';
 import {Container , AppBar,Typography} from '@material-ui/core';
 import useStyles from './styles';
-import { Button,Stack} from '@mui/material';
+import {Button} from '@mui/material';
+//import Stack from '@mui/material';
 import {useNavigate} from 'react-router-dom';
 import "./App.css"
 function App() {
@@ -17,9 +18,21 @@ function App() {
       </Container>
       <Container maxWidth="lg" align="center"> 
       <div className="Button">
-      <Stack spacing={2} direction="row" alignItems="center" alignSelf="center">
-        <Button variant="outlined" onClick={()=>{navigate("admin")}}>Admin page</Button>
-    </Stack>
+        <h2>
+          To log in as Admin:
+          </h2>
+        <Button variant="contained" onClick={()=>{navigate("admin")}}>Admin page</Button>
+        <br/>
+        <h2>
+          To log in as Existing User:
+          </h2>
+        <Button variant="contained" onClick={()=>{navigate("existingUser")}}>Existing user page</Button>
+        <br/>
+        <h2>
+          To log in as Guest User:
+          </h2>
+        <Button variant="contained" onClick={()=>{navigate("guestUser")}}>Guest user page</Button>
+        <br/>
     </div>
     </Container>
     </div>
