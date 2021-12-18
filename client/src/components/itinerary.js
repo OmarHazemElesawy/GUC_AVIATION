@@ -13,26 +13,26 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import { useParams} from 'react-router-dom';
-import moment from 'moment';
 function Summary() {
-  moment().format();
   const classes =useStyles();
   const navigate=useNavigate();
-
   const {id1}:{id1:string}=useParams();
   const {id2}:{id2:string}=useParams();
   //const {adult}:{adult:string}=useParams();
  // const {children}:{children:string}=useParams();
   const {cabinClass}:{cabinClass:string}=useParams();
+   // localStorage["flight"]=JSON.stringify(filteredFlightList);
   let start;
   let end;
-  let difference=[];
-  let differenceMs;
+  var selectedDepSeats=JSON.parse(localStorage['selectedDepSeats']);
+  let selectedDepSeatsString=(JSON.stringify(selectedDepSeats)).substring(1,JSON.stringify(selectedDepSeats).length-1)
+  var selectedRetSeats=JSON.parse(localStorage['selectedRetSeats']);
+  let selectedRetSeatsString=(JSON.stringify(selectedRetSeats)).substring(1,JSON.stringify(selectedRetSeats).length-1)
+  let difference="1";
   let allowance="";
   let price="";
-  var filteredFlightList1=[]
-  var filteredFlightList2=[]
-  let reserve1=false;
+
+
   if (cabinClass==="Business"){
       allowance="Two 23 kg bags"
       price="2000 Euros"
@@ -41,7 +41,8 @@ function Summary() {
       price="1000 Euros"
   }
 
-  var filteredFlightList=[];
+  var filteredFlightList1=[];
+  var filteredFlightList2=[];
  const[flightList, setFlightList]=useState([]);
 
    useEffect(()=>{
@@ -52,20 +53,9 @@ function Summary() {
   
    for (var j in flightList){
       if(flightList[j]['_id']===id1){
-        start=moment.duration(flightList[j]['departureTime'],"HH:mm");
-        end=moment.duration(flightList[j]['arrivalTime'],"HH:mm");
-        differenceMs=end.subtract(start);
-        difference.push(differenceMs.asHours()+" Hours");
-        filteredFlightList.push({
-          "flightNo":flightList[j].flightNo,
-          "departureTime":flightList[j].departureTime,
-          "arrivalTime":flightList[j].arrivalTime,
-          "departureAirport":flightList[j].departureAirport,
-          "arrivalAirport":flightList[j].arrivalAirport,
-          "departureTerminal":flightList[j].departureTerminal,
-          "arrivalTerminal":flightList[j].arrivalTerminal,
-          "tripDuration":difference
-        })
+      // start=moment.duration(flightList[j]['departureTime'],"HH:mm");
+       //end=moment.duration(flightList[j]['arrivalTime'],"HH:mm");
+       //difference=end.subtract(start);
         filteredFlightList1.push({
           "flightNo":flightList[j].flightNo,
           "departureTime":flightList[j].departureTime,
@@ -74,29 +64,15 @@ function Summary() {
           "arrivalAirport":flightList[j].arrivalAirport,
           "departureTerminal":flightList[j].departureTerminal,
           "arrivalTerminal":flightList[j].arrivalTerminal,
-          "tripDuration":difference[0],
-          "allowance":allowance,
-          "price":price,
-          "class":cabinClass
+         // "tripDuration":difference
         })
       }
     }
     for (var k in flightList){
         if(flightList[k]['_id']===id2){
-          start=moment.duration(flightList[k]['departureTime'],"HH:mm");
-          end=moment.duration(flightList[k]['arrivalTime'],"HH:mm");
-          differenceMs=end.subtract(start);
-          difference.push(differenceMs.asHours()+" Hours");
-          filteredFlightList.push({
-            "flightNo":flightList[k].flightNo,
-            "departureTime":flightList[k].departureTime,
-            "arrivalTime":flightList[k].arrivalTime,
-            "departureAirport":flightList[k].departureAirport,
-            "arrivalAirport":flightList[k].arrivalAirport,
-            "departureTerminal":flightList[k].departureTerminal,
-            "arrivalTerminal":flightList[k].arrivalTerminal,
-            "tripDuration":difference
-          })
+        // start=moment.duration(flightList[j]['departureTime'],"HH:mm");
+         //end=moment.duration(flightList[j]['arrivalTime'],"HH:mm");
+         //difference=end.subtract(start);
           filteredFlightList2.push({
             "flightNo":flightList[k].flightNo,
             "departureTime":flightList[k].departureTime,
@@ -105,32 +81,18 @@ function Summary() {
             "arrivalAirport":flightList[k].arrivalAirport,
             "departureTerminal":flightList[k].departureTerminal,
             "arrivalTerminal":flightList[k].arrivalTerminal,
-            "tripDuration":difference[1],
-            "allowance":allowance,
-            "price":price,
-            "class":cabinClass
+           // "tripDuration":difference
           })
         }
       }
       
-    const createReservation1=()=>{
-      axios.post('http://localhost:5000/reservations',filteredFlightList2[0]).then(()=>{
-        window.location.reload(false);
-      })
-      reserve1=true;
-  };
-  const createReservation2=()=>{
-    axios.post('http://localhost:5000/reservations',filteredFlightList1[0]).then(()=>{
-      window.location.reload(false);
-      reserve1=false;
-    })
-};
-    localStorage["flight"]=JSON.stringify(filteredFlightList);
+   // localStorage["flight"]=JSON.stringify(filteredFlightList);
+ 
 return (
 
   <div>
        <AppBar className={classes.appBar} position="static" color="inherit">
-        <Typography className= {classes.heading} variant= "h4" align="center" >Your Summary{JSON.stringify(difference)}</Typography>
+        <Typography className= {classes.heading} variant= "h4" align="center" >Your Itinerary</Typography>
       </AppBar>
       <TableContainer component={Paper}>
     <Table sx={{ minWidth: 1000 }} aria-label="simple table">
@@ -147,10 +109,11 @@ return (
         <TableCell align="right">Baggage allowance</TableCell>
         <TableCell align="right">Price</TableCell>
         <TableCell align="right">Class</TableCell>
+        <TableCell align="right">Selected Seats</TableCell>
         </TableRow>
       </TableHead>
       <TableBody>
-        {filteredFlightList.map((flight,key)=> (
+        {filteredFlightList1.map((flight,key)=> (
           <TableRow
             key={key}
             sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
@@ -163,10 +126,31 @@ return (
             <TableCell align="right">{flight.arrivalAirport}</TableCell>
             <TableCell align="right">{flight.departureTerminal}</TableCell>
             <TableCell align="right">{flight.arrivalTerminal}</TableCell>
-            <TableCell align="right">{difference[key]}</TableCell>
+            <TableCell align="right">{difference}</TableCell>
             <TableCell align="right">{allowance}</TableCell>
             <TableCell align="right">{price}</TableCell>
             <TableCell align="right">{cabinClass}</TableCell>
+            <TableCell align="right">{selectedDepSeatsString}</TableCell>
+          </TableRow>
+        ))}
+        {filteredFlightList2.map((flight,key)=> (
+          <TableRow
+            key={key}
+            sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+          >
+            {/* <TableCell align="right">{flight._id}</TableCell>*/}
+            <TableCell align="right">{flight.flightNo}</TableCell>
+            <TableCell align="right">{flight.departureTime}</TableCell>
+            <TableCell align="right">{flight.arrivalTime}</TableCell>
+            <TableCell align="right">{flight.departureAirport}</TableCell>
+            <TableCell align="right">{flight.arrivalAirport}</TableCell>
+            <TableCell align="right">{flight.departureTerminal}</TableCell>
+            <TableCell align="right">{flight.arrivalTerminal}</TableCell>
+            <TableCell align="right">{difference}</TableCell>
+            <TableCell align="right">{allowance}</TableCell>
+            <TableCell align="right">{price}</TableCell>
+            <TableCell align="right">{cabinClass}</TableCell>
+            <TableCell align="right">{selectedRetSeatsString}</TableCell>
           </TableRow>
         ))}
       </TableBody>
@@ -175,14 +159,10 @@ return (
         <Container maxWidth="lg" align="center"> 
     <div className="Button"/>
       <h2>
-        To reserve flights and proceed to seats selection please click below:
+        To return to home page, please click below:
         </h2>
-      {/*<Button variant="contained" onClick={()=>{navigate("depSeats")}}>Reserve Seats</Button>*/}
       <Button variant="contained" onClick={()=>{
-        createReservation1()
-        if(reserve1){
-        createReservation2()}
-        navigate("depSeats")}}>Reserve Seats</Button>
+        navigate("/existingUser")}}>Reserve Seats</Button>
       <br/>
      </Container>
     </div>

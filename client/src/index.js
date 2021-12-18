@@ -15,6 +15,8 @@ import ReturnDetails from "./components/returnDetails";
 import Summary from "./components/summary";
 import DepartureSeats from "./components/departureSeats";
 import UpdateUser from "./components/UpdateUser";
+import ReturnSeats from "./components/returnSeats"
+import Itinerary from "./components/itinerary"
 const rootElement = document.getElementById("root");
 render(
   <BrowserRouter>
@@ -34,6 +36,9 @@ render(
       <Route path="searchDataUser/flightDetails/:adult/:children/:id1/:cabinClass/returnFlights/returnDetails/:id2" exact element={<ReturnDetails />} />
       <Route path="searchDataUser/flightDetails/:adult/:children/:id1/:cabinClass/returnFlights/returnDetails/:id2/summary" exact element={<Summary />} />
       <Route path="searchDataUser/flightDetails/:adult/:children/:id1/:cabinClass/returnFlights/returnDetails/:id2/summary/depSeats" exact element={<DepartureSeats />} />
+      <Route path="searchDataUser/flightDetails/:adult/:children/:id1/:cabinClass/returnFlights/returnDetails/:id2/summary/depSeats/retSeats" exact element={<ReturnSeats />} />
+      <Route path="searchDataUser/flightDetails/:adult/:children/:id1/:cabinClass/returnFlights/returnDetails/:id2/summary/depSeats/retSeats/itinerary" exact element={<Itinerary />} />
+
     </Routes>
   </BrowserRouter>,
   rootElement

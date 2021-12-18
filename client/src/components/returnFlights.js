@@ -13,13 +13,18 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import {Button} from '@mui/material';
+import moment from 'moment';
 function ReturnFlights() {
 
  const classes =useStyles();
+ moment().format();
   const navigate=useNavigate();
   //const {id}:{id:string}=useParams();
   const {cabinClass}:{cabinClass:string}=useParams();
-  let difference=1;
+  let start;
+    let end;
+  var difference=[];
+  let differenceMs;
   let price="";
   let allowance="";
   var flightData=JSON.parse(localStorage['flight']);
@@ -42,9 +47,10 @@ function ReturnFlights() {
     for (var j in flightList){
         if(flightList[j]['departureAirport']===flightData[0]['arrivalAirport']&&
         flightList[j]['arrivalAirport']===flightData[0]['departureAirport']){
-        // start=moment.duration(flightList[j]['departureTime'],"HH:mm");
-         //end=moment.duration(flightList[j]['arrivalTime'],"HH:mm");
-         //difference=end.subtract(start);
+          start=moment.duration(flightList[j]['departureTime'],"HH:mm");
+          end=moment.duration(flightList[j]['arrivalTime'],"HH:mm");
+          differenceMs=end.subtract(start);
+          difference.push(differenceMs.asHours()+" Hours");
           filteredFlightList.push({
             "_id":flightList[j]._id,
             "flightNo":flightList[j].flightNo,
@@ -105,7 +111,7 @@ function ReturnFlights() {
               <TableCell align="right">{flight.arrivalAirport}</TableCell>
               <TableCell align="right">{flight.departureTerminal}</TableCell>
               <TableCell align="right">{flight.arrivalTerminal}</TableCell>
-              <TableCell align="right">{difference}</TableCell>
+              <TableCell align="right">{difference[key]}</TableCell>
               <TableCell align="right">{allowance}</TableCell>
               <TableCell align="right">{price}</TableCell>
               <TableCell align="right">

@@ -13,14 +13,18 @@ import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import axios from 'axios';
 import {Button} from '@mui/material';
+import moment from 'moment';
 
 function ReturnDetails() {
-
+  moment().format();
   const navigate=useNavigate();
   const classes =useStyles();
   const {id2}:{id2:string}=useParams();
   const {cabinClass}:{cabinClass:string}=useParams();
-  let difference=1;
+  let start;
+  let end;
+  let difference;
+  let differenceMs;
   let allowance="";
   let price="";
   if (cabinClass==="Business"){
@@ -42,9 +46,10 @@ function ReturnDetails() {
 
    for (var j in flightList){
       if(flightList[j]['_id']===id2){
-      // start=moment.duration(flightList[j]['departureTime'],"HH:mm");
-       //end=moment.duration(flightList[j]['arrivalTime'],"HH:mm");
-       //difference=end.subtract(start);
+        start=moment.duration(flightList[j]['departureTime'],"HH:mm");
+        end=moment.duration(flightList[j]['arrivalTime'],"HH:mm");
+        differenceMs=end.subtract(start);
+        difference=differenceMs.asHours()+" Hours"
         filteredFlightList.push({
           "flightNo":flightList[j].flightNo,
           "departureTime":flightList[j].departureTime,

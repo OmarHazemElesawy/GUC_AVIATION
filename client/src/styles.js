@@ -7,5 +7,15 @@ export default makeStyles(()=>({
         flexDirection:'column',
         justifyContent: 'center',
         alignItems: 'center'
-    }
+    },
+    // sideBySide:{
+    //     textAlign:"center",
+    //     display:"inline-block",
+    //     display:"inline",
+    //     position:"absolute",
+    //     top:50,
+    //     left:50
+
+
+    // }
 }))

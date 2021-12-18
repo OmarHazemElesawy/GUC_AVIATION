@@ -10,20 +10,21 @@ import { useParams} from 'react-router-dom';
 import {AppBar,Typography} from '@material-ui/core';
 import useStyles from './styles';
 import axios from 'axios';
-//import moment from 'moment';
+import moment from 'moment';
 import {Container} from '@material-ui/core';
 import {Button} from '@mui/material';
 import {useNavigate} from 'react-router-dom';
 
 function FlightDetails() {
   const navigate=useNavigate();
-    //moment().format();
+    moment().format();
     const classes =useStyles();
     const {id}:{id:string}=useParams();
     const {cabinClass}:{cabinClass:string}=useParams();
-    //let start;
-    //let end;
-    let difference=1;
+    let start;
+    let end;
+    var differenceMs;
+    var difference;
     let allowance="";
     let price="";
     if (cabinClass==="Business"){
@@ -45,9 +46,10 @@ function FlightDetails() {
 
      for (var j in flightList){
         if(flightList[j]['_id']===id){
-        // start=moment.duration(flightList[j]['departureTime'],"HH:mm");
-         //end=moment.duration(flightList[j]['arrivalTime'],"HH:mm");
-         //difference=end.subtract(start);
+         start=moment.duration(flightList[j]['departureTime'],"HH:mm");
+          end=moment.duration(flightList[j]['arrivalTime'],"HH:mm");
+          differenceMs=end.subtract(start);
+          difference=differenceMs.asHours()+" Hours"
           filteredFlightList.push({
             "flightNo":flightList[j].flightNo,
             "departureTime":flightList[j].departureTime,
@@ -56,7 +58,7 @@ function FlightDetails() {
             "arrivalAirport":flightList[j].arrivalAirport,
             "departureTerminal":flightList[j].departureTerminal,
             "arrivalTerminal":flightList[j].arrivalTerminal,
-           // "tripDuration":difference
+            "tripDuration":difference
           })
         }
       }
