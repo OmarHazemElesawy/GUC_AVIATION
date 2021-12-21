@@ -4,7 +4,8 @@ import express from 'express';
 import flightRoutes from './routes/flight.js';
 import reservationRoutes from './routes/reservation.js';
 import userRoutes from './routes/user.js';
-import seatsRoutes from './routes/seats.js';
+import seatsDepartureRoutes from './routes/seatsDeparture.js';
+import seatsReturnRoutes from './routes/seatsReturn.js';
 
 const app=express();
 
@@ -16,8 +17,8 @@ app.use(cors());
 app.use('/flights',flightRoutes);
 app.use('/reservations',reservationRoutes);
 app.use('/users',userRoutes);
-app.use('/seats',seatsRoutes);
-
+app.use('/seatsDeparture',seatsDepartureRoutes);
+app.use('/seatsReturn',seatsReturnRoutes);
 
 const CONNECTION_URL=
 'mongodb+srv://vscode1357:vscode1357@cluster0.kxzfh.mongodb.net/myFirstDatabase?retryWrites=true&w=majority';
