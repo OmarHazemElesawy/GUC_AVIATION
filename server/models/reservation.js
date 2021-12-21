@@ -11,7 +11,8 @@ const reservationSchema = mongoose.Schema({
     tripDuration:String,
     allowance:String,
     price:String,
-    class:String
+    class:String,
+    confirmationCode:String,
 
 });
 //flight number, departure and arrival times, dates, number of Economy seats, number of Business class seats, and airport

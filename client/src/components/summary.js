@@ -21,6 +21,9 @@ function Summary() {
 
   const {id1}:{id1:string}=useParams();
   const {id2}:{id2:string}=useParams();
+  let resNoOne=(id1).substring((id1).length-1,(id1).length-5)
+  let resNoTwo=(id2).substring((id2).length-1,(id2).length-5)
+  let resNo=resNoOne+resNoTwo;
   //const {adult}:{adult:string}=useParams();
  // const {children}:{children:string}=useParams();
   const {cabinClass}:{cabinClass:string}=useParams();
@@ -30,15 +33,18 @@ function Summary() {
   let differenceMs;
   let allowance="";
   let price="";
+  let price2="";
   var filteredFlightList1=[]
   var filteredFlightList2=[]
   let reserve1=false;
   if (cabinClass==="Business"){
       allowance="Two 23 kg bags"
       price="2000 Euros"
+      price2="4000 Euros"
   }else{
       allowance="One 23 kg bags"
       price="1000 Euros"
+      price2="2000 Euros"
   }
 
   var filteredFlightList=[];
@@ -77,7 +83,9 @@ function Summary() {
           "tripDuration":difference[0],
           "allowance":allowance,
           "price":price,
-          "class":cabinClass
+          "class":cabinClass,
+          "confirmationCode":resNo
+
         })
       }
     }
@@ -108,7 +116,8 @@ function Summary() {
             "tripDuration":difference[1],
             "allowance":allowance,
             "price":price,
-            "class":cabinClass
+            "class":cabinClass,
+            "confirmationCode":resNo
           })
         }
       }
@@ -130,7 +139,7 @@ return (
 
   <div>
        <AppBar className={classes.appBar} position="static" color="inherit">
-        <Typography className= {classes.heading} variant= "h4" align="center" >Your Summary{JSON.stringify(difference)}</Typography>
+        <Typography className= {classes.heading} variant= "h4" align="center" >Your Summary</Typography>
       </AppBar>
       <TableContainer component={Paper}>
     <Table sx={{ minWidth: 1000 }} aria-label="simple table">
@@ -172,6 +181,8 @@ return (
       </TableBody>
     </Table>
         </TableContainer>
+        <h3 align='right'>Total Price:{price2}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</h3>
         <Container maxWidth="lg" align="center"> 
     <div className="Button"/>
       <h2>

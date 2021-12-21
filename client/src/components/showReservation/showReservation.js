@@ -52,7 +52,7 @@ const deleteFlight=(id)=>{
   return (
       <>
       <h2>
-          All Reservations
+          Reservations/Itinerarys
       </h2>
     <TableContainer component={Paper}>
       <Table style={{width : 900}} aria-label="simple table">
@@ -69,7 +69,9 @@ const deleteFlight=(id)=>{
             <StyledTableCell align="right" >Baggage Allowance</StyledTableCell>
             <StyledTableCell align="right" >Price</StyledTableCell>
             <StyledTableCell align="right" >Class</StyledTableCell>
+            <StyledTableCell align="right" >confirmation Code</StyledTableCell>
             <StyledTableCell align="right" >Cancel</StyledTableCell>
+           
             {/*<StyledTableCell align="right" >Update</StyledTableCell>*/}
           </TableRow>
         </TableHead>
@@ -90,6 +92,7 @@ const deleteFlight=(id)=>{
               <StyledTableCell align="right">{reservation.allowance}</StyledTableCell>
               <StyledTableCell align="right">{reservation.price}</StyledTableCell>
               <StyledTableCell align="right">{reservation.class}</StyledTableCell>
+              <StyledTableCell align="right">{reservation.confirmationCode}</StyledTableCell>
              <StyledTableCell align="right">
               <IconButton aria-label="cancel" onClick={()=>{
                 const confirmBox = window.confirm("Do you really want to cancel this reservation?")

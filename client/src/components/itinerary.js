@@ -13,32 +13,36 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import { useParams} from 'react-router-dom';
-function Summary() {
+import moment from 'moment';
+function Itinerary() {
+  moment().format();
   const classes =useStyles();
   const navigate=useNavigate();
   const {id1}:{id1:string}=useParams();
   const {id2}:{id2:string}=useParams();
-  //const {adult}:{adult:string}=useParams();
- // const {children}:{children:string}=useParams();
   const {cabinClass}:{cabinClass:string}=useParams();
-   // localStorage["flight"]=JSON.stringify(filteredFlightList);
+  //var depData=JSON.parse(localStorage['selectedDepSeats']);
+ // var retData=JSON.parse(localStorage['selectedRetSeats']);
   let start;
   let end;
   var selectedDepSeats=JSON.parse(localStorage['selectedDepSeats']);
   let selectedDepSeatsString=(JSON.stringify(selectedDepSeats)).substring(1,JSON.stringify(selectedDepSeats).length-1)
   var selectedRetSeats=JSON.parse(localStorage['selectedRetSeats']);
   let selectedRetSeatsString=(JSON.stringify(selectedRetSeats)).substring(1,JSON.stringify(selectedRetSeats).length-1)
-  let difference="1";
+  let difference=[];
+  let differenceMs;
   let allowance="";
   let price="";
-
+  let price2="";
 
   if (cabinClass==="Business"){
       allowance="Two 23 kg bags"
       price="2000 Euros"
+      price2="4000 Euros"
   }else{
       allowance="One 23 kg bags"
       price="1000 Euros"
+      price2="2000 Euros"
   }
 
   var filteredFlightList1=[];
@@ -53,9 +57,10 @@ function Summary() {
   
    for (var j in flightList){
       if(flightList[j]['_id']===id1){
-      // start=moment.duration(flightList[j]['departureTime'],"HH:mm");
-       //end=moment.duration(flightList[j]['arrivalTime'],"HH:mm");
-       //difference=end.subtract(start);
+        start=moment.duration(flightList[j]['departureTime'],"HH:mm");
+        end=moment.duration(flightList[j]['arrivalTime'],"HH:mm");
+        differenceMs=end.subtract(start);
+        difference.push(differenceMs.asHours()+" Hours");
         filteredFlightList1.push({
           "flightNo":flightList[j].flightNo,
           "departureTime":flightList[j].departureTime,
@@ -64,15 +69,16 @@ function Summary() {
           "arrivalAirport":flightList[j].arrivalAirport,
           "departureTerminal":flightList[j].departureTerminal,
           "arrivalTerminal":flightList[j].arrivalTerminal,
-         // "tripDuration":difference
+          "tripDuration":difference[0]
         })
       }
-    }
+   }
     for (var k in flightList){
         if(flightList[k]['_id']===id2){
-        // start=moment.duration(flightList[j]['departureTime'],"HH:mm");
-         //end=moment.duration(flightList[j]['arrivalTime'],"HH:mm");
-         //difference=end.subtract(start);
+          start=moment.duration(flightList[k]['departureTime'],"HH:mm");
+          end=moment.duration(flightList[k]['arrivalTime'],"HH:mm");
+          differenceMs=end.subtract(start);
+          difference.push(differenceMs.asHours()+" Hours");
           filteredFlightList2.push({
             "flightNo":flightList[k].flightNo,
             "departureTime":flightList[k].departureTime,
@@ -81,13 +87,11 @@ function Summary() {
             "arrivalAirport":flightList[k].arrivalAirport,
             "departureTerminal":flightList[k].departureTerminal,
             "arrivalTerminal":flightList[k].arrivalTerminal,
-           // "tripDuration":difference
+            "tripDuration":difference[1]
           })
         }
       }
-      
-   // localStorage["flight"]=JSON.stringify(filteredFlightList);
- 
+
 return (
 
   <div>
@@ -126,7 +130,7 @@ return (
             <TableCell align="right">{flight.arrivalAirport}</TableCell>
             <TableCell align="right">{flight.departureTerminal}</TableCell>
             <TableCell align="right">{flight.arrivalTerminal}</TableCell>
-            <TableCell align="right">{difference}</TableCell>
+            <TableCell align="right">{difference[0]}</TableCell>
             <TableCell align="right">{allowance}</TableCell>
             <TableCell align="right">{price}</TableCell>
             <TableCell align="right">{cabinClass}</TableCell>
@@ -146,7 +150,7 @@ return (
             <TableCell align="right">{flight.arrivalAirport}</TableCell>
             <TableCell align="right">{flight.departureTerminal}</TableCell>
             <TableCell align="right">{flight.arrivalTerminal}</TableCell>
-            <TableCell align="right">{difference}</TableCell>
+            <TableCell align="right">{difference[1]}</TableCell>
             <TableCell align="right">{allowance}</TableCell>
             <TableCell align="right">{price}</TableCell>
             <TableCell align="right">{cabinClass}</TableCell>
@@ -156,6 +160,10 @@ return (
       </TableBody>
     </Table>
         </TableContainer>
+        <h3 align='right'>Total Price:{price2}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        &nbsp;&nbsp;</h3>
         <Container maxWidth="lg" align="center"> 
     <div className="Button"/>
       <h2>
@@ -168,4 +176,4 @@ return (
     </div>
 );
 }
-export default Summary
+export default Itinerary
