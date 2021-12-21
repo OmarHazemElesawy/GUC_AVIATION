@@ -114,7 +114,7 @@ return (
       <h2>
         To see a Summary about Selected Flights click below:
         </h2>
-      <Button variant="contained" onClick={()=>{navigate("Summary")}}>Proceed</Button>
+      <Button variant="contained" onClick={()=>{navigate("summary")}}>Proceed</Button>
       <br/>
      </Container>
     </div>
