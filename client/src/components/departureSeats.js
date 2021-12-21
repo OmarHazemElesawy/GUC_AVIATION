@@ -27,7 +27,7 @@ const classes =useStyles();
  let adultCount=parseInt(adult);
  let childrenCount=parseInt(children);
  let reservedSeats=[1,2,3];
- let confirmBox=false;
+ let confirmBox;
  const[flightList, setFlightList]=useState([]);
 // const[color,setColor]=useState('primary');
   useEffect(()=>{
@@ -73,7 +73,7 @@ const classes =useStyles();
               adultCount--;
               selectedSeats.push(count);
               if(adultCount===0){
-                confirmBox=window.alert("you have selected all seats, please select children seats");
+              confirmBox=window.alert("you have selected all seats, please select children seats");
 
               }
             }}>{count}</Button>) }
@@ -85,7 +85,7 @@ const classes =useStyles();
             {countListFiltered.map(count => 
             <Button variant="outlined"onClick={()=>{
               if(selectedSeats.includes(count)){
-                confirmBox=window.alert("you already selected this seat before");
+              confirmBox=window.alert("you already selected this seat before");
               }else{
               childrenCount--;
               selectedSeats.push(count);
