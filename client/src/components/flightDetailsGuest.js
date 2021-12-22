@@ -6,14 +6,12 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
-import { useParams} from 'react-router-dom';
-import {AppBar,Typography} from '@material-ui/core';
+import { useParams,useNavigate} from 'react-router-dom';
+import {AppBar,Typography,Container} from '@material-ui/core';
 import useStyles from './styles';
 import axios from 'axios';
 import moment from 'moment';
-import {Container} from '@material-ui/core';
 import {Button} from '@mui/material';
-import {useNavigate} from 'react-router-dom';
 
 function FlightDetailsGuest() {
   const navigate=useNavigate();
@@ -92,7 +90,6 @@ function FlightDetailsGuest() {
               key={key}
               sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
             >
-              {/* <TableCell align="right">{flight._id}</TableCell>*/}
               <TableCell align="right">{flight.flightNo}</TableCell>
               <TableCell align="right">{flight.departureTime}</TableCell>
               <TableCell align="right">{flight.arrivalTime}</TableCell>

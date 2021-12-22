@@ -1,9 +1,7 @@
 import {React,useEffect,useState} from 'react';
 import {Container , AppBar,Typography} from '@material-ui/core';
 import useStyles from './styles';
-//import {Button} from '@mui/material';
-import {useNavigate} from 'react-router-dom';
-import { useParams} from 'react-router-dom';
+import {useNavigate,useParams} from 'react-router-dom';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
@@ -58,11 +56,10 @@ function ReturnDetails() {
           "arrivalAirport":flightList[j].arrivalAirport,
           "departureTerminal":flightList[j].departureTerminal,
           "arrivalTerminal":flightList[j].arrivalTerminal,
-         // "tripDuration":difference
         })
       }
     }
-    //localStorage["flight"]=JSON.stringify(filteredFlightList);
+
 return (
 
   <div>

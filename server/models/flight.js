@@ -10,8 +10,6 @@ const flightSchema = mongoose.Schema({
     arrivalAirport:String,
     departureTerminal:String,
     arrivalTerminal:String,
-    seatsBusiness:[String],
-    seatsEconomic:[String]
 
 });
 //flight number, departure and arrival times, dates, number of Economy seats, number of Business class seats, and airport

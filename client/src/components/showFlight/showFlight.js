@@ -65,8 +65,6 @@ const deleteFlight=(id)=>{
             <StyledTableCell align="right" >Arrival Airport</StyledTableCell>
             <StyledTableCell align="right" >Departure Terminal</StyledTableCell>
             <StyledTableCell align="right" >Arrival Terminal</StyledTableCell>
-            <StyledTableCell align="right" >Reserved Business Seats</StyledTableCell>
-            <StyledTableCell align="right" >Reserved Economic Seats</StyledTableCell>
             <StyledTableCell align="right" >Delete</StyledTableCell>
             <StyledTableCell align="right" >Update</StyledTableCell>
           </TableRow>
@@ -88,8 +86,6 @@ const deleteFlight=(id)=>{
               <StyledTableCell align="right">{flight.arrivalAirport}</StyledTableCell>
               <StyledTableCell align="right">{flight.departureTerminal}</StyledTableCell>
               <StyledTableCell align="right">{flight.arrivalTerminal}</StyledTableCell>
-              <StyledTableCell align="right">{flight.seatsBusiness}</StyledTableCell>
-              <StyledTableCell align="right">{flight.seatsEconomic}</StyledTableCell>
               <StyledTableCell align="right">
               <IconButton aria-label="delete" onClick={()=>{
                 const confirmBox = window.confirm("Do you really want to delete this entry?")

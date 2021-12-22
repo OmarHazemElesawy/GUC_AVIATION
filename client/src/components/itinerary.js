@@ -2,8 +2,7 @@ import {React,useEffect,useState} from 'react';
 import {Container , AppBar,Typography} from '@material-ui/core';
 import useStyles from './styles';
 import {Button} from '@mui/material';
-//import Stack from '@mui/material';
-import {useNavigate} from 'react-router-dom';
+import {useNavigate,useParams} from 'react-router-dom';
 import axios from 'axios';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
@@ -12,17 +11,19 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
-import { useParams} from 'react-router-dom';
 import moment from 'moment';
+
 function Itinerary() {
+
   moment().format();
   const classes =useStyles();
   const navigate=useNavigate();
   const {id1}:{id1:string}=useParams();
   const {id2}:{id2:string}=useParams();
   const {cabinClass}:{cabinClass:string}=useParams();
-  //var depData=JSON.parse(localStorage['selectedDepSeats']);
- // var retData=JSON.parse(localStorage['selectedRetSeats']);
+
+// var depData=JSON.parse(localStorage['selectedDepSeats']);
+// var retData=JSON.parse(localStorage['selectedRetSeats']);
   let start;
   let end;
   var selectedDepSeats=JSON.parse(localStorage['selectedDepSeats']);
@@ -91,12 +92,34 @@ function Itinerary() {
           })
         }
       }
+  // const [flight1,setFlight]=useState({
+  //       flightNo:'',
+  //       departureTime:'',
+  //       arrivalTime:'',
+  //       ecoSeatNo:'',
+  //       businessSeatNo:'',
+  //       departureAirport:'',
+  //       arrivalAirport:'',
+  //       departureTerminal:'',
+  //       arrivalTerminal:'',
+  //       seatsBusiness:[],
+  //       seatsEconomic:[]
+  //        });
 
+  //     const updateFlight=(ID)=>{
+  //       axios.post(`http://localhost:5000/flights/${ID}`,flight1).then(()=>{
+  //         window.location.reload(false);
+  //       })
+  //     };
+  //     for (var f in flightList){
+  //       if(flightList[f]['_id']===id1){
+  //         setFlight({ ...flight1,seatsBusiness:depData})
+  //       }}
 return (
 
   <div>
        <AppBar className={classes.appBar} position="static" color="inherit">
-        <Typography className= {classes.heading} variant= "h4" align="center" >Your Itinerary</Typography>
+        <Typography className= {classes.heading} variant= "h4" align="center" >Your Itinerary </Typography>
       </AppBar>
       <TableContainer component={Paper}>
     <Table sx={{ minWidth: 1000 }} aria-label="simple table">
@@ -122,7 +145,6 @@ return (
             key={key}
             sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
           >
-            {/* <TableCell align="right">{flight._id}</TableCell>*/}
             <TableCell align="right">{flight.flightNo}</TableCell>
             <TableCell align="right">{flight.departureTime}</TableCell>
             <TableCell align="right">{flight.arrivalTime}</TableCell>
@@ -142,7 +164,6 @@ return (
             key={key}
             sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
           >
-            {/* <TableCell align="right">{flight._id}</TableCell>*/}
             <TableCell align="right">{flight.flightNo}</TableCell>
             <TableCell align="right">{flight.departureTime}</TableCell>
             <TableCell align="right">{flight.arrivalTime}</TableCell>
@@ -170,6 +191,8 @@ return (
         To return to home page, please click below:
         </h2>
       <Button variant="contained" onClick={()=>{
+        //updateFlight(id1)
+        //updateFlight(id2)
         navigate("/existingUser")}}>Reserve Seats</Button>
       <br/>
      </Container>

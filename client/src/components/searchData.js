@@ -49,7 +49,7 @@ export default function SearchData() {
           "arrivalTerminal":Item.arrivalTerminal
         })
       }
-      if(flightData['flightNo']!==""&&flightData['departureTime']!==""&&flightData['arrivalTime']!==""&flightData['departureAirport']!==""&&
+      if(flightData['flightNo']!==""&&flightData['departureTime']!==""&&flightData['arrivalTime']!==""&&flightData['departureAirport']!==""&&
              flightData['arrivalAirport']!==""&&flightData['departureTerminal']!==""&&flightData['arrivalTerminal']!==""){
                 for (var j in filteredFlights){
                    if(JSON.stringify(filteredFlights[j])===JSON.stringify(flightData)){
@@ -62,29 +62,6 @@ export default function SearchData() {
            <AppBar className={classes.appBar} position="static" color="inherit">
           <Typography className= {classes.heading} variant= "h4" align="center" >Search Results</Typography>
         </AppBar>
-          {/* the data from the text field:
-            <br/>
-            {JSON.stringify(flightData)}
-            <br/>
-            <br/>
-            all flights:
-            <br/>
-            {JSON.stringify(flightList)}
-             <br/>
-            <br/>
-            filtered flights:
-            <br/>
-            {JSON.stringify(filteredFlights)}
-            <br/>
-            full filtered flights:
-            <br/>
-            {JSON.stringify(fullFilteredFlights)}
-            <br/>
-            <br/>
-            search result:
-            <br/>
-            {JSON.stringify(finalFilteredFlights)}
-            <br/> */}
             <TableContainer component={Paper}>
       <Table sx={{ minWidth: 1000 }} aria-label="simple table">
         <TableHead>

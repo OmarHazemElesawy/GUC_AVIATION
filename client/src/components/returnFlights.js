@@ -1,9 +1,7 @@
 import {React,useEffect,useState} from 'react';
 import {AppBar,Typography} from '@material-ui/core';
 import useStyles from './styles';
-//import {Button} from '@mui/material';
-import {useNavigate} from 'react-router-dom';
-import { useParams} from 'react-router-dom';
+import {useNavigate,useParams} from 'react-router-dom';
 import axios from 'axios';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
@@ -19,7 +17,6 @@ function ReturnFlights() {
  const classes =useStyles();
  moment().format();
   const navigate=useNavigate();
-  //const {id}:{id:string}=useParams();
   const {cabinClass}:{cabinClass:string}=useParams();
   let start;
     let end;
@@ -68,18 +65,8 @@ function ReturnFlights() {
   return (
       <div>
           <AppBar className={classes.appBar} position="static" color="inherit">
-          <Typography className= {classes.heading} variant= "h4" align="center" >Available return Flight(s) details</Typography>
+          <Typography className= {classes.heading} variant= "h4" align="center" >Available return Flight(s)</Typography>
         </AppBar>
-   {/*<br/>
-            {JSON.stringify(flightData)}
-            <br/>
-            <br/>
-            {JSON.stringify(flightList)}
-            <br/>
-            <br/>
-            {JSON.stringify(filteredFlightList)}
-            <br/>
-   <br/>*/}
             <TableContainer component={Paper}>
       <Table sx={{ minWidth: 1000 }} aria-label="simple table">
         <TableHead>
@@ -103,7 +90,6 @@ function ReturnFlights() {
               key={key}
               sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
             >
-              {/* <TableCell align="right">{flight._id}</TableCell>*/}
               <TableCell align="right">{flight.flightNo}</TableCell>
               <TableCell align="right">{flight.departureTime}</TableCell>
               <TableCell align="right">{flight.arrivalTime}</TableCell>
@@ -126,6 +112,4 @@ function ReturnFlights() {
       </div>
   );
 }
-// <Button variant="outlined" onClick={()=>{navigate("update")}}>update page</Button>
-// <Button variant="outlined" onClick={()=>{navigate("searchData")}}>Search page</Button>
 export default ReturnFlights

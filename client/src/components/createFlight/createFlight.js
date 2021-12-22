@@ -6,7 +6,6 @@ import Button from '@mui/material/Button';
 import axios from 'axios';
 
 export default function Create() {
-    //update date
 
     const [flight,setFlight]=useState({
       flightNo:'',
@@ -19,56 +18,12 @@ export default function Create() {
       departureTerminal:'',
       arrivalTerminal:''
        });
-
-       const [seatsDeparture,setSeatsDeparture]=useState({
-        flightId:'',
-        seatsBusiness:[],
-        seatsEconomic:[]
-    
-         });
-         const [seatsReturn,setSeatsReturn]=useState({
-          flightId:'',
-          seatsBusiness:[],
-          seatsEconomic:[]
-      
-           });
     const createFlight=()=>{
         axios.post('http://localhost:5000/flights',flight).then(()=>{
           window.location.reload(false);
-          createSeatsDeparture();
-          createSeatsReturn();
-        //  createSeats();
         })
       };
-        const createSeatsDeparture=()=>{
-          axios.post('http://localhost:5000/seatsDeparture',seatsDeparture).then(()=>{
-            window.location.reload(false);
-          })
-        };
-        const createSeatsReturn=()=>{
-          axios.post('http://localhost:5000/seatsReturn',seatsReturn).then(()=>{
-            window.location.reload(false);
-          })
-        };
-    //     const  fillSeatsEconomic=(y)=>{
-    //       var listY=[];
-    //       for(let i=0;i<parseInt(y);i++){
-    //         listY[i]="free";
-    //       }
-    //      return{
-    //        listY
-    //      }
-    //    };
-    //    const  fillSeatsBusiness=(x)=>{
-    //     var listX=[];
-    //     for(let j=0;j<parseInt(x);j++){
-    //       listX[j]="free";
-    //     }
-    //    return{
-    //      listX
-    //    }
-    //  };
-    
+   
 
   return (
       <>
@@ -83,10 +38,8 @@ export default function Create() {
       noValidate
       autoComplete="off"
     >
-      <TextField id="outlined-basic" label="Flight Number" variant="outlined" helperText="Ex:MS731" value={(flight.flightNo,seatsDeparture.flightId,seatsReturn.flightId)}onChange={(event)=>{
+      <TextField id="outlined-basic" label="Flight Number" variant="outlined" helperText="Ex:MS731" value={flight.flightNo}onChange={(event)=>{
           setFlight({ ...flight,flightNo:event.target.value});
-          setSeatsDeparture({ ...seatsDeparture,flightId:event.target.value});
-          setSeatsReturn({ ...seatsReturn,flightId:event.target.value})
         }}/>
       <TextField id="outlined-basic" label="Departure Time" variant="outlined" helperText="Ex:10:45" value={flight.departureTime}onChange={(event)=>{
           setFlight({ ...flight,departureTime:event.target.value})
@@ -96,11 +49,9 @@ export default function Create() {
         }}/>
       <TextField id="outlined-basic" label="Economic Seat Number" variant="outlined" helperText="Ex:175" value={flight.ecoSeatNo}onChange={(event)=>{
           setFlight({ ...flight,ecoSeatNo:event.target.value});
-        //  setSeats({ ...seats,economicNo:event.target.value})
         }}/>
                <TextField id="outlined-basic" label="Business Seat Number" variant="outlined" helperText="Ex:175" value={flight.businessSeatNo}onChange={(event)=>{
          setFlight({ ...flight,businessSeatNo:event.target.value});
-         //setSeats({ ...seats,businessNo:event.target.value})
         }}/>
         <TextField id="outlined-basic" label=" Departure Airport" variant="outlined" helperText="Ex:SXF" value={flight.departureAirport}onChange={(event)=>{
           setFlight({ ...flight,departureAirport:event.target.value})

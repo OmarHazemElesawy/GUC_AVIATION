@@ -1,15 +1,10 @@
 import {React,useEffect,useState} from 'react';
 import {Container , AppBar,Typography} from '@material-ui/core';
 import useStyles from './styles';
-import { useParams} from 'react-router-dom';
+import { useParams,useNavigate} from 'react-router-dom';
 import axios from 'axios';
-//import Stack from '@mui/material/Stack';
 import Button from '@mui/material/Button';
-//import {Button} from '@mui/material';
-//import Stack from '@mui/material';
-//import Switch from '@mui/material/Switch';
-import {useNavigate} from 'react-router-dom';
-//import { styled } from '@mui/material/styles';
+
 function DepartureSeats() {
 
 const navigate=useNavigate();
@@ -17,7 +12,6 @@ const classes =useStyles();
  let {adult}:{adult:string}=useParams();
  let {children}:{children:string}=useParams();
  let {id1}:{id1:string}=useParams();
- //let {id2}:{id2:string}=useParams();
  let {cabinClass}:{cabinClass:string}=useParams();
  let economicCount=0;
  let businessCount=0;
@@ -26,10 +20,8 @@ const classes =useStyles();
  var selectedSeats=[];
  let adultCount=parseInt(adult);
  let childrenCount=parseInt(children);
- let reservedSeats=[1,2,3];
- let confirmBox;
+ let reservedSeats=[''];
  const[flightList, setFlightList]=useState([]);
-// const[color,setColor]=useState('primary');
   useEffect(()=>{
     axios.get('http://localhost:5000/flights').then((allFlights)=>{
       setFlightList(allFlights.data);
@@ -73,7 +65,7 @@ const classes =useStyles();
               adultCount--;
               selectedSeats.push(count);
               if(adultCount===0){
-              confirmBox=window.alert("you have selected all seats, please select children seats");
+               window.alert("you have selected all seats, please select children seats");
 
               }
             }}>{count}</Button>) }
@@ -85,13 +77,12 @@ const classes =useStyles();
             {countListFiltered.map(count => 
             <Button variant="outlined"onClick={()=>{
               if(selectedSeats.includes(count)){
-              confirmBox=window.alert("you already selected this seat before");
+               window.alert("you already selected this seat before");
               }else{
               childrenCount--;
               selectedSeats.push(count);
-              confirmBox=false;
               if(childrenCount===0){
-                confirmBox=window.alert("you have selected all seats redirecting now");
+                window.alert("you have selected all seats redirecting now");
                 localStorage["selectedDepSeats"]=JSON.stringify(selectedSeats);
                 navigate("retSeats");
               }
@@ -101,10 +92,5 @@ const classes =useStyles();
           </Container>
     </div>
   );
-
-//{flightList.map((flight,key) => ())}     {/*{JSON.stringify(countList)}*/}
-//<Checkbox {...label} defaultChecked />
-// <Button variant="outlined" onClick={()=>{navigate("update")}}>update page</Button>
-// <Button variant="outlined" onClick={()=>{navigate("searchData")}}>Search page</Button>*/
   }
 export default DepartureSeats

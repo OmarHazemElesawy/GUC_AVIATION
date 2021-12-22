@@ -9,8 +9,6 @@ import Paper from '@mui/material/Paper';
 import axios from 'axios';
 import IconButton from '@material-ui/core/IconButton';
 import DeleteIcon from '@material-ui/icons/Delete';
-//import EditIcon from '@material-ui/icons/Edit';
-//import {useNavigate} from 'react-router-dom';
 import { styled } from '@mui/material/styles';
 
 export default function ShowReservation() {
@@ -42,13 +40,10 @@ const deleteFlight=(id)=>{
     '&:nth-of-type(odd)': {
       backgroundColor: theme.palette.action.hover,
     },
-    // hide last border
     '&:last-child td, &:last-child th': {
       border: 0,
     },
   }));
-  
- // const navigate=useNavigate();
   return (
       <>
       <h2>
@@ -71,8 +66,6 @@ const deleteFlight=(id)=>{
             <StyledTableCell align="right" >Class</StyledTableCell>
             <StyledTableCell align="right" >confirmation Code</StyledTableCell>
             <StyledTableCell align="right" >Cancel</StyledTableCell>
-           
-            {/*<StyledTableCell align="right" >Update</StyledTableCell>*/}
           </TableRow>
         </TableHead>
         <TableBody>
@@ -102,13 +95,7 @@ const deleteFlight=(id)=>{
               }}>
                 <DeleteIcon />
                 </IconButton>
-              </StyledTableCell>{/*
-              <StyledTableCell align="right">
-              <IconButton aria-label="update" onClick={()=>{navigate(`update/${flight._id}`)
-              }}>
-                <EditIcon />
-                </IconButton>
-            </StyledTableCell>*/}
+              </StyledTableCell>
             </StyledTableRow>
              
           ))}

@@ -4,9 +4,6 @@ import Search from './components/searchFlightGuest';
 import useStyles from './styles';
 import { Outlet } from 'react-router-dom';
 import "./ExistingUser.css"
-//import { Button } from '@material-ui/core';
-//import {useNavigate} from 'react-router-dom';
-//import axios from 'axios';
 function ExistingUser() {
   const classes =useStyles();
 
@@ -35,14 +32,3 @@ function ExistingUser() {
   );
 }
 export default ExistingUser
-//<button aria-label="updateUser" onClick={()=>{navigate(`updateUser/${userList[0]._id}`)}}>
-//</button>
-//import useStyles from './styles';
-//import {useNavigate} from 'react-router-dom';
-//import {Container , AppBar,Typography} from '@material-ui/core';
-//import { Button,Stack} from '@mui/material';
-//const classes =useStyles();
-//const navigate=useNavigate();
-// <Button variant="outlined" onClick={()=>{navigate("update")}}>update page</Button>
-// <Button variant="outlined" onClick={()=>{navigate("searchData")}}>Search page</Button>
-  

@@ -2,7 +2,7 @@ import {React,useEffect,useState} from 'react';
 import {Container , AppBar,Typography} from '@material-ui/core';
 import useStyles from './styles';
 import {Button} from '@mui/material';
-import {useNavigate} from 'react-router-dom';
+import {useNavigate,useParams} from 'react-router-dom';
 import axios from 'axios';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
@@ -11,9 +11,10 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
-import { useParams} from 'react-router-dom';
 import moment from 'moment';
+
 function SummaryGuest() {
+
   moment().format();
   const classes =useStyles();
   const navigate=useNavigate();
@@ -114,7 +115,6 @@ return (
             key={key}
             sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
           >
-            {/* <TableCell align="right">{flight._id}</TableCell>*/}
             <TableCell align="right">{flight.flightNo}</TableCell>
             <TableCell align="right">{flight.departureTime}</TableCell>
             <TableCell align="right">{flight.arrivalTime}</TableCell>

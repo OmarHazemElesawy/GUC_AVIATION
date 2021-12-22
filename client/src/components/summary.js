@@ -2,8 +2,7 @@ import {React,useEffect,useState} from 'react';
 import {Container , AppBar,Typography} from '@material-ui/core';
 import useStyles from './styles';
 import {Button} from '@mui/material';
-//import Stack from '@mui/material';
-import {useNavigate} from 'react-router-dom';
+import {useNavigate,useParams} from 'react-router-dom';
 import axios from 'axios';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
@@ -12,9 +11,10 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
-import { useParams} from 'react-router-dom';
 import moment from 'moment';
+
 function Summary() {
+  
   moment().format();
   const classes =useStyles();
   const navigate=useNavigate();
@@ -24,8 +24,6 @@ function Summary() {
   let resNoOne=(id1).substring((id1).length-1,(id1).length-5)
   let resNoTwo=(id2).substring((id2).length-1,(id2).length-5)
   let resNo=resNoOne+resNoTwo;
-  //const {adult}:{adult:string}=useParams();
- // const {children}:{children:string}=useParams();
   const {cabinClass}:{cabinClass:string}=useParams();
   let start;
   let end;
@@ -188,7 +186,6 @@ return (
       <h2>
         To reserve flights and proceed to seats selection please click below:
         </h2>
-      {/*<Button variant="contained" onClick={()=>{navigate("depSeats")}}>Reserve Seats</Button>*/}
       <Button variant="contained" onClick={()=>{
         createReservation1()
         if(reserve1){
