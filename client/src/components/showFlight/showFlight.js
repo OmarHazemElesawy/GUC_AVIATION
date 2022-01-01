@@ -57,6 +57,7 @@ const deleteFlight=(id)=>{
         <TableHead>
           <TableRow>
             <StyledTableCell align="right" >Flight No.</StyledTableCell>
+            <StyledTableCell align="right" >Date</StyledTableCell>
             <StyledTableCell align="right" >Departure Time</StyledTableCell>
             <StyledTableCell align="right" >Arrival Time</StyledTableCell>
             <StyledTableCell align="right" >Economic Seats No.</StyledTableCell>
@@ -78,6 +79,7 @@ const deleteFlight=(id)=>{
               <StyledTableCell component="th" scope="row">
                 {flight.flightNo}
               </StyledTableCell>
+              <StyledTableCell align="right">{flight.date}</StyledTableCell>
               <StyledTableCell align="right">{flight.departureTime}</StyledTableCell>
               <StyledTableCell align="right">{flight.arrivalTime}</StyledTableCell>
               <StyledTableCell align="right">{flight.ecoSeatNo}</StyledTableCell>

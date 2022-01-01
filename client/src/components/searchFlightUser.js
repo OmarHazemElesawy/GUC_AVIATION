@@ -11,6 +11,7 @@ export default function Search() {
     const [flight,setFlight]=useState({
       passengerChild:'',
       passengerAdult:'',
+      date:'',
       departureTime:'',
       arrivalTime:'',
       departureAirport:'',
@@ -44,6 +45,9 @@ export default function Search() {
          <TextField id="outlined-basic" label="Number of Adults" variant="outlined" helperText="Ex: 2" value={flight.passengerAdult}onChange={(event)=>{
           setFlight({ ...flight,passengerAdult:event.target.value})
         }}/>
+        <TextField id="outlined-basic" label="Date" variant="outlined" helperText="Ex: 2020-01-01" value={flight.date}onChange={(event)=>{
+          setFlight({ ...flight,date:event.target.value})
+        }}/>
       <TextField id="outlined-basic" label="Departure Time" variant="outlined" helperText="Ex: 10:45" value={flight.departureTime}onChange={(event)=>{
           setFlight({ ...flight,departureTime:event.target.value})
         }}/>
@@ -67,7 +71,7 @@ export default function Search() {
         }}/>
       <Stack spacing={2} direction="row">
         <Button variant="outlined" onClick={()=>{
-              if(flight['flightNo']===""||flight['departureTime']===""||flight['arrivalTime']===""||
+              if(flight['flightNo']===""||flight['date']===""||flight['departureTime']===""||flight['arrivalTime']===""||
               flight['departureAirport']===""||flight['arrivalAirport']===""||flight['departureTerminal']===""||
               flight['arrivalTerminal']===""){
                const alertBox = window.alert("please enter data in the provided fields")

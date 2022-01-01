@@ -32,6 +32,7 @@ export default function SearchData() {
       for (var i in flightList){
         var item=flightList[i]
         filteredFlights.push({
+          "date":item.date,
           "departureTime":item.departureTime,
           "arrivalTime":item.arrivalTime,
           "departureAirport":item.departureAirport,
@@ -46,6 +47,7 @@ export default function SearchData() {
           "_id":Item._id,
           "cabinClass":flightData['cabinClass'],
           "flightNo":Item.flightNo,
+          "date":Item.date,
           "departureTime":Item.departureTime,
           "arrivalTime":Item.arrivalTime,
           "departureAirport":Item.departureAirport,
@@ -67,6 +69,7 @@ export default function SearchData() {
         }
       }
       flightDataFiltered.push({
+        "date":flightData.date,
         "departureTime":flightData.departureTime,
         "arrivalTime":flightData.arrivalTime,
         "departureAirport":flightData.departureAirport,
@@ -90,6 +93,7 @@ export default function SearchData() {
         <TableHead>
           <TableRow>
             <TableCell align="right">Flight No.</TableCell>
+            <TableCell align="right">Date</TableCell>
             <TableCell align="right">Departure Time</TableCell>
             <TableCell align="right">Arrival Time</TableCell>
             <TableCell align="right">Departure Airport</TableCell>
@@ -107,6 +111,7 @@ export default function SearchData() {
               sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
             >
               <TableCell align="right">{flight.flightNo}</TableCell>
+              <TableCell align="right">{flight.date}</TableCell>
               <TableCell align="right">{flight.departureTime}</TableCell>
               <TableCell align="right">{flight.arrivalTime}</TableCell>
               <TableCell align="right">{flight.departureAirport}</TableCell>

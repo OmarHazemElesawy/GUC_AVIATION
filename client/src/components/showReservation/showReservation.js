@@ -54,6 +54,7 @@ const deleteFlight=(id)=>{
         <TableHead>
           <TableRow>
             <StyledTableCell align="right" >Flight No.</StyledTableCell>
+            <StyledTableCell align="right" >Date</StyledTableCell>
             <StyledTableCell align="right" >Departure Time</StyledTableCell>
             <StyledTableCell align="right" >Arrival Time</StyledTableCell>
             <StyledTableCell align="right" >Departure Airport</StyledTableCell>
@@ -75,6 +76,7 @@ const deleteFlight=(id)=>{
               sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
             >
               <StyledTableCell align="right">{reservation.flightNo}</StyledTableCell>
+              <StyledTableCell align="right">{reservation.date}</StyledTableCell>
               <StyledTableCell align="right">{reservation.departureTime}</StyledTableCell>
               <StyledTableCell align="right">{reservation.arrivalTime}</StyledTableCell>
               <StyledTableCell align="right">{reservation.departureAirport}</StyledTableCell>

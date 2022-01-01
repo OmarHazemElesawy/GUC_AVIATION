@@ -9,6 +9,7 @@ import { useNavigate } from 'react-router-dom';
 export default function Search() {
     const [flight,setFlight]=useState({
       flightNo:'',
+      date:'',
       departureTime:'',
       arrivalTime:'',
       departureAirport:'',
@@ -37,6 +38,9 @@ export default function Search() {
     >
       <TextField id="outlined-basic" label="Flight Number" variant="outlined" helperText="Ex: MS731" value={flight.flightNo}onChange={(event)=>{
           setFlight({ ...flight,flightNo:event.target.value})
+        }}/>
+         <TextField id="outlined-basic" label="Date" variant="outlined" helperText="2020-01-01" value={flight.date}onChange={(event)=>{
+          setFlight({ ...flight,date:event.target.value})
         }}/>
       <TextField id="outlined-basic" label="Departure Time" variant="outlined" helperText="Ex: 10:45" value={flight.departureTime}onChange={(event)=>{
           setFlight({ ...flight,departureTime:event.target.value})

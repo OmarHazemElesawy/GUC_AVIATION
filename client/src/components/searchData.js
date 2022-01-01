@@ -27,6 +27,7 @@ export default function SearchData() {
         var item=flightList[i]
         filteredFlights.push({
           "flightNo":item.flightNo,
+          "date":item.date,
           "departureTime":item.departureTime,
           "arrivalTime":item.arrivalTime,
           "departureAirport":item.departureAirport,
@@ -39,6 +40,7 @@ export default function SearchData() {
         var Item=flightList[k]
         fullFilteredFlights.push({
           "flightNo":Item.flightNo,
+          "date":Item.date,
           "departureTime":Item.departureTime,
           "arrivalTime":Item.arrivalTime,
           "ecoSeatNo":Item.ecoSeatNo,
@@ -49,7 +51,7 @@ export default function SearchData() {
           "arrivalTerminal":Item.arrivalTerminal
         })
       }
-      if(flightData['flightNo']!==""&&flightData['departureTime']!==""&&flightData['arrivalTime']!==""&&flightData['departureAirport']!==""&&
+      if(flightData['flightNo']!==""&&flightData['date']!==""&&flightData['departureTime']!==""&&flightData['arrivalTime']!==""&&flightData['departureAirport']!==""&&
              flightData['arrivalAirport']!==""&&flightData['departureTerminal']!==""&&flightData['arrivalTerminal']!==""){
                 for (var j in filteredFlights){
                    if(JSON.stringify(filteredFlights[j])===JSON.stringify(flightData)){
@@ -67,6 +69,7 @@ export default function SearchData() {
         <TableHead>
           <TableRow>
             <TableCell align="right">Flight No.</TableCell>
+            <TableCell align="right">Date</TableCell>
             <TableCell align="right">Departure Time</TableCell>
             <TableCell align="right">Arrival Time</TableCell>
             <TableCell align="right">Economic Seat No.</TableCell>
@@ -86,6 +89,7 @@ export default function SearchData() {
               sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
             >
               <TableCell align="right">{flight.flightNo}</TableCell>
+              <TableCell align="right">{flight.date}</TableCell>
               <TableCell align="right">{flight.departureTime}</TableCell>
               <TableCell align="right">{flight.arrivalTime}</TableCell>
               <TableCell align="right">{flight.ecoSeatNo}</TableCell>

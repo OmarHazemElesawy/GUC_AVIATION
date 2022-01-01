@@ -37,6 +37,7 @@ export const updateFlight = async (req,res)=>{
     try{
         await FlightData.findOneAndUpdate({_id:id},{
             flightNo:req.body.flightNo||FlightData.flightNo,
+            date:req.body.date||FlightData.date,
             departureTime:req.body.departureTime||FlightData.departureTime,
             arrivalTime:req.body.arrivalTime||FlightData.arrivalTime,
             ecoSeatNo:req.body.ecoSeatNo||FlightData.ecoSeatNo,

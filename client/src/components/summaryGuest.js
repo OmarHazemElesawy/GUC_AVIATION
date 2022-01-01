@@ -56,6 +56,7 @@ function SummaryGuest() {
         difference.push(differenceMs.asHours()+" Hours");
         filteredFlightList.push({
           "flightNo":flightList[j].flightNo,
+          "date":flightList[j].date,
           "departureTime":flightList[j].departureTime,
           "arrivalTime":flightList[j].arrivalTime,
           "departureAirport":flightList[j].departureAirport,
@@ -74,6 +75,7 @@ function SummaryGuest() {
           difference.push(differenceMs.asHours()+" Hours");
           filteredFlightList.push({
             "flightNo":flightList[k].flightNo,
+            "date":flightList[k].date,
             "departureTime":flightList[k].departureTime,
             "arrivalTime":flightList[k].arrivalTime,
             "departureAirport":flightList[k].departureAirport,
@@ -97,6 +99,7 @@ return (
       <TableHead>
         <TableRow>
         <TableCell align="right">Flight No.</TableCell>
+        <TableCell align="right">Date</TableCell>
         <TableCell align="right">Departure Time</TableCell>
         <TableCell align="right">Arrival Time</TableCell>
         <TableCell align="right">Departure Airport</TableCell>
@@ -116,6 +119,7 @@ return (
             sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
           >
             <TableCell align="right">{flight.flightNo}</TableCell>
+            <TableCell align="right">{flight.date}</TableCell>
             <TableCell align="right">{flight.departureTime}</TableCell>
             <TableCell align="right">{flight.arrivalTime}</TableCell>
             <TableCell align="right">{flight.departureAirport}</TableCell>
@@ -140,7 +144,7 @@ return (
         Click below to be redirected to main page.
         </h2>
       <Button variant="contained" onClick={()=>{
-        navigate("/")}}>Reserve Seats</Button>
+        navigate("/")}}>Main page</Button>
       <br/>
      </Container>
     </div>

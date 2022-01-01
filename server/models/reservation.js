@@ -2,6 +2,7 @@ import mongoose from 'mongoose';
 
 const reservationSchema = mongoose.Schema({
     flightNo: String,
+    date:String,
     departureTime:String,
     arrivalTime:String,
     departureAirport:String,

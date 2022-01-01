@@ -12,6 +12,7 @@ function Update() {
     const navigate=useNavigate();
     const [flight,setFlight]=useState({
         flightNo:'',
+        date:'',
         departureTime:'',
         arrivalTime:'',
         ecoSeatNo:'',
@@ -42,6 +43,9 @@ function Update() {
     >
     <TextField id="outlined-basic" label="Flight Number" variant="outlined" value={flight.flightNo}onChange={(event)=>{
         setFlight({ ...flight,flightNo:event.target.value})
+      }}/>
+      <TextField id="outlined-basic" label="Date" variant="outlined" value={flight.date}onChange={(event)=>{
+        setFlight({ ...flight,date:event.target.value})
       }}/>
     <TextField id="outlined-basic" label="Departure Time" variant="outlined" value={flight.departureTime}onChange={(event)=>{
         setFlight({ ...flight,departureTime:event.target.value})

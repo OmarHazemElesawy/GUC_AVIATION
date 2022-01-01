@@ -2,7 +2,6 @@ import React from 'react';
 import {Container , AppBar,Typography} from '@material-ui/core';
 import useStyles from './styles';
 import {Button} from '@mui/material';
-//import Stack from '@mui/material';
 import {useNavigate} from 'react-router-dom';
 import "./App.css"
 function App() {
