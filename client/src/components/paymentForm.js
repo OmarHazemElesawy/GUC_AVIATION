@@ -28,6 +28,8 @@ const CARD_OPTIONS = {
 }
 
 export default function PaymentForm() {
+    const {id1}:{id1:string}=useParams();
+    const {id2}:{id2:string}=useParams();
     const navigate=useNavigate();
     const classes =useStyles();
     const [success, setSuccess ] = useState(false)
@@ -73,6 +75,53 @@ export default function PaymentForm() {
         console.log(error.message)
     }
 }
+const [reservation1,setReservation1]=useState({
+    flightNo: '',
+    date:'',
+    departureTime:'',
+    arrivalTime:'',
+    departureAirport:'',
+    arrivalAirport:'',
+    departureTerminal:'',
+    arrivalTerminal:'',
+    tripDuration:'',
+    allowance:'',
+    price:'',
+    class:'',
+    confirmationCode:'',
+    payed:false,
+    depSeats:[],
+    retSeats:[]
+});
+const [reservation2,setReservation2]=useState({
+    flightNo: '',
+    date:'',
+    departureTime:'',
+    arrivalTime:'',
+    departureAirport:'',
+    arrivalAirport:'',
+    departureTerminal:'',
+    arrivalTerminal:'',
+    tripDuration:'',
+    allowance:'',
+    price:'',
+    class:'',
+    confirmationCode:'',
+    payed:false,
+    depSeats:[],
+    retSeats:[]
+});
+    
+
+  const updateReservation1=(ID)=>{
+    axios.post(`http://localhost:5000/reservations/${ID}`,reservation1).then(()=>{
+    })
+  };
+  const updateReservation2=(ID)=>{
+    axios.post(`http://localhost:5000/reservations/${ID}`,reservation2).then(()=>{
+    })
+  };
+
 
     return (
         <>
@@ -97,7 +146,12 @@ export default function PaymentForm() {
        <div>
            <h2 align="center">payment successful! you payed</h2>
            <Stack spacing={2} direction="row">
-               <Button variant="contained"  onClick={()=>{navigate("/existingUser")
+               <Button variant="contained"  onClick={()=>{
+                   navigate("/existingUser");
+                   setReservation1({ ...reservation1,payed:true});
+                   setReservation2({ ...reservation2,payed:true});
+                   updateReservation1(id1);
+                   updateReservation2(id2);
               }}>Return to Home Page</Button>
                </Stack>
        </div> 
