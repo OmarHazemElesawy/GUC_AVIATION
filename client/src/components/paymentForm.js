@@ -1,7 +1,11 @@
 import { CardElement, useElements, useStripe } from "@stripe/react-stripe-js"
 import axios from "axios"
 import React, { useState } from 'react'
-import {useParams} from 'react-router-dom';
+import {useParams,useNavigate} from 'react-router-dom';
+import {Container , AppBar,Typography,Grow} from '@material-ui/core';
+import useStyles from './styles';
+import Stack from '@mui/material/Stack';
+import Button from '@mui/material/Button';
 
 const CARD_OPTIONS = {
 	iconStyle: "solid",
@@ -24,6 +28,8 @@ const CARD_OPTIONS = {
 }
 
 export default function PaymentForm() {
+    const navigate=useNavigate();
+    const classes =useStyles();
     const [success, setSuccess ] = useState(false)
     const stripe = useStripe()
     const elements = useElements()
@@ -54,6 +60,7 @@ export default function PaymentForm() {
 
             if(response.data.success) {
                 console.log("Successful payment")
+                
                 setSuccess(true)
             }
 
@@ -61,12 +68,22 @@ export default function PaymentForm() {
             console.log("Error", error)
         }
     } else {
+        window.confirm("please enter correct credit card Information!")
+        window.location.reload(false);
         console.log(error.message)
     }
 }
 
     return (
         <>
+        <div>
+      <Container maxWidth="lg"> 
+        <AppBar className={classes.appBar} position="static" color="inherit">
+          <Typography className= {classes.heading} variant= "h4" align="center" >Payment for round Trip</Typography>
+        </AppBar>
+      </Container>
+      <Grow in>
+        <Container>
         {!success ? 
         <form onSubmit={handleSubmit}>
             <fieldset className="FormGroup">
@@ -78,9 +95,16 @@ export default function PaymentForm() {
         </form>
         :
        <div>
-           <h2>payment successful! you payed</h2>
+           <h2 align="center">payment successful! you payed</h2>
+           <Stack spacing={2} direction="row">
+               <Button variant="contained"  onClick={()=>{navigate("/existingUser")
+              }}>Return to Home Page</Button>
+               </Stack>
        </div> 
         }
+         </Container>
+      </Grow>
+        </div>
         </>
     )
 }
