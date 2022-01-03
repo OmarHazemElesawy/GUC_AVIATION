@@ -34,7 +34,7 @@ function Summary() {
   let price2="";
   var filteredFlightList1=[]
   var filteredFlightList2=[]
-  let reserve1=false;
+  // let reserve1=false
   if (cabinClass==="Business"){
       allowance="Two 23 kg bags"
       price="2000 Euros"
@@ -84,7 +84,8 @@ function Summary() {
           "allowance":allowance,
           "price":price,
           "class":cabinClass,
-          "confirmationCode":resNo
+          "confirmationCode":resNo,
+          "payed":false
 
         })
       }
@@ -104,7 +105,7 @@ function Summary() {
             "arrivalAirport":flightList[k].arrivalAirport,
             "departureTerminal":flightList[k].departureTerminal,
             "arrivalTerminal":flightList[k].arrivalTerminal,
-            "tripDuration":difference
+            "tripDuration":difference,
           })
           filteredFlightList2.push({
             "flightNo":flightList[k].flightNo,
@@ -119,24 +120,27 @@ function Summary() {
             "allowance":allowance,
             "price":price,
             "class":cabinClass,
-            "confirmationCode":resNo
+            "confirmationCode":resNo,
+            "payed":false
           })
         }
       }
       
-    const createReservation1=()=>{
-      axios.post('http://localhost:5000/reservations',filteredFlightList2[0]).then(()=>{
-        window.location.reload(false);
-      })
-      reserve1=true;
-  };
-  const createReservation2=()=>{
-    axios.post('http://localhost:5000/reservations',filteredFlightList1[0]).then(()=>{
-      window.location.reload(false);
-      reserve1=false;
-    })
-};
+//     const createReservation1=()=>{
+//       axios.post('http://localhost:5000/reservations',filteredFlightList2[0]).then(()=>{
+//         window.location.reload(false);
+//       })
+//       reserve1=true;
+//   };
+//   const createReservation2=()=>{
+//     axios.post('http://localhost:5000/reservations',filteredFlightList1[0]).then(()=>{
+//       window.location.reload(false);
+//       reserve1=false;
+//     })
+// };
     localStorage["flight"]=JSON.stringify(filteredFlightList);
+    localStorage["filteredFlightList2"]=JSON.stringify(filteredFlightList2);
+    localStorage["filteredFlightList1"]=JSON.stringify(filteredFlightList1);
 return (
 
   <div>
@@ -192,9 +196,9 @@ return (
         To reserve flights and proceed to seats selection please click below:
         </h2>
       <Button variant="contained" onClick={()=>{
-        createReservation1()
-        if(reserve1){
-        createReservation2()}
+        // createReservation1()
+        // if(reserve1){
+        // createReservation2()}
         navigate("depSeats")}}>Reserve Seats</Button>
       <br/>
      </Container>

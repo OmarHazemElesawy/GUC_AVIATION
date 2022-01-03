@@ -21,8 +21,9 @@ function Itinerary() {
   const {id1}:{id1:string}=useParams();
   const {id2}:{id2:string}=useParams();
   const {cabinClass}:{cabinClass:string}=useParams();
-
-// var depData=JSON.parse(localStorage['selectedDepSeats']);
+  var flightListSum1=JSON.parse(localStorage['filteredFlightList1']);
+  var flightListSum2=JSON.parse(localStorage['filteredFlightList2']);
+ // var depData=JSON.parse(localStorage['selectedDepSeats']);
 // var retData=JSON.parse(localStorage['selectedRetSeats']);
   let start;
   let end;
@@ -35,6 +36,7 @@ function Itinerary() {
   let allowance="";
   let price="";
   let price2="";
+  let reserve1=false
 
   if (cabinClass==="Business"){
       allowance="Two 23 kg bags"
@@ -48,6 +50,8 @@ function Itinerary() {
 
   var filteredFlightList1=[];
   var filteredFlightList2=[];
+  var filteredFlightListSum1=[];
+  var filteredFlightListSum2=[];
  const[flightList, setFlightList]=useState([]);
 
    useEffect(()=>{
@@ -94,34 +98,61 @@ function Itinerary() {
           })
         }
       }
-  // const [flight1,setFlight]=useState({
-  //       flightNo:'',
-  //       departureTime:'',
-  //       arrivalTime:'',
-  //       ecoSeatNo:'',
-  //       businessSeatNo:'',
-  //       departureAirport:'',
-  //       arrivalAirport:'',
-  //       departureTerminal:'',
-  //       arrivalTerminal:'',
-  //       seatsBusiness:[],
-  //       seatsEconomic:[]
-  //        });
-
-  //     const updateFlight=(ID)=>{
-  //       axios.post(`http://localhost:5000/flights/${ID}`,flight1).then(()=>{
-  //         window.location.reload(false);
-  //       })
-  //     };
-  //     for (var f in flightList){
-  //       if(flightList[f]['_id']===id1){
-  //         setFlight({ ...flight1,seatsBusiness:depData})
-  //       }}
+      for (var a in flightListSum1){
+        filteredFlightListSum1.push({
+          "flightNo":flightListSum1[a].flightNo,
+          "date":flightListSum1[a].date,
+          "departureTime":flightListSum1[a].departureTime,
+          "arrivalTime":flightListSum1[a].arrivalTime,
+          "departureAirport":flightListSum1[a].departureAirport,
+          "arrivalAirport":flightListSum1[a].arrivalAirport,
+          "departureTerminal":flightListSum1[a].departureTerminal,
+          "arrivalTerminal":flightListSum1[a].arrivalTerminal,
+          "tripDuration":flightListSum1[a].tripDuration,
+          "allowance":flightListSum1[a].allowance,
+          "price":flightListSum1[a].price,
+          "class":flightListSum1[a].class,
+          "confirmationCode":flightListSum1[a].confirmationCode,
+          "payed":flightListSum1[a].payed,
+          'depSeats':selectedDepSeatsString
+      })
+    }
+      for (var b in flightListSum2){
+        filteredFlightListSum2.push({
+          "flightNo":flightListSum2[b].flightNo,
+          "date":flightListSum2[b].date,
+          "departureTime":flightListSum2[b].departureTime,
+          "arrivalTime":flightListSum2[b].arrivalTime,
+          "departureAirport":flightListSum2[b].departureAirport,
+          "arrivalAirport":flightListSum2[b].arrivalAirport,
+          "departureTerminal":flightListSum2[b].departureTerminal,
+          "arrivalTerminal":flightListSum2[b].arrivalTerminal,
+          "tripDuration":flightListSum2[b].tripDuration,
+          "allowance":flightListSum2[b].allowance,
+          "price":flightListSum2[b].price,
+          "class":flightListSum2[b].class,
+          "confirmationCode":flightListSum2[b].confirmationCode,
+          "payed":flightListSum2[b].payed,
+          'retSeats':selectedRetSeatsString
+      })
+    }
+  const createReservation1=()=>{
+    axios.post('http://localhost:5000/reservations',filteredFlightListSum1[0]).then(()=>{
+      window.location.reload(false);
+    })
+    reserve1=true;
+};
+const createReservation2=()=>{
+  axios.post('http://localhost:5000/reservations',filteredFlightListSum2[0]).then(()=>{
+    window.location.reload(false);
+    reserve1=false;
+  })
+};
 return (
 
   <div>
        <AppBar className={classes.appBar} position="static" color="inherit">
-        <Typography className= {classes.heading} variant= "h4" align="center" >Your Itinerary </Typography>
+        <Typography className= {classes.heading} variant= "h4" align="center" >Your Itinerary</Typography>
       </AppBar>
       <TableContainer component={Paper}>
     <Table sx={{ minWidth: 1000 }} aria-label="simple table">
@@ -196,8 +227,9 @@ return (
         To return to home page, please click below:
         </h2>
       <Button variant="contained" onClick={()=>{
-        //updateFlight(id1)
-        //updateFlight(id2)
+         createReservation1()
+         if(reserve1){
+         createReservation2()}
         navigate("/existingUser")}}>Reserve Seats</Button>
       <br/>
      </Container>
