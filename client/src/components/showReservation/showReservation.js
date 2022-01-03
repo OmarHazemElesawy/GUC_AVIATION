@@ -10,11 +10,13 @@ import axios from 'axios';
 import IconButton from '@material-ui/core/IconButton';
 import DeleteIcon from '@material-ui/icons/Delete';
 import { styled } from '@mui/material/styles';
+import { Button } from '@mui/material';
+import {useNavigate } from 'react-router-dom';
 
 export default function ShowReservation() {
   const[reservationList, setReservationList]=useState([]);
 
-
+const navigate=useNavigate();
 const deleteFlight=(id)=>{
   axios.delete(`http://localhost:5000/reservations/${id}`).then(()=>{
     window.location.reload(false);
@@ -66,6 +68,7 @@ const deleteFlight=(id)=>{
             <StyledTableCell align="right" >Price</StyledTableCell>
             <StyledTableCell align="right" >Class</StyledTableCell>
             <StyledTableCell align="right" >confirmation Code</StyledTableCell>
+            <StyledTableCell align="right" >Pay</StyledTableCell>
             <StyledTableCell align="right" >Cancel</StyledTableCell>
           </TableRow>
         </TableHead>
@@ -88,16 +91,21 @@ const deleteFlight=(id)=>{
               <StyledTableCell align="right">{reservation.price}</StyledTableCell>
               <StyledTableCell align="right">{reservation.class}</StyledTableCell>
               <StyledTableCell align="right">{reservation.confirmationCode}</StyledTableCell>
-             <StyledTableCell align="right">
+             <> {key%2===1? <StyledTableCell align="right">
+             <Button variant="outlined" onClick={()=>{navigate(`payment/${reservationList[0]._id}/${reservationList[1]._id}/${reservation.class}`)
+              }}>PAY</Button>
+              </StyledTableCell>:<StyledTableCell align="right"></StyledTableCell>}</>
+             <> {key%2===1?  <StyledTableCell align="right">
               <IconButton aria-label="cancel" onClick={()=>{
                 const confirmBox = window.confirm("Do you really want to cancel this reservation?")
                 if(confirmBox===true){
-                  deleteFlight(reservation._id)
+                  deleteFlight(reservationList[0]._id)
+                  deleteFlight(reservationList[1]._id)
                 }
               }}>
                 <DeleteIcon />
                 </IconButton>
-              </StyledTableCell>
+              </StyledTableCell>:<StyledTableCell align="right"></StyledTableCell>}</>
             </StyledTableRow>
              
           ))}
