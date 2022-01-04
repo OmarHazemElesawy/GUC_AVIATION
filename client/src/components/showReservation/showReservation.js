@@ -71,7 +71,8 @@ const deleteFlight=(id)=>{
             <StyledTableCell align="right" >departure Seats</StyledTableCell>
             <StyledTableCell align="right" >return Seats</StyledTableCell>
             <StyledTableCell align="right" >Pay</StyledTableCell>
-            <StyledTableCell align="right" >Cancel</StyledTableCell>
+            <StyledTableCell align="right" >Cancel Reservation</StyledTableCell>
+            <StyledTableCell align="center" >Select Flight</StyledTableCell>
           </TableRow>
         </TableHead>
         <TableBody>
@@ -93,13 +94,13 @@ const deleteFlight=(id)=>{
               <StyledTableCell align="right">{reservation.price}</StyledTableCell>
               <StyledTableCell align="right">{reservation.class}</StyledTableCell>
               <StyledTableCell align="right">{reservation.confirmationCode}</StyledTableCell>
-              <>{key%2===0?<StyledTableCell align="right">{reservation.depSeats}</StyledTableCell>:<StyledTableCell align="right">-</StyledTableCell>}</>
-              <>{key%2===1?<StyledTableCell align="right">{reservation.retSeats}</StyledTableCell>:<StyledTableCell align="right">-</StyledTableCell>}</>
+              <>{key%2===0?<StyledTableCell align="center">{reservation.depSeats}</StyledTableCell>:<StyledTableCell align="center">-</StyledTableCell>}</>
+              <>{key%2===1?<StyledTableCell align="center">{reservation.retSeats}</StyledTableCell>:<StyledTableCell align="center">-</StyledTableCell>}</>
              <> {key%2===1? <StyledTableCell align="right">
              <Button variant="outlined" onClick={()=>{navigate(`payment/${reservationList[0]._id}/${reservationList[1]._id}/${reservation.class}`)
               }}>PAY</Button>
               </StyledTableCell>:<StyledTableCell align="center">-</StyledTableCell>}</>
-             <> {key%2===1?  <StyledTableCell align="right">
+             <> {key%2===1?  <StyledTableCell align="center">
               <IconButton aria-label="cancel" onClick={()=>{
                 const confirmBox = window.confirm("Do you really want to cancel this reservation?")
                 if(confirmBox===true){
@@ -110,6 +111,13 @@ const deleteFlight=(id)=>{
                 <DeleteIcon />
                 </IconButton>
               </StyledTableCell>:<StyledTableCell align="center">-</StyledTableCell>}</>
+              <> {key%2===0?<StyledTableCell align="center">
+                    <Button variant="contained">Departure</Button>
+                    </StyledTableCell>
+                    :
+                    <StyledTableCell align="center">
+                      <Button variant="contained">Return</Button>
+                      </StyledTableCell>}</>
             </StyledTableRow>
              
           ))}

@@ -1,0 +1,21 @@
+GET http://localhost:5000/users
+######
+POST http://localhost:5000/users
+Content-Type: application/json
+
+{
+    "firstName":"mohamed",
+    "lastName":"ramy",
+    "email":"mohamedramy@gmail.com",
+    "passport":"112233",
+    "password":"678910"
+}
+#######
+POST http://localhost:5000/login
+Content-Type: application/json
+
+{
+    "firstName":"omar",
+    "lastName":"ali",
+    "password":"12345"
+}

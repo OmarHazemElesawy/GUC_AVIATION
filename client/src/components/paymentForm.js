@@ -115,13 +115,14 @@ const [reservation2,setReservation2]=useState({
 
   const updateReservation1=(ID)=>{
     axios.post(`http://localhost:5000/reservations/${ID}`,reservation1).then(()=>{
-    })
+        window.location.reload(false);   
+     })
   };
   const updateReservation2=(ID)=>{
     axios.post(`http://localhost:5000/reservations/${ID}`,reservation2).then(()=>{
+        window.location.reload(false);
     })
   };
-
 
     return (
         <>
@@ -140,18 +141,19 @@ const [reservation2,setReservation2]=useState({
                     <CardElement options={CARD_OPTIONS}/>
                 </div>
             </fieldset>
-            <button>Pay</button>
+            <button onClick={()=>{
+                   setReservation1({ ...reservation1,payed:true});
+                   setReservation2({ ...reservation2,payed:true});
+              }}>Pay</button>
         </form>
         :
        <div>
            <h2 align="center">payment successful! you payed</h2>
            <Stack spacing={2} direction="row">
                <Button variant="contained"  onClick={()=>{
-                   navigate("/existingUser");
-                   setReservation1({ ...reservation1,payed:true});
-                   setReservation2({ ...reservation2,payed:true});
                    updateReservation1(id1);
                    updateReservation2(id2);
+                   navigate("/existingUser");
               }}>Return to Home Page</Button>
                </Stack>
        </div> 
