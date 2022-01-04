@@ -93,6 +93,7 @@ const deleteFlight=(id)=>{
               <StyledTableCell align="right">{reservation.allowance}</StyledTableCell>
               <StyledTableCell align="right">{reservation.price}</StyledTableCell>
               <StyledTableCell align="right">{reservation.class}</StyledTableCell>
+              
               <StyledTableCell align="right">{reservation.confirmationCode}</StyledTableCell>
               <>{key%2===0?<StyledTableCell align="center">{reservation.depSeats}</StyledTableCell>:<StyledTableCell align="center">-</StyledTableCell>}</>
               <>{key%2===1?<StyledTableCell align="center">{reservation.retSeats}</StyledTableCell>:<StyledTableCell align="center">-</StyledTableCell>}</>
