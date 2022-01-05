@@ -66,7 +66,6 @@ const classes =useStyles();
               selectedSeats.push(count);
               if(adultCount===0){
                window.alert("you have selected all seats, please select children seats");
-
               }
             }}>{count}</Button>) }
             <br/>

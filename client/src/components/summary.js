@@ -18,12 +18,11 @@ function Summary() {
   moment().format();
   const classes =useStyles();
   const navigate=useNavigate();
-
   const {id1}:{id1:string}=useParams();
   const {id2}:{id2:string}=useParams();
-  let resNoOne=(id1).substring((id1).length-1,(id1).length-5)
-  let resNoTwo=(id2).substring((id2).length-1,(id2).length-5)
-  let resNo=resNoOne+resNoTwo;
+  //let resNoOne=(id1).substring((id1).length-1,(id1).length-5)
+  //let resNoTwo=(id2).substring((id2).length-6,(id2).length-10)
+  let resNo=makeid(8);
   const {cabinClass}:{cabinClass:string}=useParams();
   let start;
   let end;
@@ -125,19 +124,16 @@ function Summary() {
           })
         }
       }
-      
-//     const createReservation1=()=>{
-//       axios.post('http://localhost:5000/reservations',filteredFlightList2[0]).then(()=>{
-//         window.location.reload(false);
-//       })
-//       reserve1=true;
-//   };
-//   const createReservation2=()=>{
-//     axios.post('http://localhost:5000/reservations',filteredFlightList1[0]).then(()=>{
-//       window.location.reload(false);
-//       reserve1=false;
-//     })
-// };
+      function makeid(length) {
+        var result = '';
+        var characters= 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+        var charactersLength = characters.length;
+        for ( var i = 0; i < length; i++ ) {
+          result += characters.charAt(Math.floor(Math.random() * 
+     charactersLength));
+       }
+       return result;
+    }
     localStorage["flight"]=JSON.stringify(filteredFlightList);
     localStorage["filteredFlightList2"]=JSON.stringify(filteredFlightList2);
     localStorage["filteredFlightList1"]=JSON.stringify(filteredFlightList1);

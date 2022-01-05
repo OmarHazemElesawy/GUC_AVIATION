@@ -1,6 +1,6 @@
 import { CardElement, useElements, useStripe } from "@stripe/react-stripe-js"
 import axios from "axios"
-import React, { useState } from 'react'
+import { React, useState} from 'react'
 import {useParams,useNavigate} from 'react-router-dom';
 import {Container , AppBar,Typography,Grow} from '@material-ui/core';
 import useStyles from './styles';
@@ -38,19 +38,19 @@ export default function PaymentForm() {
     let amountInCents;
     const {id_dep}:{id_dep:string}=useParams();
     const {cabinClass}:{cabinClass:string}=useParams();
+
     if(cabinClass==="Business"){
         amountInCents=2000*100;
     }else{
         amountInCents=1000*100
     }
+
     const handleSubmit = async (e) => {
         e.preventDefault()
         const {error, paymentMethod} = await stripe.createPaymentMethod({
             type: "card",
             card: elements.getElement(CardElement)
         })
-
-
     if(!error) {
         try {
             const {id} = paymentMethod
@@ -90,8 +90,6 @@ const [reservation1,setReservation1]=useState({
     class:'',
     confirmationCode:'',
     payed:false,
-    depSeats:[],
-    retSeats:[]
 });
 const [reservation2,setReservation2]=useState({
     flightNo: '',
@@ -108,8 +106,6 @@ const [reservation2,setReservation2]=useState({
     class:'',
     confirmationCode:'',
     payed:false,
-    depSeats:[],
-    retSeats:[]
 });
     
 
@@ -151,6 +147,8 @@ const [reservation2,setReservation2]=useState({
            <h2 align="center">payment successful! you payed</h2>
            <Stack spacing={2} direction="row">
                <Button variant="contained"  onClick={()=>{
+                     console.log(reservation1.payed)
+                     console.log(reservation2.payed)
                    updateReservation1(id1);
                    updateReservation2(id2);
                    navigate("/existingUser");

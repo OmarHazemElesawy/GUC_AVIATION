@@ -45,31 +45,31 @@ export default function Search() {
          <TextField id="outlined-basic" label="Number of Adults" variant="outlined" helperText="Ex: 2" value={flight.passengerAdult}onChange={(event)=>{
           setFlight({ ...flight,passengerAdult:event.target.value})
         }}/>
-        <TextField id="outlined-basic" label="Date" variant="outlined" helperText="Ex: 2020-01-01" value={flight.date}onChange={(event)=>{
+        <TextField id="outlined-basic" label="Date" variant="outlined" helperText="Ex: 2021-10-01" value={flight.date}onChange={(event)=>{
           setFlight({ ...flight,date:event.target.value})
         }}/>
       <TextField id="outlined-basic" label="Departure Time" variant="outlined" helperText="Ex: 10:45" value={flight.departureTime}onChange={(event)=>{
           setFlight({ ...flight,departureTime:event.target.value})
         }}/>
-      <TextField id="outlined-basic" label="Arrival Time" variant="outlined" helperText="Ex: 14:30" value={flight.arrivalTime}onChange={(event)=>{
+      <TextField id="outlined-basic" label="Arrival Time" variant="outlined" helperText="Ex: 14:00" value={flight.arrivalTime}onChange={(event)=>{
           setFlight({ ...flight,arrivalTime:event.target.value})
         }}/>
       <TextField id="outlined-basic" label="departure Airport" variant="outlined" helperText="Ex: CAI" value={flight.departureAirport}onChange={(event)=>{
           setFlight({ ...flight,departureAirport:event.target.value})
         }}/>
-      <TextField id="outlined-basic" label="arrival Airport" variant="outlined" helperText="Ex: A2" value={flight.arrivalAirport}onChange={(event)=>{
+      <TextField id="outlined-basic" label="arrival Airport" variant="outlined" helperText="Ex: SXF" value={flight.arrivalAirport}onChange={(event)=>{
           setFlight({ ...flight,arrivalAirport:event.target.value})
         }}/>
-         <TextField id="outlined-basic" label="Departure Terminal" variant="outlined" helperText="Ex: CAI" value={flight.departureTerminal}onChange={(event)=>{
+         <TextField id="outlined-basic" label="Departure Terminal" variant="outlined" helperText="Ex: F4" value={flight.departureTerminal}onChange={(event)=>{
           setFlight({ ...flight,departureTerminal:event.target.value})
         }}/>
-      <TextField id="outlined-basic" label="Arrival Terminal" variant="outlined" helperText="Ex: A2" value={flight.arrivalTerminal}onChange={(event)=>{
+      <TextField id="outlined-basic" label="Arrival Terminal" variant="outlined" helperText="Ex: T1" value={flight.arrivalTerminal}onChange={(event)=>{
           setFlight({ ...flight,arrivalTerminal:event.target.value})
         }}/>
-        <TextField id="outlined-basic" label="Cabin Class" variant="outlined" helperText="Ex:Business/Economic" value={flight.cabinClass}onChange={(event)=>{
+        <TextField id="outlined-basic" label="Cabin Class" variant="outlined" helperText="Ex: Business/Economic" value={flight.cabinClass}onChange={(event)=>{
           setFlight({ ...flight,cabinClass:event.target.value})
         }}/>
-      <Stack spacing={2} direction="row">
+      <Stack justifyContent="center" alignItems="center" direction="row" spacing={2}>
         <Button variant="outlined" onClick={()=>{
               if(flight['flightNo']===""||flight['date']===""||flight['departureTime']===""||flight['arrivalTime']===""||
               flight['departureAirport']===""||flight['arrivalAirport']===""||flight['departureTerminal']===""||

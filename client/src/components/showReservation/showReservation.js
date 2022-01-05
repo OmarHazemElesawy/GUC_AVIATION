@@ -46,6 +46,7 @@ const deleteFlight=(id)=>{
       border: 0,
     },
   }));
+
   return (
       <>
       <h2>
@@ -72,7 +73,7 @@ const deleteFlight=(id)=>{
             <StyledTableCell align="right" >return Seats</StyledTableCell>
             <StyledTableCell align="right" >Pay</StyledTableCell>
             <StyledTableCell align="right" >Cancel Reservation</StyledTableCell>
-            <StyledTableCell align="center" >Select Flight</StyledTableCell>
+            <StyledTableCell align="center" >Edit Flight</StyledTableCell>
           </TableRow>
         </TableHead>
         <TableBody>
@@ -93,14 +94,18 @@ const deleteFlight=(id)=>{
               <StyledTableCell align="right">{reservation.allowance}</StyledTableCell>
               <StyledTableCell align="right">{reservation.price}</StyledTableCell>
               <StyledTableCell align="right">{reservation.class}</StyledTableCell>
-              
               <StyledTableCell align="right">{reservation.confirmationCode}</StyledTableCell>
-              <>{key%2===0?<StyledTableCell align="center">{reservation.depSeats}</StyledTableCell>:<StyledTableCell align="center">-</StyledTableCell>}</>
-              <>{key%2===1?<StyledTableCell align="center">{reservation.retSeats}</StyledTableCell>:<StyledTableCell align="center">-</StyledTableCell>}</>
-             <> {key%2===1? <StyledTableCell align="right">
-             <Button variant="outlined" onClick={()=>{navigate(`payment/${reservationList[0]._id}/${reservationList[1]._id}/${reservation.class}`)
-              }}>PAY</Button>
+
+              <>{!((reservation.depSeats).length===0)?<StyledTableCell align="center">{reservation.depSeats}</StyledTableCell>:
+              <StyledTableCell align="center">-</StyledTableCell>}</>
+              <>{!((reservation.retSeats).length===0)?<StyledTableCell align="center">{reservation.retSeats}</StyledTableCell>:
+              <StyledTableCell align="center">-</StyledTableCell>}</>
+
+              <>{key%2===1? <StyledTableCell align="right">
+              <>{!(reservation.payed)?<Button variant="outlined" onClick={()=>{navigate(`payment/${reservationList[key-1]._id}/${reservationList[key]._id}/${reservation.class}`)
+              }}>PAY</Button>:<Button variant="disabled">PAY</Button>}</>
               </StyledTableCell>:<StyledTableCell align="center">-</StyledTableCell>}</>
+
              <> {key%2===1?  <StyledTableCell align="center">
               <IconButton aria-label="cancel" onClick={()=>{
                 const confirmBox = window.confirm("Do you really want to cancel this reservation?")
@@ -112,12 +117,13 @@ const deleteFlight=(id)=>{
                 <DeleteIcon />
                 </IconButton>
               </StyledTableCell>:<StyledTableCell align="center">-</StyledTableCell>}</>
+
               <> {key%2===0?<StyledTableCell align="center">
-                    <Button variant="contained">Departure</Button>
+                <Button variant="contained" onClick={()=>{navigate(`depReserved/${reservation._id}`)}}>Departure</Button>
                     </StyledTableCell>
                     :
                     <StyledTableCell align="center">
-                      <Button variant="contained">Return</Button>
+                      <Button variant="contained" onClick={()=>{navigate(`retReserved/${reservation._id}`)}}>Return</Button>
                       </StyledTableCell>}</>
             </StyledTableRow>
              
