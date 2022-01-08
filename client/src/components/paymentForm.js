@@ -148,7 +148,7 @@ const [reservation2,setReservation2]=useState({
            <Stack spacing={2} direction="row">
                <Button variant="contained"  onClick={()=>{
                      console.log(reservation1.payed)
-                     console.log(reservation2.payed)
+                   console.log(reservation2.payed)
                    updateReservation1(id1);
                    updateReservation2(id2);
                    navigate("/existingUser");
