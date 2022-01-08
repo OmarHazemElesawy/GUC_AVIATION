@@ -11,13 +11,10 @@ import {AppBar,Typography} from '@material-ui/core';
 import useStyles from './styles';
 import {useNavigate} from 'react-router-dom';
 import Button from '@mui/material/Button';
-export default function SearchDataGuest() {
+export default function SearchDataReturn() {
 
     const classes =useStyles();
-    var flightData=JSON.parse(localStorage['flight']);
-    const children = parseInt(flightData['passengerChild']);
-    const adult = parseInt(flightData['passengerAdult']);
-    const passengers=children+adult;
+    var flightData=JSON.parse(localStorage['searchRetReserved']);
 
     const[flightList, setFlightList]=useState([]);
     var filteredFlights=[];
@@ -34,12 +31,6 @@ export default function SearchDataGuest() {
         var item=flightList[i]
         filteredFlights.push({
           "date":item.date,
-          "departureTime":item.departureTime,
-          "arrivalTime":item.arrivalTime,
-          "departureAirport":item.departureAirport,
-          "arrivalAirport":item.arrivalAirport,
-          "departureTerminal":item.departureTerminal,
-          "arrivalTerminal":item.arrivalTerminal
         })
       }
       for (var k in flightList){
@@ -57,26 +48,8 @@ export default function SearchDataGuest() {
           "arrivalTerminal":Item.arrivalTerminal
         })
       }
-      for (var m in fullFilteredFlights){
-        if(fullFilteredFlights['cabinClass']==="Business"){
-            if(passengers>parseInt(fullFilteredFlights[m]['businessSeatNo'])){
-            fullFilteredFlights.splice(m,1)
-            }
-
-        }else if(fullFilteredFlights['cabinClass']==="Economic"){
-            if(passengers>parseInt(fullFilteredFlights[m]['ecoSeatNo'])){
-                fullFilteredFlights.splice(m,1)
-            }
-        }
-      }
       flightDataFiltered.push({
-        "date":flightData.date,
-        "departureTime":flightData.departureTime,
-        "arrivalTime":flightData.arrivalTime,
-        "departureAirport":flightData.departureAirport,
-        "arrivalAirport":flightData.arrivalAirport,
-        "departureTerminal":flightData.departureTerminal,
-        "arrivalTerminal":flightData.arrivalTerminal
+        "date":flightData.date
       })
       for (var j in filteredFlights){
         if(JSON.stringify(filteredFlights[j])===JSON.stringify(flightDataFiltered[0])){
@@ -120,7 +93,7 @@ export default function SearchDataGuest() {
               <TableCell align="right">{flight.departureTerminal}</TableCell>
               <TableCell align="right">{flight.arrivalTerminal}</TableCell>
               <TableCell align="right">
-                    <Button variant="contained"onClick={()=>{navigate(`flightDetailsGuest/${adult}/${children}/${flight._id}/${flight.cabinClass}`)
+                    <Button variant="contained"onClick={()=>{navigate(0)
               }}>select Flight</Button>
               </TableCell>
             </TableRow>
