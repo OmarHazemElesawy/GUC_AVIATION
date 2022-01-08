@@ -4,23 +4,24 @@ import useStyles from './styles';
 import { useParams,useNavigate} from 'react-router-dom';
 import axios from 'axios';
 import Button from '@mui/material/Button';
+import Stack from '@mui/material/Stack';
 
-function DepartureSeats() {
+function DepartureSeatsReserved() {
 
 const navigate=useNavigate();
 const classes =useStyles();
- let {adult}:{adult:string}=useParams();
- let {children}:{children:string}=useParams();
- let {id1}:{id1:string}=useParams();
- let {cabinClass}:{cabinClass:string}=useParams();
+
+ let {id}:{id:string}=useParams();
+ let {ID}:{ID:string}=useParams();
  let economicCount=0;
  let businessCount=0;
  let countList=[];
  let countListFiltered=[];
  var selectedSeats=[];
- let adultCount=parseInt(adult);
- let childrenCount=parseInt(children);
  let reservedSeats=[''];
+ let seatsCount;
+ let cabinClass;
+
  const[flightList, setFlightList]=useState([]);
   useEffect(()=>{
     axios.get('http://localhost:5000/flights').then((allFlights)=>{
@@ -28,11 +29,28 @@ const classes =useStyles();
     })
   },[])
 
+  const[reservationList, setReservationList]=useState([]);
+  useEffect(()=>{
+    axios.get('http://localhost:5000/reservations').then((allReservations)=>{
+      setReservationList(allReservations.data);
+    })
+  },[])
 
   for (var k in flightList){
-    if(flightList[k]['_id']===id1){
+    if(flightList[k]['_id']===ID){
       economicCount=flightList[k]['ecoSeatNo'];
       businessCount=flightList[k]['businessSeatNo']
+    }
+  }
+
+  for (var a in reservationList){
+    if(reservationList[a]['_id']===id){
+      cabinClass=reservationList[a]["class"];
+      if((reservationList[a]["retSeats"]).length===0){
+        seatsCount=(reservationList[a]["depSeats"]).length;
+      }else{
+        seatsCount=(reservationList[a]["retSeats"]).length;
+      }
     }
   }
 
@@ -50,7 +68,15 @@ const classes =useStyles();
       countListFiltered.push(countList[x])
     }
   }
-
+  const [reservation1,setReservation1]=useState({
+    depSeats:[],
+    retSeats:[]
+});
+const updateReservation1=(ID)=>{
+  axios.post(`http://localhost:5000/reservations/${ID}`,reservation1).then(()=>{
+      window.location.reload(false);   
+   })
+};
   return (
     <div className="departureSeats">
       <Container maxWidth="lg"> 
@@ -58,7 +84,7 @@ const classes =useStyles();
           <Typography className= {classes.heading} variant= "h4" align="center" >Your Departure Seats</Typography>
           </AppBar>
             <h2>
-            Please select {adult} adult tickets:
+            Please select {seatsCount} Seats:
             </h2>
             <br/>
             {countListFiltered.map(count => 
@@ -66,35 +92,22 @@ const classes =useStyles();
               if(selectedSeats.includes(count)){
                 window.alert("you already selected this seat before");
                 } else{
-              adultCount--;
+              seatsCount--;
               selectedSeats.push(count);
-              if(adultCount===0){
-               window.alert("you have selected all seats, please select children seats");
+              if(seatsCount===0){
+               window.alert("you have selected all seats!\n Please Confirm Selection By Clicking Button Below");
+               localStorage["editedDepSeats"]=JSON.stringify(selectedSeats);
+               setReservation1({ ...reservation1,depSeats:selectedSeats})
               }
-            }}}>{count}</Button>) }
-            <br/>
-            <h2>
-              
-            Please select {children} children tickets:
-            </h2>
-            <br/>
-            {countListFiltered.map(count => 
-            <Button variant="outlined"onClick={()=>{
-              if(selectedSeats.includes(count)){
-               window.alert("you already selected this seat before");
-              }else{
-              childrenCount--;
-              selectedSeats.push(count);
-              if(childrenCount===0){
-                window.alert("you have selected all seats redirecting now");
-                localStorage["selectedDepSeats"]=JSON.stringify(selectedSeats);
-                navigate("retSeats");
-              }
-            }}}>{count}</Button>) }
-            
-            <br/>
+              }}}>{count}</Button>)}
+               <Stack spacing={2} direction="row">
+              <Button variant="contained" onClick={()=>{
+                updateReservation1(id)
+                navigate(-1)
+              }}>Confirm Selection</Button>
+              </Stack>
           </Container>
     </div>
   );
   }
-export default DepartureSeats
+export default DepartureSeatsReserved
