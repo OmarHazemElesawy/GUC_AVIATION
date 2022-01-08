@@ -7,12 +7,12 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import axios from 'axios';
-import IconButton from '@material-ui/core/IconButton';
-import DeleteIcon from '@material-ui/icons/Delete';
+import DeleteOutlinedIcon from '@mui/icons-material/DeleteOutlined';
 import { styled } from '@mui/material/styles';
 import { Button } from '@mui/material';
 import {useNavigate } from 'react-router-dom';
-
+import FlightTakeoffIcon from '@mui/icons-material/FlightTakeoff';
+import FlightLandIcon from '@mui/icons-material/FlightLand';
 export default function ShowReservation() {
   const[reservationList, setReservationList]=useState([]);
 
@@ -56,23 +56,23 @@ const deleteFlight=(id)=>{
       <Table style={{width : 900}} aria-label="simple table">
         <TableHead>
           <TableRow>
-            <StyledTableCell align="right" >Flight No.</StyledTableCell>
-            <StyledTableCell align="right" >Date</StyledTableCell>
-            <StyledTableCell align="right" >Departure Time</StyledTableCell>
-            <StyledTableCell align="right" >Arrival Time</StyledTableCell>
-            <StyledTableCell align="right" >Departure Airport</StyledTableCell>
-            <StyledTableCell align="right" >Arrival Airport</StyledTableCell>
-            <StyledTableCell align="right" >Departure Terminal</StyledTableCell>
-            <StyledTableCell align="right" >Arrival Terminal</StyledTableCell>
-            <StyledTableCell align="right" >Trip Duration</StyledTableCell>
-            <StyledTableCell align="right" >Baggage Allowance</StyledTableCell>
-            <StyledTableCell align="right" >Price</StyledTableCell>
-            <StyledTableCell align="right" >Class</StyledTableCell>
-            <StyledTableCell align="right" >confirmation Code</StyledTableCell>
-            <StyledTableCell align="right" >departure Seats</StyledTableCell>
-            <StyledTableCell align="right" >return Seats</StyledTableCell>
-            <StyledTableCell align="right" >Pay</StyledTableCell>
-            <StyledTableCell align="right" >Cancel Reservation</StyledTableCell>
+            <StyledTableCell align="center" >Flight No.</StyledTableCell>
+            <StyledTableCell align="center" >Date</StyledTableCell>
+            <StyledTableCell align="center" >Departure Time</StyledTableCell>
+            <StyledTableCell align="center" >Arrival Time</StyledTableCell>
+            <StyledTableCell align="center" >Departure Airport</StyledTableCell>
+            <StyledTableCell align="center" >Arrival Airport</StyledTableCell>
+            <StyledTableCell align="center" >Departure Terminal</StyledTableCell>
+            <StyledTableCell align="center" >Arrival Terminal</StyledTableCell>
+            <StyledTableCell align="center" >Trip Duration</StyledTableCell>
+            <StyledTableCell align="center" >Baggage Allowance</StyledTableCell>
+            <StyledTableCell align="center" >Price</StyledTableCell>
+            <StyledTableCell align="center" >Class</StyledTableCell>
+            <StyledTableCell align="center" >confirmation Code</StyledTableCell>
+            <StyledTableCell align="center" >departure Seats</StyledTableCell>
+            <StyledTableCell align="center" >return Seats</StyledTableCell>
+            <StyledTableCell align="center" >Pay</StyledTableCell>
+            <StyledTableCell align="center" >Cancel Reservation</StyledTableCell>
             <StyledTableCell align="center" >Edit Flight</StyledTableCell>
           </TableRow>
         </TableHead>
@@ -96,34 +96,34 @@ const deleteFlight=(id)=>{
               <StyledTableCell align="right">{reservation.class}</StyledTableCell>
               <StyledTableCell align="right">{reservation.confirmationCode}</StyledTableCell>
 
-              <>{!((reservation.depSeats).length===0)?<StyledTableCell align="center">{reservation.depSeats}</StyledTableCell>:
-              <StyledTableCell align="center">-</StyledTableCell>}</>
-              <>{!((reservation.retSeats).length===0)?<StyledTableCell align="center">{reservation.retSeats}</StyledTableCell>:
-              <StyledTableCell align="center">-</StyledTableCell>}</>
+              <>{!((reservation.depSeats).length===0)?<StyledTableCell align="center">{(reservation.depSeats).toString()}</StyledTableCell>:
+              <StyledTableCell align="center">X</StyledTableCell>}</>
+              <>{!((reservation.retSeats).length===0)?<StyledTableCell align="center">{(reservation.retSeats).toString()}</StyledTableCell>:
+              <StyledTableCell align="center">X</StyledTableCell>}</>
 
               <>{key%2===1? <StyledTableCell align="right">
               <>{!(reservation.payed)?<Button variant="outlined" onClick={()=>{navigate(`payment/${reservationList[key-1]._id}/${reservationList[key]._id}/${reservation.class}`)
               }}>PAY</Button>:<Button variant="disabled">PAY</Button>}</>
-              </StyledTableCell>:<StyledTableCell align="center">-</StyledTableCell>}</>
+              </StyledTableCell>:<StyledTableCell align="center">X</StyledTableCell>}</>
 
              <> {key%2===1?  <StyledTableCell align="center">
-              <IconButton aria-label="cancel" onClick={()=>{
+              <DeleteOutlinedIcon aria-label="cancel" onClick={()=>{
                 const confirmBox = window.confirm("Do you really want to cancel this reservation?")
                 if(confirmBox===true){
                   deleteFlight(reservationList[0]._id)
                   deleteFlight(reservationList[1]._id)
                 }
-              }}>
-                <DeleteIcon />
-                </IconButton>
-              </StyledTableCell>:<StyledTableCell align="center">-</StyledTableCell>}</>
+              }}></DeleteOutlinedIcon>
+              </StyledTableCell>:<StyledTableCell align="center">X</StyledTableCell>}</>
 
-              <> {key%2===0?<StyledTableCell align="center">
-                <Button variant="contained" onClick={()=>{navigate(`depReserved/${reservation._id}`)}}>Departure</Button>
+              <>{!((reservation.depSeats).length===0)?<StyledTableCell align="center">
+                <FlightTakeoffIcon variant="contained"onClick={()=>{navigate(`depReserved/${reservation._id}/${reservation.flightID}`)}}>
+                </FlightTakeoffIcon>
                     </StyledTableCell>
                     :
                     <StyledTableCell align="center">
-                      <Button variant="contained" onClick={()=>{navigate(`retReserved/${reservation._id}`)}}>Return</Button>
+                      <FlightLandIcon variant="contained" onClick={()=>{navigate(`retReserved/${reservation._id}/${reservation.flightID}`)}}>
+                      </FlightLandIcon>
                       </StyledTableCell>}</>
             </StyledTableRow>
              
