@@ -26,6 +26,11 @@ import Itinerary from "./components/itinerary";
 import Payment from "./components/stripeContainer";
 import DepReserved from "./components/depReserved";
 import RetReserved from "./components/retReserved";
+import DepartureSeatsReserved from "./components/departureSeatsReserved";
+import ReturnSeatsReserved from "./components/returnSeatsReserved";
+import SearchDeparture from "./components/searchDeparture";
+import SearchReturn from "./components/searchReturn";
+import SearchDataDeparture from "./components/searchDataDeparture"
 const rootElement = document.getElementById("root");
 render(
   <BrowserRouter>
@@ -54,8 +59,13 @@ render(
       <Route path="searchDataUser/flightDetails/:adult/:children/:id1/:cabinClass/returnFlights/returnDetails/:id2/summary/depSeats/retSeats" exact element={<ReturnSeats />} />
       <Route path="searchDataUser/flightDetails/:adult/:children/:id1/:cabinClass/returnFlights/returnDetails/:id2/summary/depSeats/retSeats/itinerary" exact element={<Itinerary />} />
       <Route path="existingUser/payment/:id1/:id2/:cabinClass" exact element={<Payment />} />
-      <Route path="existingUser/depReserved/:id" exact element={< DepReserved/>} />
-      <Route path="existingUser/retReserved/:id" exact element={< RetReserved/>} />
+      <Route path="existingUser/depReserved/:id/:ID" exact element={< DepReserved/>} />
+      <Route path="existingUser/retReserved/:id/:ID" exact element={< RetReserved/>} />
+      <Route path="existingUser/depReserved/:id/:ID/depSeatsReserved" exact element={< DepartureSeatsReserved/>} />
+      <Route path="existingUser/retReserved/:id/:ID/retSeatsReserved" exact element={< ReturnSeatsReserved/>} />
+      <Route path="existingUser/depReserved/:id/:ID/editDepReserved" exact element={< SearchDeparture/>} />
+      <Route path="existingUser/depReserved/:id/:ID/editDepReserved/searchDataDep" exact element={< SearchDataDeparture/>} />
+      <Route path="existingUser/retReserved/:id/:ID/editRetReserved" exact element={< SearchReturn/>} />
     </Routes>
   </BrowserRouter>,
   rootElement
