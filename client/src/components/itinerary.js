@@ -101,6 +101,7 @@ function Itinerary() {
       for (var a in flightListSum1){
         filteredFlightListSum1.push({
           "flightNo":flightListSum1[a].flightNo,
+          "flightID":flightListSum1[a].flightID,
           "date":flightListSum1[a].date,
           "departureTime":flightListSum1[a].departureTime,
           "arrivalTime":flightListSum1[a].arrivalTime,
@@ -114,12 +115,13 @@ function Itinerary() {
           "class":flightListSum1[a].class,
           "confirmationCode":flightListSum1[a].confirmationCode,
           "payed":flightListSum1[a].payed,
-          'depSeats':selectedDepSeatsString
+          'depSeats':selectedDepSeatsString.split(",")
       })
     }
       for (var b in flightListSum2){
         filteredFlightListSum2.push({
           "flightNo":flightListSum2[b].flightNo,
+          "flightID":flightListSum2[b].flightID,
           "date":flightListSum2[b].date,
           "departureTime":flightListSum2[b].departureTime,
           "arrivalTime":flightListSum2[b].arrivalTime,
@@ -133,7 +135,7 @@ function Itinerary() {
           "class":flightListSum2[b].class,
           "confirmationCode":flightListSum2[b].confirmationCode,
           "payed":flightListSum2[b].payed,
-          'retSeats':selectedRetSeatsString
+          'retSeats':selectedRetSeatsString.split(",")
       })
     }
   const createReservation1=()=>{

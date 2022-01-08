@@ -72,6 +72,7 @@ function Summary() {
         })
         filteredFlightList1.push({
           "flightNo":flightList[j].flightNo,
+          "flightID":flightList[j]._id,
           "date":flightList[j].date,
           "departureTime":flightList[j].departureTime,
           "arrivalTime":flightList[j].arrivalTime,
@@ -108,6 +109,7 @@ function Summary() {
           })
           filteredFlightList2.push({
             "flightNo":flightList[k].flightNo,
+            "flightID":flightList[k]._id,
             "date":flightList[k].date,
             "departureTime":flightList[k].departureTime,
             "arrivalTime":flightList[k].arrivalTime,
@@ -131,6 +133,7 @@ function Summary() {
         for ( var i = 0; i < length; i++ ) {
           result += characters.charAt(Math.floor(Math.random() * 
      charactersLength));
+     
        }
        return result;
     }
