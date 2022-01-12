@@ -31,6 +31,13 @@ import ReturnSeatsReserved from "./components/returnSeatsReserved";
 import SearchDeparture from "./components/searchDeparture";
 import SearchReturn from "./components/searchReturn";
 import SearchDataDeparture from "./components/searchDataDeparture"
+import SearchDataReturn from "./components/searchDataReturn";
+import DepartureReservedDetails from "./components/depReservedDetails"
+import ReturnReservedDetails from "./components/retReservedDetails"
+import DepartureSeatsEdited from "./components/departureSeatsEdited";
+import ReturnSeatsEdited from "./components/returnSeatsEdited";
+
+
 const rootElement = document.getElementById("root");
 render(
   <BrowserRouter>
@@ -66,6 +73,12 @@ render(
       <Route path="existingUser/depReserved/:id/:ID/editDepReserved" exact element={< SearchDeparture/>} />
       <Route path="existingUser/depReserved/:id/:ID/editDepReserved/searchDataDep" exact element={< SearchDataDeparture/>} />
       <Route path="existingUser/retReserved/:id/:ID/editRetReserved" exact element={< SearchReturn/>} />
+      <Route path="existingUser/retReserved/:id/:ID/editRetReserved/searchDataRet" exact element={< SearchDataReturn/>} />
+      <Route path="existingUser/depReserved/:id/:ID/editDepReserved/searchDataDep/depReservedDetails/:ID2/:cabinClass" exact element={< DepartureReservedDetails/>}/>
+      <Route path="existingUser/depReserved/:id/:ID/editDepReserved/searchDataDep/depReservedDetails/:ID2/:cabinClass/depSeatsEdited" exact element={< DepartureSeatsEdited/>}/>
+      <Route path="existingUser/retReserved/:id/:ID/editRetReserved/searchDataRet/retReservedDetails/:ID2/:cabinClass" exact element={< ReturnReservedDetails/>} />
+      <Route path="existingUser/retReserved/:id/:ID/editRetReserved/searchDataRet/retReservedDetails/:ID2/:cabinClass/retSeatsEdited" exact element={< ReturnSeatsEdited/>}/>
+
     </Routes>
   </BrowserRouter>,
   rootElement

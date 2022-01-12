@@ -40,9 +40,9 @@ export default function PaymentForm() {
     const {cabinClass}:{cabinClass:string}=useParams();
 
     if(cabinClass==="Business"){
-        amountInCents=2000*100;
+        amountInCents=4000*100;
     }else{
-        amountInCents=1000*100
+        amountInCents=2000*100
     }
 
     const handleSubmit = async (e) => {

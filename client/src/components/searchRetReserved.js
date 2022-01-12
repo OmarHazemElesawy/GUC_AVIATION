@@ -49,7 +49,7 @@ export default function Search() {
                 if(confirmBox===true){
                   searchFlight()
                   localStorage["searchRetReserved"]=JSON.stringify(flight);
-                  navigate("/searchDataUser")
+                  navigate("searchDataRet")
          }} }}>show results</Button>
     </Stack>
     </Box>

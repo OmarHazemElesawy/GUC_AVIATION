@@ -9,7 +9,7 @@ import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import {AppBar,Typography} from '@material-ui/core';
 import useStyles from './styles';
-import {useNavigate} from 'react-router-dom';
+import {useNavigate,useParams} from 'react-router-dom';
 import Button from '@mui/material/Button';
 export default function SearchDataReturn() {
 
@@ -21,16 +21,37 @@ export default function SearchDataReturn() {
     var fullFilteredFlights=[];
     var finalFilteredFlights=[];
     var flightDataFiltered=[];
+    var depAirport;
+    var arrAirport;
 
+    const {id}:{id:string}=useParams();
+    const[reservationList, setReservationsList]=useState([]);
+   
       useEffect(()=>{
         axios.get('http://localhost:5000/flights').then((allFlights)=>{
           setFlightList(allFlights.data);
         }) 
       },[])
+
+      useEffect(()=>{
+        axios.get('http://localhost:5000/reservations').then((allReservations)=>{
+          setReservationsList(allReservations.data);
+        }) 
+      },[])
+
+      for (var a in reservationList){
+        if(reservationList[a]['_id']===id){
+          depAirport=reservationList[a]['departureAirport']
+          arrAirport=reservationList[a]['arrivalAirport']
+        }
+      }
+
       for (var i in flightList){
         var item=flightList[i]
         filteredFlights.push({
           "date":item.date,
+          "departureAirport":item.departureAirport,
+          "arrivalAirport":item.arrivalAirport
         })
       }
       for (var k in flightList){
@@ -49,7 +70,10 @@ export default function SearchDataReturn() {
         })
       }
       flightDataFiltered.push({
-        "date":flightData.date
+        "date":flightData.date,
+        "departureAirport":depAirport,
+        "arrivalAirport":arrAirport
+
       })
       for (var j in filteredFlights){
         if(JSON.stringify(filteredFlights[j])===JSON.stringify(flightDataFiltered[0])){
@@ -93,7 +117,7 @@ export default function SearchDataReturn() {
               <TableCell align="right">{flight.departureTerminal}</TableCell>
               <TableCell align="right">{flight.arrivalTerminal}</TableCell>
               <TableCell align="right">
-                    <Button variant="contained"onClick={()=>{navigate(0)
+                    <Button variant="contained"onClick={()=>{navigate(`retReservedDetails/${flight._id}/${flight.cabinClass}`)
               }}>select Flight</Button>
               </TableCell>
             </TableRow>

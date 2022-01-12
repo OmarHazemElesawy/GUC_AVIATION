@@ -24,7 +24,7 @@ app.post('/payment',cors(), async(req,res)=>{
     try{
         const payment=await stripe.paymentIntents.create({
             amount,
-            currency:"egp",
+            currency:"eur",
             payment_method:id,
             description:"",
             confirm:true
