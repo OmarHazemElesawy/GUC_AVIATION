@@ -1,6 +1,6 @@
 import { CardElement, useElements, useStripe } from "@stripe/react-stripe-js"
 import axios from "axios"
-import { React, useState} from 'react'
+import { React, useState,useEffect} from 'react'
 import {useParams,useNavigate} from 'react-router-dom';
 import {Container , AppBar,Typography,Grow} from '@material-ui/core';
 import useStyles from './styles';
@@ -28,6 +28,8 @@ const CARD_OPTIONS = {
 }
 
 export default function PaymentForm() {
+
+
     const {id1}:{id1:string}=useParams();
     const {id2}:{id2:string}=useParams();
     const navigate=useNavigate();
@@ -38,6 +40,9 @@ export default function PaymentForm() {
     let amountInCents;
     const {id_dep}:{id_dep:string}=useParams();
     const {cabinClass}:{cabinClass:string}=useParams();
+    let departureString;
+    let returnString;
+    let roundTripString;
 
     if(cabinClass==="Business"){
         amountInCents=4000*100;
@@ -45,6 +50,85 @@ export default function PaymentForm() {
         amountInCents=2000*100
     }
 
+    const[reservationList, setReservationList]=useState([]);
+    useEffect(()=>{
+      axios.get('http://localhost:5000/reservations').then((allReservations)=>{
+        setReservationList(allReservations.data);
+      })
+    },[])
+    for (var k in reservationList){
+        if(reservationList[k]['_id']===id1){
+            if(reservationList[k]['depSeats'].length===0){
+                returnString=`Your Return Flight:<br><br>
+                # Flight Number: ${reservationList[k]['flightNo']}<br>
+                # Flight Date: ${reservationList[k]['date']}<br>
+                # Departure Time: ${reservationList[k]['departureTime']}<br>
+                # Arrival Time: ${reservationList[k]['arrivalTime']}<br>
+                # Departure Airport: ${reservationList[k]['departureAirport']}<br>
+                # Arrival Airport: ${reservationList[k]['arrivalAirport']}<br>
+                # Departure Terminal: ${reservationList[k]['departureTerminal']}<br>
+                # Arrival Terminal: ${reservationList[k]['arrivalTerminal']}<br>
+                # Trip Duration: ${reservationList[k]['tripDuration']}<br>
+                # Baggage Allowance: ${reservationList[k]['allowance']}<br>
+                # Price: ${reservationList[k]['price']}<br>
+                # Class: ${reservationList[k]['class']}<br>
+                # Confirmation Code: ${reservationList[k]['confirmationCode']}<br>
+                # Reserved Seats: ${reservationList[k]['retSeats']}<br><br>`
+            }else{
+                departureString=`Your Departure Flight:<br><br>
+                 # Flight Number: ${reservationList[k]['flightNo']}<br>
+                 # Flight Date: ${reservationList[k]['date']}<br>
+                 # Departure Time: ${reservationList[k]['departureTime']}<br>
+                 # Arrival Time: ${reservationList[k]['arrivalTime']}<br>
+                 # Departure Airport: ${reservationList[k]['departureAirport']}<br>
+                 # Arrival Airport: ${reservationList[k]['arrivalAirport']}<br>
+                 # Departure Terminal: ${reservationList[k]['departureTerminal']}<br>
+                 # Arrival Terminal: ${reservationList[k]['arrivalTerminal']}<br>
+                 # Trip Duration: ${reservationList[k]['tripDuration']}<br>
+                 # Baggage Allowance: ${reservationList[k]['allowance']}<br>
+                 # Price: ${reservationList[k]['price']}<br>
+                 # Class: ${reservationList[k]['class']}<br>
+                 # Confirmation Code: ${reservationList[k]['confirmationCode']}<br>
+                 # Reserved Seats: ${reservationList[k]['depSeats']}<br><br>`
+            }
+        }
+        if(reservationList[k]['_id']===id2){
+            if(reservationList[k]['depSeats'].length===0){
+                returnString=`Your Return Flight:<br><br>
+                # Flight Number: ${reservationList[k]['flightNo']}<br>
+                # Flight Date: ${reservationList[k]['date']}<br>
+                # Departure Time: ${reservationList[k]['departureTime']}<br>
+                # Arrival Time: ${reservationList[k]['arrivalTime']}<br>
+                # Departure Airport: ${reservationList[k]['departureAirport']}<br>
+                # Arrival Airport: ${reservationList[k]['arrivalAirport']}<br>
+                # Departure Terminal: ${reservationList[k]['departureTerminal']}<br>
+                # Arrival Terminal: ${reservationList[k]['arrivalTerminal']}<br>
+                # Trip Duration: ${reservationList[k]['tripDuration']}<br>
+                # Baggage Allowance: ${reservationList[k]['allowance']}<br>
+                # Price: ${reservationList[k]['price']}<br>
+                # Class: ${reservationList[k]['class']}<br>
+                # Confirmation Code: ${reservationList[k]['confirmationCode']}<br>
+                # Reserved Seats: ${reservationList[k]['retSeats']}<br><br>`
+            }else{
+                departureString=`Your Departure Flight:<br><br>
+                 # Flight Number: ${reservationList[k]['flightNo']}<br>
+                 # Flight Date: ${reservationList[k]['date']}<br>
+                 # Departure Time: ${reservationList[k]['departureTime']}<br>
+                 # Arrival Time: ${reservationList[k]['arrivalTime']}<br>
+                 # Departure Airport: ${reservationList[k]['departureAirport']}<br>
+                 # Arrival Airport: ${reservationList[k]['arrivalAirport']}<br>
+                 # Departure Terminal: ${reservationList[k]['departureTerminal']}<br>
+                 # Arrival Terminal: ${reservationList[k]['arrivalTerminal']}<br>
+                 # Trip Duration: ${reservationList[k]['tripDuration']}<br>
+                 # Baggage Allowance: ${reservationList[k]['allowance']}<br>
+                 # Price: ${reservationList[k]['price']}<br>
+                 # Class: ${reservationList[k]['class']}<br>
+                 # Confirmation Code: ${reservationList[k]['confirmationCode']}<br>
+                 # Reserved Seats: ${reservationList[k]['depSeats']}<br><br>`
+            }
+          }
+      }
+      roundTripString=departureString+returnString;
     const handleSubmit = async (e) => {
         e.preventDefault()
         const {error, paymentMethod} = await stripe.createPaymentMethod({
@@ -73,6 +157,13 @@ export default function PaymentForm() {
         window.confirm("please enter correct credit card Information!")
         window.location.reload(false);
         console.log(error.message)
+    }
+}
+const handleSend=async(text)=>{
+    try{
+        await axios.post("http://localhost:5000/sendMail",{text})
+    }catch(error){
+        console.log(error)
     }
 }
 const [reservation1,setReservation1]=useState({
@@ -107,8 +198,10 @@ const [reservation2,setReservation2]=useState({
     confirmationCode:'',
     payed:false,
 });
-    
 
+///depSeats:[String],
+///retSeats:[String]
+    
   const updateReservation1=(ID)=>{
     axios.post(`http://localhost:5000/reservations/${ID}`,reservation1).then(()=>{
         window.location.reload(false);   
@@ -130,7 +223,7 @@ const [reservation2,setReservation2]=useState({
       </Container>
       <Grow in>
         <Container>
-        {!success ? 
+        {!success ?
         <form onSubmit={handleSubmit}>
             <fieldset className="FormGroup">
                 <div className="FormRow">
@@ -151,6 +244,7 @@ const [reservation2,setReservation2]=useState({
                    console.log(reservation2.payed)
                    updateReservation1(id1);
                    updateReservation2(id2);
+                   handleSend(roundTripString)
                    navigate("/existingUser");
               }}>Return to Home Page</Button>
                </Stack>

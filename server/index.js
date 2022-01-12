@@ -7,8 +7,11 @@ import userRoutes from './routes/user.js';
 import dotenv from "dotenv"
 import Stripe from 'stripe';
 import jwt from 'jsonwebtoken';
-// import bcrypt from "bcrypt"
+import nodemailer from "nodemailer";
+
+
 const app=express();
+
 dotenv.config();
 app.use(express.json({limit:"20mb", extended:true}));
 app.use(express.urlencoded({limit:"20mb", extended:true}));
@@ -19,6 +22,8 @@ const stripe =Stripe(process.env.STRIPE_SECRET_TEST)
 app.use('/flights',flightRoutes);
 app.use('/reservations',reservationRoutes);
 app.use('/users',userRoutes);
+
+
 app.post('/payment',cors(), async(req,res)=>{
     let{amount,id}=req.body
     try{
@@ -42,6 +47,8 @@ app.post('/payment',cors(), async(req,res)=>{
         })
     }
 });
+
+
 app.post('/login', async(req,res)=>{
 const userFirstName= req.body.firstName;
 const userLastName= req.body.lastName;
@@ -50,6 +57,33 @@ const newUser={firstName:userFirstName,lastName:userLastName,password:userPasswo
 const accessToken=jwt.sign(newUser,process.env.ACCESS_TOKEN_SECRET)
 res.json({accessToken:accessToken})
 });
+
+
+app.post("/sendMail",cors(),async(req,res)=>
+{
+    let {text}=req.body
+    let transport=nodemailer.createTransport({
+        service:"gmail",
+        auth:{
+            user:process.env.MAIL_USER,
+            pass:process.env.MAIL_PASS,
+        }
+    });
+    await transport.sendMail({
+        from:process.env.MAIL_USER,
+        to:'nodeApp123@outlook.com',
+        subject:"Testing",
+        html:`<div>
+        <h3>Hello our Dear Customer</h3>
+        <br/>
+        <p>${text}</p>
+        <br/>
+        <p>Thank you for using our services, Hope we see you soon</p>
+        <p>Best regards,</p>
+        <p>GUC Aviation</p>
+        </div>`
+    })
+})
 
 const CONNECTION_URL=
 'mongodb+srv://vscode1357:vscode1357@cluster0.kxzfh.mongodb.net/myFirstDatabase?retryWrites=true&w=majority';
