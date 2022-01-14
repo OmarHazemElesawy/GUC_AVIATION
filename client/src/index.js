@@ -3,6 +3,7 @@ import {BrowserRouter,Routes,Route} from "react-router-dom";
 import App from "./App";
 import Admin from "./Admin";
 import ExistingUser from "./ExistingUser"
+import Auth from "./components/auth/auth"
 import GuestUser from "./GuestUser"
 import Update from "./components/Update"
 import Search from "./components/searchFlight"
@@ -36,15 +37,21 @@ import DepartureReservedDetails from "./components/depReservedDetails"
 import ReturnReservedDetails from "./components/retReservedDetails"
 import DepartureSeatsEdited from "./components/departureSeatsEdited";
 import ReturnSeatsEdited from "./components/returnSeatsEdited";
-
+import { Provider } from "react-redux";
+import { createStore,applyMiddleware,compose } from "redux";
+import thunk from "redux-thunk"
+import {reducers} from "./components/reducers"
 
 const rootElement = document.getElementById("root");
+const store=createStore(reducers,compose(applyMiddleware(thunk)));
 render(
+  <Provider store={store}>
   <BrowserRouter>
     <Routes>
       <Route path="/" exact element={<App />} />
       <Route path="admin" exact element={<Admin />} />
       <Route path="existingUser" exact element={<ExistingUser />} />
+      <Route path="auth" exact element={<Auth />} />
       <Route path="guestUser" exact element={<GuestUser />} />
       <Route path="admin/update/:id" exact element={<Update />} />
       <Route path="existingUser/updateUser/:id" exact element={<UpdateUser />} />
@@ -78,8 +85,8 @@ render(
       <Route path="existingUser/depReserved/:id/:ID/editDepReserved/searchDataDep/depReservedDetails/:ID2/:cabinClass/depSeatsEdited" exact element={< DepartureSeatsEdited/>}/>
       <Route path="existingUser/retReserved/:id/:ID/editRetReserved/searchDataRet/retReservedDetails/:ID2/:cabinClass" exact element={< ReturnReservedDetails/>} />
       <Route path="existingUser/retReserved/:id/:ID/editRetReserved/searchDataRet/retReservedDetails/:ID2/:cabinClass/retSeatsEdited" exact element={< ReturnSeatsEdited/>}/>
-
     </Routes>
-  </BrowserRouter>,
+  </BrowserRouter>
+  </Provider>,
   rootElement
 );
