@@ -1,5 +1,6 @@
-import { makeStyles } from "@material-ui/core/styles";
-export default makeStyles(()=>({
+import { makeStyles } from '@material-ui/core/styles';
+
+export default makeStyles((theme) => ({
     appBar:{
         borderRadius: 15,
         margin: '30px 0',
@@ -8,14 +9,9 @@ export default makeStyles(()=>({
         justifyContent: 'center',
         alignItems: 'center'
     },
-    // sideBySide:{
-    //     textAlign:"center",
-    //     display:"inline-block",
-    //     display:"inline",
-    //     position:"absolute",
-    //     top:50,
-    //     left:50
-
-
-    // }
-}))
+  heading: {
+    color: 'rgba(1,1,1, 1)',
+    textDecoration: 'none',
+    
+  }
+}));
