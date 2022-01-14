@@ -12,7 +12,7 @@ function App() {
     <div className="App">
       <Container maxWidth="lg"> 
         <AppBar className={classes.appBar} position="static" color="inherit">
-          <Typography className= {classes.heading} variant= "h4" align="center" >Home Page</Typography>
+          <Typography className= {classes.heading} variant= "h4" align="center" >GIU Aviation</Typography>
           </AppBar>
       </Container>
       <Container maxWidth="lg" align="center"> 
@@ -23,9 +23,9 @@ function App() {
         <Button variant="contained" onClick={()=>{navigate("admin")}}>Admin page</Button>
         <br/>
         <h2>
-          To log in as Existing User:
+          To log in as Existing User/Register as new User:
           </h2>
-        <Button variant="contained" onClick={()=>{navigate("existingUser")}}>Existing user page</Button>
+        <Button variant="contained" onClick={()=>{navigate("auth")}}>Login/Register</Button>
         <br/>
         <h2>
           To log in as Guest User:
