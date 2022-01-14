@@ -1,4 +1,4 @@
-import {React,useEffect,useState} from 'react';
+import {React} from 'react';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableCell,{ tableCellClasses } from '@mui/material/TableCell';
@@ -6,21 +6,15 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
-import axios from 'axios';
+//import axios from 'axios';
 import { styled } from '@mui/material/styles';
 import IconButton from '@material-ui/core/IconButton';
 import EditIcon from '@material-ui/icons/Edit';
 import {useNavigate} from 'react-router-dom';
 
 export default function ShowUser() {
-  const[userList, setUserList]=useState([]);
+  const userList=JSON.parse(localStorage.getItem('profile'));
 
-  useEffect(()=>{
-    axios.get('http://localhost:5000/users').then((allUsers)=>{
-      setUserList(allUsers.data);
-    })
-  },[])
-  
   const StyledTableCell = styled(TableCell)(({ theme }) => ({
     [`&.${tableCellClasses.head}`]: {
       backgroundColor: theme.palette.common.black,
@@ -51,32 +45,33 @@ export default function ShowUser() {
       <Table style={{width : 200}} aria-label="simple table">
         <TableHead>
           <TableRow>
-            <StyledTableCell align="right" >First Name</StyledTableCell>
-            <StyledTableCell align="right" >Last Name</StyledTableCell>
-            <StyledTableCell align="right" >Email</StyledTableCell>
-            <StyledTableCell align="right" >Passport No.</StyledTableCell>
-            <StyledTableCell align="right" >Update</StyledTableCell>
+            <StyledTableCell align="center" >Name</StyledTableCell>
+            <StyledTableCell align="center" >Email</StyledTableCell>
+            <StyledTableCell align="center" >Passport No.</StyledTableCell>
+            <StyledTableCell align="center" >Update Data</StyledTableCell>
+            <StyledTableCell align="center" >Update Password</StyledTableCell>
           </TableRow>
         </TableHead>
         <TableBody>
-          {userList.map((user,key) => (
             <StyledTableRow
-              key={key}
               sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
             >
-              <StyledTableCell align="right">{user.firstName}</StyledTableCell>
-              <StyledTableCell align="right">{user.lastName}</StyledTableCell>
-              <StyledTableCell align="right">{user.email}</StyledTableCell>
-              <StyledTableCell align="right">{user.passport}</StyledTableCell>
+              <StyledTableCell align="right">{userList.result.name}</StyledTableCell>
+              <StyledTableCell align="right">{userList.result.email}</StyledTableCell>
+              <StyledTableCell align="right">{userList.result.passport}</StyledTableCell>
               <StyledTableCell align="right">
-              <IconButton aria-label="update" onClick={()=>{navigate(`updateUser/${userList[0]._id}`)
+              <IconButton aria-label="updateData" onClick={()=>{navigate(`updateUser/${userList.result._id}`)
+              }}>
+                <EditIcon />
+                </IconButton>
+                </StyledTableCell>
+                <StyledTableCell align="right">
+                <IconButton aria-label="updatePassword" onClick={()=>{navigate(`updatePassword/${userList.result._id}`)
               }}>
                 <EditIcon />
                 </IconButton>
             </StyledTableCell>
             </StyledTableRow>
-             
-          ))}
         </TableBody>
       </Table>
     </TableContainer>

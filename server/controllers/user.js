@@ -1,5 +1,7 @@
 import UserData from '../models/user.js';
-import bcrypt from "bcrypt"
+import bcrypt from "bcrypt";
+import jwt from "jsonwebtoken";
+
 
 export const getUser = async(req,res)=>{
     try{
@@ -23,20 +25,41 @@ export const createUser = async (req,res)=>{
         res.status(409).json({message:error.message});
     }
 }
-export const loginUser = async (req,res)=>{
-        const user=await UserData.find({firstName:req.body.firstName,lastName:req.body.lastName});
-        if(user===null){
-            return res.status(400).send("cannot find user")
-        }
+export const signin = async (req,res)=>{
+    const{email,password}=req.body;
     try{
-      if(await bcrypt.compare(req.body.password,user[0].password)){
-          res.send("success")
-          console.log(user[0]);
-      }else{
-        res.send("not allowed")
+      const existingUser=await UserData.findOne({email})
+
+      if(!existingUser)return res.status(404).json({message:"user doesn't exist."})
+      const isPasswordCorrect=await bcrypt.compare(password,existingUser.password)
+
+      if(!isPasswordCorrect){
+          window.confirm("wrong email or password");
+          return res.status(400).json({message:"invalid credentials"})
       }
+
+      const token=jwt.sign({email:existingUser.email,id:existingUser._id},"test",{expiresIn:"1h"});
+
+      res.status(200).json({result:existingUser,token});
+
     }catch(error){
-        console.log(error)
+        res.status(500).json({message:"something went wrong"});
+    }
+};
+export const signup = async (req,res)=>{
+    const{email,password,confirmPassword,firstName,lastName,passport}=req.body;
+    try{
+      const existingUser=await UserData.findOne({email})
+
+      if(existingUser)return res.status(400).json({message:"user already exists."})
+      if(!(password===confirmPassword))return res.status(400).json({message:"passwords don't match"})
+      const hashedPassword=await bcrypt.hash(password,12)
+      const result =await UserData.create({email,passport,password:hashedPassword,name:`${firstName} ${lastName}`})
+      const token=jwt.sign({email:result.email,id:result._id},"test",{expiresIn:"1h"});
+      res.status(201).json({result,token});
+
+    }catch(error){
+        res.status(500).json({message:"something went wrong"});
     }
 }
 export const updateUser = async (req,res)=>{
