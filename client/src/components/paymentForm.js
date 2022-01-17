@@ -129,6 +129,9 @@ export default function PaymentForm() {
           }
       }
       roundTripString=departureString+returnString;
+      let subject2=`You Have Successfully Payed For The round Trip<br>
+                    Below You Will Find Your Flights' Details`
+      
     const handleSubmit = async (e) => {
         e.preventDefault()
         const {error, paymentMethod} = await stripe.createPaymentMethod({
@@ -159,9 +162,9 @@ export default function PaymentForm() {
         console.log(error.message)
     }
 }
-const handleSend=async(text)=>{
+const handleSend=async(text,subject1,subject2)=>{
     try{
-        await axios.post("http://localhost:5000/sendMail",{text})
+        await axios.post("http://localhost:5000/sendMail",{text:text,subject1:subject1,subject2:subject2})
     }catch(error){
         console.log(error)
     }
@@ -244,7 +247,7 @@ const [reservation2,setReservation2]=useState({
                    console.log(reservation2.payed)
                    updateReservation1(id1);
                    updateReservation2(id2);
-                   handleSend(roundTripString)
+                   handleSend(roundTripString,"payment confirmation",subject2)
                    navigate("/existingUser");
               }}>Return to Home Page</Button>
                </Stack>

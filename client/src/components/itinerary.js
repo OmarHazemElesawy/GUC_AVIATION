@@ -23,8 +23,7 @@ function Itinerary() {
   const {cabinClass}:{cabinClass:string}=useParams();
   var flightListSum1=JSON.parse(localStorage['filteredFlightList1']);
   var flightListSum2=JSON.parse(localStorage['filteredFlightList2']);
- // var depData=JSON.parse(localStorage['selectedDepSeats']);
-// var retData=JSON.parse(localStorage['selectedRetSeats']);
+  var userProfile=JSON.parse(localStorage['profile']);
   let start;
   let end;
   var selectedDepSeats=JSON.parse(localStorage['selectedDepSeats']);
@@ -102,6 +101,7 @@ function Itinerary() {
         filteredFlightListSum1.push({
           "flightNo":flightListSum1[a].flightNo,
           "flightID":flightListSum1[a].flightID,
+          "userID":userProfile.result._id,
           "date":flightListSum1[a].date,
           "departureTime":flightListSum1[a].departureTime,
           "arrivalTime":flightListSum1[a].arrivalTime,
@@ -122,6 +122,7 @@ function Itinerary() {
         filteredFlightListSum2.push({
           "flightNo":flightListSum2[b].flightNo,
           "flightID":flightListSum2[b].flightID,
+          "userID":userProfile.result._id,
           "date":flightListSum2[b].date,
           "departureTime":flightListSum2[b].departureTime,
           "arrivalTime":flightListSum2[b].arrivalTime,
