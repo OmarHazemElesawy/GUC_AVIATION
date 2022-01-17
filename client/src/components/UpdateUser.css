@@ -9,3 +9,11 @@
       align-items: center;
       align-self: center;
   }
+  .UpdateUser {
+    text-align: center;
+    background-color:lightgray;
+  }
+  .UpdatePassword {
+    text-align: center;
+    background-color:lightgray;
+  }

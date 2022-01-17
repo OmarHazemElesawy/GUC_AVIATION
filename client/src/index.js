@@ -22,6 +22,7 @@ import Summary from "./components/summary";
 import SummaryGuest from "./components/summaryGuest";
 import DepartureSeats from "./components/departureSeats";
 import UpdateUser from "./components/UpdateUser";
+import UpdatePassword from "./components/updatePassword";
 import ReturnSeats from "./components/returnSeats";
 import Itinerary from "./components/itinerary";
 import Payment from "./components/stripeContainer";
@@ -55,6 +56,7 @@ render(
       <Route path="guestUser" exact element={<GuestUser />} />
       <Route path="admin/update/:id" exact element={<Update />} />
       <Route path="existingUser/updateUser/:id" exact element={<UpdateUser />} />
+      <Route path="existingUser/updatePassword/:id" exact element={<UpdatePassword />} />
       <Route path="search" exact element={<Search />} />
       <Route path="searchData" exact element={<SearchData />} />
       <Route path="searchUser" exact element={<SearchUser />} />
