@@ -195,9 +195,6 @@ return (
         To reserve flights and proceed to seats selection please click below:
         </h2>
       <Button variant="contained" onClick={()=>{
-        // createReservation1()
-        // if(reserve1){
-        // createReservation2()}
         navigate("depSeats")}}>Reserve Seats</Button>
       <br/>
      </Container>

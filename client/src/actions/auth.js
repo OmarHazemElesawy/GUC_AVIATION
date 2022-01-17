@@ -7,6 +7,7 @@ try{
     dispatch({type:AUTH,data});
     navigate("/existingUser") 
 }catch(error){
+    window.confirm("wrong Email or Password")
     console.log(error)
 }
 };
@@ -17,6 +18,7 @@ export const signup=(formData,navigate)=>async(dispatch)=>{
         dispatch({type:AUTH,data});
         navigate("/existingUser") 
     }catch(error){
-        console.log(error)
+        window.confirm(error.JSON.message);
+        console.log(error);
     }
 };

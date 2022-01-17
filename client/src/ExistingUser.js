@@ -9,6 +9,7 @@ import { Outlet ,useNavigate,useLocation} from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import "./ExistingUser.css";
 function ExistingUser() {
+
   const classes =useStyles();
   const dispatch=useDispatch();
   const navigate=useNavigate();
@@ -34,7 +35,6 @@ function ExistingUser() {
           <Typography className= {classes.heading} variant= "h4" align="center" >Home</Typography>
           <Avatar className= {classes.purple} alt={user?.result.name} src={user?.result.imageUrl} align="left" >{user?.result.name.charAt(0)}</Avatar>
           <Typography className= {classes.userName} variant= "h6" align="left" >{user?.result.name}</Typography>
-          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
           <Stack spacing={14} direction="column">
           <Button variant="contained" className={classes.logout} color="primary" align="left" onClick={logout}>Logout</Button>
           </Stack>

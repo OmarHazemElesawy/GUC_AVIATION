@@ -18,10 +18,10 @@ function UpdateUser() {
          });
 
       const updateUser=(ID)=>{
-        axios.post(`http://localhost:5000/users/${ID}`,user).then(()=>{
-          window.location.reload(false);
+        axios.post(`http://localhost:5000/user/${ID}`,user).then(()=>{
         })
       };
+
     return (
      <div className="UpdateUser">
         <AppBar className={classes.appBar} position="static" color="inherit">
@@ -35,11 +35,8 @@ function UpdateUser() {
       noValidate
       autoComplete="off"
     >
-    <TextField id="outlined-basic" label="First Name" variant="outlined" value={user.firstName}onChange={(event)=>{
-        setUser({ ...user,firstName:event.target.value})
-      }}/>
-    <TextField id="outlined-basic" label="Last Name" variant="outlined" value={user.lastName}onChange={(event)=>{
-        setUser({ ...user,lastName:event.target.value})
+    <TextField id="outlined-basic" label="Full Name" variant="outlined" value={user.name}onChange={(event)=>{
+        setUser({ ...user,name:event.target.value})
       }}/>
     <TextField id="outlined-basic" label="Email" variant="outlined" value={user.email}onChange={(event)=>{
         setUser({ ...user,email:event.target.value})
