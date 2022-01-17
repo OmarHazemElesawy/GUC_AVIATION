@@ -12,8 +12,6 @@ export default function Search() {
       passengerChild:'',
       passengerAdult:'',
       date:'',
-      departureTime:'',
-      arrivalTime:'',
       departureAirport:'',
       arrivalAirport:'',
       departureTerminal:'',
@@ -48,12 +46,6 @@ export default function Search() {
          <TextField id="outlined-basic" label="Date" variant="outlined" helperText="Ex: 2020-01-01" value={flight.date}onChange={(event)=>{
           setFlight({ ...flight,date:event.target.value})
         }}/>
-      <TextField id="outlined-basic" label="Departure Time" variant="outlined" helperText="Ex: 10:45" value={flight.departureTime}onChange={(event)=>{
-          setFlight({ ...flight,departureTime:event.target.value})
-        }}/>
-      <TextField id="outlined-basic" label="Arrival Time" variant="outlined" helperText="Ex: 14:30" value={flight.arrivalTime}onChange={(event)=>{
-          setFlight({ ...flight,arrivalTime:event.target.value})
-        }}/>
       <TextField id="outlined-basic" label="departure Airport" variant="outlined" helperText="Ex: CAI" value={flight.departureAirport}onChange={(event)=>{
           setFlight({ ...flight,departureAirport:event.target.value})
         }}/>
@@ -71,7 +63,7 @@ export default function Search() {
         }}/>
       <Stack spacing={2} direction="row">
         <Button variant="outlined" onClick={()=>{
-              if(flight['flightNo']===""||flight['date']===""||flight['departureTime']===""||flight['arrivalTime']===""||
+              if(flight['flightNo']===""||flight['date']===""||
               flight['departureAirport']===""||flight['arrivalAirport']===""||flight['departureTerminal']===""||
               flight['arrivalTerminal']===""){
                const alertBox = window.alert("please enter data in the provided fields")

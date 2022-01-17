@@ -33,8 +33,6 @@ export default function SearchData() {
         var item=flightList[i]
         filteredFlights.push({
           "date":item.date,
-          "departureTime":item.departureTime,
-          "arrivalTime":item.arrivalTime,
           "departureAirport":item.departureAirport,
           "arrivalAirport":item.arrivalAirport,
           "departureTerminal":item.departureTerminal,
@@ -70,8 +68,6 @@ export default function SearchData() {
       }
       flightDataFiltered.push({
         "date":flightData.date,
-        "departureTime":flightData.departureTime,
-        "arrivalTime":flightData.arrivalTime,
         "departureAirport":flightData.departureAirport,
         "arrivalAirport":flightData.arrivalAirport,
         "departureTerminal":flightData.departureTerminal,
