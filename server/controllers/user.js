@@ -34,7 +34,6 @@ export const signin = async (req,res)=>{
       const isPasswordCorrect=await bcrypt.compare(password,existingUser.password)
 
       if(!isPasswordCorrect){
-          window.confirm("wrong email or password");
           return res.status(400).json({message:"invalid credentials"})
       }
 
@@ -66,11 +65,33 @@ export const updateUser = async (req,res)=>{
     const id =req.params.id;
     try{
         await UserData.findOneAndUpdate({_id:id},{
-            firstName:req.body.firstName||UserData.firstName,
-            lastName:req.body.lastName||UserData.lastName,
+            name:req.body.name||UserData.name,
             email:req.body.email||UserData.email,
             passport:req.body.passport||UserData.passport,
-            password:req.body.password||UserData.password
+            password:req.body.password||UserData.password,
+            id:req.body.id||UserData.id
+        }).exec();
+        res.send('Successfully updated')
+    }catch(error){
+        console.log(error);
+    }
+ }
+ export const updatePassword = async (req,res)=>{
+    const id =req.params.id;
+    const userPassword=req.body;
+    try{
+
+        const existingUser=await UserData.findOne({_id:id})
+        const isPasswordSame=await bcrypt.compare(userPassword.password,existingUser.password)
+        if(isPasswordSame){
+            return res.status(400).json({message:"password entered is similar to the exisitng password,please enter a different one"})
+        }
+        if((userPassword.password===userPassword.confirmPassword))
+        return res.status(400).json({message:"Passwords entered do not match"})
+        const hashedPassword=await bcrypt.hash(userPassword.password,12)
+        console.log(hashedPassword)
+        await UserData.findOneAndUpdate({_id:id},{
+            password:hashedPassword,
         }).exec();
         res.send('Successfully updated')
     }catch(error){

@@ -49,6 +49,7 @@ export const deleteReservation= async (req,res)=>{
         await ReservationData.findOneAndUpdate({_id:id},{
             flightNo:req.body.flightNo||ReservationData.flightNo,
             flightID:req.body.flightID||ReservationData.flightID,
+            userID:req.body.userID||ReservationData.userID,
             date:req.body.date||ReservationData.date,
             departureTime:req.body.departureTime||ReservationData.departureTime,
             arrivalTime:req.body.arrivalTime||ReservationData.arrivalTime,
