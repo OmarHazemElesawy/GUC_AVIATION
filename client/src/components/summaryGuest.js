@@ -135,16 +135,15 @@ return (
       </TableBody>
     </Table>
         </TableContainer>
-        <h3 align='right'>Total Price:{price2}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</h3>
+        <h3 align='center'>Total Price:{price2}</h3>
         <Container maxWidth="lg" align="center"> 
     <div className="Button"/>
       <h2>
-        Sorry! to reserve a flight, you need to be an existing user...<br/>
-        Click below to be redirected to main page.
+        Sorry! To Reserve A Flight, You Need To Be An Existing User...<br/>
+        Click Below To Be Redirected To Sign Up Page.
         </h2>
       <Button variant="contained" onClick={()=>{
-        navigate("/")}}>Main page</Button>
+        navigate("/auth")}}>Sign Up</Button>
       <br/>
      </Container>
     </div>
