@@ -1,4 +1,8 @@
 .App {
   text-align: center;
   background-color:lightgray;
+  background-image: url(./images/airplane3.jpg);
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
 }

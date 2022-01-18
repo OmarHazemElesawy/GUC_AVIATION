@@ -1,7 +1,7 @@
 import React from 'react';
 import {Container , AppBar,Typography} from '@material-ui/core';
 import useStyles from './styles';
-import {Button} from '@mui/material';
+import {Button, Stack} from '@mui/material';
 import {useNavigate} from 'react-router-dom';
 import "./App.css"
 function App() {
@@ -17,26 +17,30 @@ function App() {
       </Container>
       <Container maxWidth="lg" align="center"> 
       <div className="Button">
-        <h2>
+      <Stack spacing={5} direction="column">
+        <h1>
           To log in as Admin:
-          </h2>
-        <Button variant="contained" onClick={()=>{navigate("admin")}}>Admin page</Button>
-        <br/>
-        <h2>
+          </h1>
+        <Button variant="contained"size="small" onClick={()=>{navigate("admin")}}>Admin page</Button>
+        </Stack>
+        <br/><br/><br/><br/>
+        <Stack spacing={5} direction="column">
+        <h1>
           To log in as Existing User/Register as new User:
-          </h2>
-        <Button variant="contained" onClick={()=>{navigate("auth")}}>Login/Register</Button>
-        <br/>
-        <h2>
+          </h1>
+        <Button variant="contained" size="small" onClick={()=>{navigate("auth")}}>Login / Register</Button>
+        </Stack>
+        <br/><br/><br/><br/>
+        <Stack spacing={5} direction="column">
+        <h1>
           To log in as Guest User:
-          </h2>
-        <Button variant="contained" onClick={()=>{navigate("guestUser")}}>Guest user page</Button>
-        <br/>
+          </h1>
+        <Button variant="contained"size="small" onClick={()=>{navigate("guestUser")}}>Guest user page</Button>
+        </Stack>
     </div>
     </Container>
     </div>
   );
 }
-// <Button variant="outlined" onClick={()=>{navigate("update")}}>update page</Button>
-// <Button variant="outlined" onClick={()=>{navigate("searchData")}}>Search page</Button>
+
 export default App
