@@ -74,7 +74,7 @@ render(
       <Route path="searchDataUser/flightDetails/:adult/:children/:id1/:cabinClass/returnFlights/returnDetails/:id2/summary/depSeats" exact element={<DepartureSeats />} />
       <Route path="searchDataUser/flightDetails/:adult/:children/:id1/:cabinClass/returnFlights/returnDetails/:id2/summary/depSeats/retSeats" exact element={<ReturnSeats />} />
       <Route path="searchDataUser/flightDetails/:adult/:children/:id1/:cabinClass/returnFlights/returnDetails/:id2/summary/depSeats/retSeats/itinerary" exact element={<Itinerary />} />
-      <Route path="existingUser/payment/:id1/:id2/:cabinClass" exact element={<Payment />} />
+      <Route path="existingUser/payment/:id1/:id2/:cabinClass1/:cabinClass2" exact element={<Payment />} />
       <Route path="existingUser/depReserved/:id/:ID" exact element={< DepReserved/>} />
       <Route path="existingUser/retReserved/:id/:ID" exact element={< RetReserved/>} />
       <Route path="existingUser/depReserved/:id/:ID/depSeatsReserved" exact element={< DepartureSeatsReserved/>} />
