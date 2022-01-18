@@ -1,21 +1,19 @@
-import{ React,useState} from 'react';
+import{ React,useState,useEffect} from 'react';
 import TextField from '@mui/material/TextField';
 import { useParams,useNavigate } from 'react-router-dom';
-import { Button,Stack,Box } from '@mui/material';
+import { Button,Stack,Box, Container } from '@mui/material';
 import useStyles from './styles';
 import axios from 'axios';
 import "../stylesUser.js"
 import {AppBar,Typography} from '@material-ui/core';
-//import bcrypt from "bcrypt"
 function UpdatePassword() {
     const classes =useStyles();
     const {id}:{id:string}=useParams();
     const navigate=useNavigate();
-    //const user=JSON.parse(localStorage.getItem('profile'));
-    //const passwordDcrypted=bcryptuser.result.password
+    const userProfile=JSON.parse(localStorage.getItem('profile'));
+    let oldPassword;
     const [user,setUser]=useState({
         password:'',
-        confirmPassword:''
          });
 
       const updatePassword=(ID)=>{
@@ -24,12 +22,29 @@ function UpdatePassword() {
         })
       };
 
+      const[userList, setUserList]=useState([]);
+
+      useEffect(()=>{
+        axios.get('http://localhost:5000/user').then((allUsers)=>{
+          setUserList(allUsers.data);
+        })
+      },[])
+      for (var k in userList){
+        if(userList[k]['_id']===userProfile.result._id){
+          oldPassword=userList[k]['pass']
+        }
+      }
     return (
      <div className="UpdatePassword">
+        <Container maxWidth="lg"> 
         <AppBar className={classes.appBar} position="static" color="inherit">
           <Typography className= {classes.heading} variant= "h4" align="center" >Update your Password</Typography>
-          {/* <Typography className= {classes.userName} variant= "h6" align="left" >u</Typography> */}
         </AppBar>
+        <h3>
+          Your Old Password:
+          <br/>
+          {oldPassword}
+        </h3>
           <Box
       component="form"
       sx={{
@@ -39,14 +54,12 @@ function UpdatePassword() {
       autoComplete="off"
     >
     <TextField id="outlined-basic" label="Password" variant="outlined" required fullWidth value={user.password}onChange={(event)=>{
-        setUser({ ...user,password:event.target.value})
+        setUser({ ...user,password:event.target.value});
       }}/>
-    <TextField id="outlined-basic" label="Confrim Password" variant="outlined" required fullWidth value={user.confirmPassword}onChange={(event)=>{
-        setUser({ ...user,confirmPassword:event.target.value})
-      }}/>
+      
       <div className="Button">
-      <Stack spacing={2} direction="row" alignItems="center" alignSelf="center">
-        <Button variant="outlined" onClick={()=>{const confirmBox = window.confirm("Are you sure you want to update Password?")
+      <Stack spacing={20} size="large" direction="column" alignItems="center" alignSelf="center">
+        <Button variant="contained" onClick={()=>{const confirmBox = window.confirm("Are you sure you want to update Password?")
                 if(confirmBox===true){
                   updatePassword(id);
                   navigate("/ExistingUser")}}}>Update Password</Button>
@@ -54,6 +67,7 @@ function UpdatePassword() {
     </Stack>
     </div>
     </Box>
+    </Container>
     </div>
     );
 }

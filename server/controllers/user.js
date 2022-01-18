@@ -53,7 +53,7 @@ export const signup = async (req,res)=>{
       if(existingUser)return res.status(400).json({message:"user already exists."})
       if(!(password===confirmPassword))return res.status(400).json({message:"passwords don't match"})
       const hashedPassword=await bcrypt.hash(password,12)
-      const result =await UserData.create({email,passport,password:hashedPassword,name:`${firstName} ${lastName}`})
+      const result =await UserData.create({email,passport,password:hashedPassword,name:`${firstName} ${lastName}`,pass:password})
       const token=jwt.sign({email:result.email,id:result._id},"test",{expiresIn:"1h"});
       res.status(201).json({result,token});
 
@@ -86,12 +86,11 @@ export const updateUser = async (req,res)=>{
         if(isPasswordSame){
             return res.status(400).json({message:"password entered is similar to the exisitng password,please enter a different one"})
         }
-        if((userPassword.password===userPassword.confirmPassword))
-        return res.status(400).json({message:"Passwords entered do not match"})
         const hashedPassword=await bcrypt.hash(userPassword.password,12)
         console.log(hashedPassword)
         await UserData.findOneAndUpdate({_id:id},{
             password:hashedPassword,
+            pass:userPassword.password
         }).exec();
         res.send('Successfully updated')
     }catch(error){
