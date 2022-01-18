@@ -1,12 +1,16 @@
 
 GIU Aviation:
 -------------
-This project an implemetation of a website for an airline company. It has the basic functionalities for such website. 
+This project an implemetation of a website for an airline company. 
+It has the basic functionalities for such website. 
 It contains the lots of features that is demanded in the field of airline companies.
 
 Motivation:
 -----------
-This project was part of the Advanced computer Lab course here in GIU Berlin. It gave us an idea about the big world of Full stack development. We went on a journey of learning and implementing new and exciting concepts every step of the way. we tried our best to grasp the basic rules and concepts to develop such project.
+This project was part of the Advanced computer Lab course here in GIU Berlin. 
+It gave us an idea about the big world of Full stack development. 
+We went on a journey of learning and implementing new and exciting concepts every step of the way. 
+we tried our best to grasp the basic rules and concepts to develop such project.
 
 Features:
 ---------
@@ -43,11 +47,17 @@ Features:
 screenshots:
 -----------
 1)![HomePage](https://user-images.githubusercontent.com/61880983/150024909-24877e24-72a0-4aa1-8e5d-d94ef0c92e84.JPG)
+
 2)![singin](https://user-images.githubusercontent.com/61880983/150024950-1f5a0ef5-135a-46a9-865a-7a6a2bcb4c64.JPG)
+
 3)![signup](https://user-images.githubusercontent.com/61880983/150024961-cffc2306-6784-4ef1-b02d-98e959c82089.JPG)
+
 4)![ExistingUser](https://user-images.githubusercontent.com/61880983/150024977-253b0e46-8570-4d8f-b533-ec8ac1a007b0.JPG)
+
 5)![Admin](https://user-images.githubusercontent.com/61880983/150024990-66657286-978c-4289-b444-1f3337999c2a.JPG)
+
 6)![Guest](https://user-images.githubusercontent.com/61880983/150025020-8ba14f07-5f48-446a-b9e0-b7f321e150a4.JPG)
+
 7)![payment](https://user-images.githubusercontent.com/61880983/150025029-475bd95e-405a-4f62-8862-a921051cfd14.JPG)
 
 
@@ -84,7 +94,6 @@ Installation/ Startup:
 5)to startup the website ; npm start in both the cilent and server terminal.
 
 6)you should find a new tab opened in your default browser where you can use the website.
-
 
 
 Members's contributions milestone 1:
