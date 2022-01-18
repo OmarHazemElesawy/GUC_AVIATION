@@ -18,7 +18,7 @@ Features:
 
 2) An Admin can can view current flights and search for them.
 
-3) An Admin can create/delete/update flights
+3) An Admin can create/delete/update flights.
 
 4) A guest user can search for flights and see details about searched flights.
 
