@@ -49,10 +49,10 @@ export default function Search() {
       <TextField id="outlined-basic" label="departure Airport" variant="outlined" helperText="Ex: CAI" value={flight.departureAirport}onChange={(event)=>{
           setFlight({ ...flight,departureAirport:event.target.value})
         }}/>
-      <TextField id="outlined-basic" label="arrival Airport" variant="outlined" helperText="Ex: A2" value={flight.arrivalAirport}onChange={(event)=>{
+      <TextField id="outlined-basic" label="arrival Airport" variant="outlined" helperText="Ex: SXF" value={flight.arrivalAirport}onChange={(event)=>{
           setFlight({ ...flight,arrivalAirport:event.target.value})
         }}/>
-         <TextField id="outlined-basic" label="Departure Terminal" variant="outlined" helperText="Ex: CAI" value={flight.departureTerminal}onChange={(event)=>{
+         <TextField id="outlined-basic" label="Departure Terminal" variant="outlined" helperText="Ex: F1" value={flight.departureTerminal}onChange={(event)=>{
           setFlight({ ...flight,departureTerminal:event.target.value})
         }}/>
       <TextField id="outlined-basic" label="Arrival Terminal" variant="outlined" helperText="Ex: A2" value={flight.arrivalTerminal}onChange={(event)=>{

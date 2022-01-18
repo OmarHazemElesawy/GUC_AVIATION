@@ -20,8 +20,6 @@ function Summary() {
   const navigate=useNavigate();
   const {id1}:{id1:string}=useParams();
   const {id2}:{id2:string}=useParams();
-  //let resNoOne=(id1).substring((id1).length-1,(id1).length-5)
-  //let resNoTwo=(id2).substring((id2).length-6,(id2).length-10)
   let resNo=makeid(8);
   const {cabinClass}:{cabinClass:string}=useParams();
   let start;

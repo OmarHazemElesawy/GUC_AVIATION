@@ -2,6 +2,10 @@ import { makeStyles } from '@material-ui/core/styles';
 import { deepPurple } from '@material-ui/core/colors';
 
 export default makeStyles((theme) => ({
+  App: {
+    alignItems: 'center',
+    backgroundColor: 'blue'
+  },
     appBar:{
         borderRadius: 15,
         margin: '30px 0',

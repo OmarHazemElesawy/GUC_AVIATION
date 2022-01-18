@@ -21,7 +21,7 @@ function ExistingUser() {
     setUser(null)
   }
   useEffect(()=>{
-    const token=user?.token;
+    //const token=user?.token;
     setUser(JSON.parse(localStorage.getItem('profile')));
   },[location]);
 
