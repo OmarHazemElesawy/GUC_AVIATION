@@ -42,6 +42,14 @@ Features:
 
 screenshots:
 -----------
+1)![HomePage](https://user-images.githubusercontent.com/61880983/150024909-24877e24-72a0-4aa1-8e5d-d94ef0c92e84.JPG)
+2)![singin](https://user-images.githubusercontent.com/61880983/150024950-1f5a0ef5-135a-46a9-865a-7a6a2bcb4c64.JPG)
+3)![signup](https://user-images.githubusercontent.com/61880983/150024961-cffc2306-6784-4ef1-b02d-98e959c82089.JPG)
+4)![ExistingUser](https://user-images.githubusercontent.com/61880983/150024977-253b0e46-8570-4d8f-b533-ec8ac1a007b0.JPG)
+5)![Admin](https://user-images.githubusercontent.com/61880983/150024990-66657286-978c-4289-b444-1f3337999c2a.JPG)
+6)![Guest](https://user-images.githubusercontent.com/61880983/150025020-8ba14f07-5f48-446a-b9e0-b7f321e150a4.JPG)
+7)![payment](https://user-images.githubusercontent.com/61880983/150025029-475bd95e-405a-4f62-8862-a921051cfd14.JPG)
+
 
 Tech/Framework used:
 --------------------
