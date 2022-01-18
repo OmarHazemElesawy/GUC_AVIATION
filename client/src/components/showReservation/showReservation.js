@@ -23,7 +23,6 @@ export default function ShowReservation() {
   let departureString;
   let returnString;
   let roundTripString;
-
 const navigate=useNavigate();
 const deleteFlight=(id)=>{
   axios.delete(`http://localhost:5000/reservations/${id}`).then(()=>{
@@ -37,7 +36,7 @@ const deleteFlight=(id)=>{
       setReservationList2(allReservations.data);
     })
   },[])
-  const handleSendHelper=async(id1,id2,text,subject1,subject2)=>{
+  const handleSendHelper=async(id1,id2,email,text,subject1,subject2)=>{
     
     for (var k in reservationList2){
         if(reservationList2[k]['_id']===id1){
@@ -112,7 +111,7 @@ const deleteFlight=(id)=>{
           }
       }
       roundTripString=departureString+returnString;
-      handleSend(roundTripString,subject1,subject2);
+      handleSend(email,roundTripString,subject1,subject2);
 }
   
 
@@ -133,9 +132,9 @@ const deleteFlight=(id)=>{
       border: 0,
     },
   }));
-  const handleSend=async(text,subject1,subject2)=>{
+  const handleSend=async(email,text,subject1,subject2)=>{
     try{
-        await axios.post("http://localhost:5000/sendMail",{text:text,subject1:subject1,subject2:subject2})
+        await axios.post("http://localhost:5000/sendMail",{email:email,text:text,subject1:subject1,subject2:subject2})
     }catch(error){
         console.log(error)
     }
@@ -199,7 +198,7 @@ let subject2=`You Have Successfully cancelled The round Trip flights`
               <StyledTableCell align="center">X</StyledTableCell>}</>
 
               <>{key%2===1? <StyledTableCell align="right">
-              <>{!(reservation.payed)?<Button variant="outlined" onClick={()=>{navigate(`payment/${reservationList[key-1]._id}/${reservationList[key]._id}/${reservation.class}`)
+              <>{!(reservation.payed)?<Button variant="outlined" onClick={()=>{navigate(`payment/${reservationList[key-1]._id}/${reservationList[key]._id}/${reservationList[key-1].class}/${reservationList[key].class}`)
               }}>PAY</Button>:<Button variant="disabled">PAY</Button>}</>
               </StyledTableCell>:<StyledTableCell align="center">X</StyledTableCell>}</>
 
@@ -208,22 +207,33 @@ let subject2=`You Have Successfully cancelled The round Trip flights`
                 const confirmBox = window.confirm("Do you really want to cancel this reservation?")
                 if(confirmBox===true){
                   if(reservation.class==="Business"){
-                    deleteFlight(reservationList[0]._id)
-                    deleteFlight(reservationList[1]._id)
-                    handleSend("4000 Euros are to be refunded","Cancellation Confirmation",subject2)
+                    if(reservation.userID===userProfile.result._id){
+                    deleteFlight(reservationList[key-1]._id)
+                    deleteFlight(reservationList[key]._id)
+                    if(reservation.payed){
+                    handleSend(userProfile.result.email,"4000 Euros are to be refunded","Cancellation Confirmation",subject2)
                     }else{
-                      deleteFlight(reservationList[0]._id)
-                      deleteFlight(reservationList[1]._id)
-                    handleSend("2000 Euros are to be refunded","Cancellation Confirmation",subject2)
+                      handleSend(userProfile.result.email,"No Money to be refunded","Cancellation Confirmation",subject2)
                     }
+                    }}else{
+                      if(reservation.userID===userProfile.result._id){
+                      deleteFlight(reservationList[key-1]._id)
+                      deleteFlight(reservationList[key]._id)
+                      if(reservation.payed){
+                        handleSend(userProfile.result.email,"2000 Euros are to be refunded","Cancellation Confirmation",subject2)
+                        }else{
+                          handleSend(userProfile.result.email,"No Money to be refunded","Cancellation Confirmation",subject2)
+                        }
+                    }}
                 }
               }}></DeleteOutlinedIcon>
               </StyledTableCell>:<StyledTableCell align="center">X</StyledTableCell>}</>
 
               <> {key%2===1?  <StyledTableCell align="center">
               <SendIcon aria-label="Email" onClick={()=>{
+                window.alert("Email Has Been Sent Successfully")
                  handleSendHelper(reservationList[key-1]._id,reservationList[key]._id,
-                  roundTripString,"Reservation Details","This email has been sent upon your request")
+                  userProfile.result.email,roundTripString,"Reservation Details","This email has been sent upon your request")
               }}></SendIcon>
               </StyledTableCell>:<StyledTableCell align="center">X</StyledTableCell>}</>
 
