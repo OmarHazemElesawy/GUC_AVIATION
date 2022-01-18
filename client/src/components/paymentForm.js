@@ -39,16 +39,23 @@ export default function PaymentForm() {
     const elements = useElements()
     let amountInCents;
     const {id_dep}:{id_dep:string}=useParams();
-    const {cabinClass}:{cabinClass:string}=useParams();
+    const {cabinClass1}:{cabinClass1:string}=useParams();
+    const {cabinClass2}:{cabinClass2:string}=useParams();
+    var userProfile=JSON.parse(localStorage['profile']);
     let departureString;
     let returnString;
     let roundTripString;
 
-    if(cabinClass==="Business"){
+    if(cabinClass1==="Business"&&cabinClass2==="Business"){
         amountInCents=4000*100;
+    }else if(cabinClass1==="Business"&&cabinClass2==="Economic"){
+        amountInCents=3000*100;
+    }else if(cabinClass1==="Economic"&&cabinClass2==="Business"){
+        amountInCents=3000*100;
     }else{
-        amountInCents=2000*100
+        amountInCents=2000*100;
     }
+        
 
     const[reservationList, setReservationList]=useState([]);
     useEffect(()=>{
@@ -162,9 +169,9 @@ export default function PaymentForm() {
         console.log(error.message)
     }
 }
-const handleSend=async(text,subject1,subject2)=>{
+const handleSend=async(email,text,subject1,subject2)=>{
     try{
-        await axios.post("http://localhost:5000/sendMail",{text:text,subject1:subject1,subject2:subject2})
+        await axios.post("http://localhost:5000/sendMail",{email:email,text:text,subject1:subject1,subject2:subject2})
     }catch(error){
         console.log(error)
     }
@@ -247,7 +254,7 @@ const [reservation2,setReservation2]=useState({
                    console.log(reservation2.payed)
                    updateReservation1(id1);
                    updateReservation2(id2);
-                   handleSend(roundTripString,"payment confirmation",subject2)
+                   handleSend(userProfile.result.email,roundTripString,"payment confirmation",subject2)
                    navigate("/existingUser");
               }}>Return to Home Page</Button>
                </Stack>
