@@ -71,11 +71,11 @@ This project was made using the MERN Stack:
 
 APIs used:
 ----------
-1) Axios API: a promise based HTTP client for node js and the browser
+1) Axios API: a promise based HTTP client for node js and the browser.
 
-2) Stripe API:used for online payments and keeping track of said payments
+2) Stripe API:used for online payments and keeping track of said payments.
 
-3) Nodemailer API: used to send emails with ease
+3) Nodemailer API: used to send emails with ease.
 
 Programming languages used:
 ---------------------------
@@ -91,9 +91,16 @@ Installation/ Startup:
 
 4)npm install in both terminals to install dependencies and to create the package-lock.json files again.
 
-5)to startup the website ; npm start in both the cilent and server terminal.
+5)To startup the website ; npm start in both the cilent and server terminal.
 
-6)you should find a new tab opened in your default browser where you can use the website.
+6)You should find a new tab opened in your default browser where you can use the website.
+
+7)For node mailer you will find the email and the password for a testing email account(sender email) to change it just edit .env file with desired email.
+
+8)For stripe , to monitor payments; you can log in to stripe account that you can find also in the .env file there you will find email/password.
+
+9)If you want to change stripe account you can do that,but, you need to change the public key found in the stripeContainer.js file in the client folder,
+ and also you need to change the secret key in the .env file.
 
 
 Members's contributions milestone 1:
