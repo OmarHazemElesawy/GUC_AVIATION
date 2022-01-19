@@ -22,7 +22,7 @@ Features:
 
 4) A guest user can search for flights and see details about searched flights.
 
-5)An existing user can select desired seats from the list of available seats.
+5) An existing user can select desired seats from the list of available seats.
 
 6) An existing User can see his current personal information and update his data and password.
 
