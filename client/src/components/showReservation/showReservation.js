@@ -23,6 +23,7 @@ export default function ShowReservation() {
   let departureString;
   let returnString;
   let roundTripString;
+  let userEmail;
 const navigate=useNavigate();
 const deleteFlight=(id)=>{
   axios.delete(`http://localhost:5000/reservations/${id}`).then(()=>{
@@ -36,6 +37,18 @@ const deleteFlight=(id)=>{
       setReservationList2(allReservations.data);
     })
   },[])
+  const[userList, setUserList]=useState([]);
+
+      useEffect(()=>{
+        axios.get('http://localhost:5000/user').then((allUsers)=>{
+          setUserList(allUsers.data);
+        })
+      },[])
+      for (var k in userList){
+        if(userList[k]['_id']===userProfile.result._id){
+          userEmail=userList[k]['email']
+        }
+      }
   const handleSendHelper=async(id1,id2,email,text,subject1,subject2)=>{
     
     for (var k in reservationList2){
@@ -211,18 +224,18 @@ let subject2=`You Have Successfully cancelled The round Trip flights`
                     deleteFlight(reservationList[key-1]._id)
                     deleteFlight(reservationList[key]._id)
                     if(reservation.payed){
-                    handleSend(userProfile.result.email,"4000 Euros are to be refunded","Cancellation Confirmation",subject2)
+                    handleSend(userEmail,"4000 Euros are to be refunded","Cancellation Confirmation",subject2)
                     }else{
-                      handleSend(userProfile.result.email,"No Money to be refunded","Cancellation Confirmation",subject2)
+                      handleSend(userEmail,"No Money to be refunded","Cancellation Confirmation",subject2)
                     }
                     }}else{
                       if(reservation.userID===userProfile.result._id){
                       deleteFlight(reservationList[key-1]._id)
                       deleteFlight(reservationList[key]._id)
                       if(reservation.payed){
-                        handleSend(userProfile.result.email,"2000 Euros are to be refunded","Cancellation Confirmation",subject2)
+                        handleSend(userEmail,"2000 Euros are to be refunded","Cancellation Confirmation",subject2)
                         }else{
-                          handleSend(userProfile.result.email,"No Money to be refunded","Cancellation Confirmation",subject2)
+                          handleSend(userEmail,"No Money to be refunded","Cancellation Confirmation",subject2)
                         }
                     }}
                 }
@@ -233,7 +246,7 @@ let subject2=`You Have Successfully cancelled The round Trip flights`
               <SendIcon aria-label="Email" onClick={()=>{
                 window.alert("Email Has Been Sent Successfully")
                  handleSendHelper(reservationList[key-1]._id,reservationList[key]._id,
-                  userProfile.result.email,roundTripString,"Reservation Details","This email has been sent upon your request")
+                  userEmail,roundTripString,"Reservation Details","This email has been sent upon your request")
               }}></SendIcon>
               </StyledTableCell>:<StyledTableCell align="center">X</StyledTableCell>}</>
 

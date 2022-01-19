@@ -35,7 +35,7 @@ function UpdateUser() {
       noValidate
       autoComplete="off"
     >
-    <TextField id="outlined-basic" label="Full Name" variant="outlined" value={user.name}onChange={(event)=>{
+    <TextField id="outlined-basic" label="Name" variant="outlined" value={user.name}onChange={(event)=>{
         setUser({ ...user,name:event.target.value})
       }}/>
     <TextField id="outlined-basic" label="Email" variant="outlined" value={user.email}onChange={(event)=>{

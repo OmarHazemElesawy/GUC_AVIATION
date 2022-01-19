@@ -45,6 +45,7 @@ export default function PaymentForm() {
     let departureString;
     let returnString;
     let roundTripString;
+    let userEmail;
 
     if(cabinClass1==="Business"&&cabinClass2==="Business"){
         amountInCents=4000*100;
@@ -63,6 +64,18 @@ export default function PaymentForm() {
         setReservationList(allReservations.data);
       })
     },[])
+    const[userList, setUserList]=useState([]);
+
+    useEffect(()=>{
+      axios.get('http://localhost:5000/user').then((allUsers)=>{
+        setUserList(allUsers.data);
+      })
+    },[])
+    for (var i in userList){
+      if(userList[i]['_id']===userProfile.result._id){
+        userEmail=userList[i]['email']
+      }
+    }
     for (var k in reservationList){
         if(reservationList[k]['_id']===id1){
             if(reservationList[k]['depSeats'].length===0){
@@ -254,7 +267,7 @@ const [reservation2,setReservation2]=useState({
                    console.log(reservation2.payed)
                    updateReservation1(id1);
                    updateReservation2(id2);
-                   handleSend(userProfile.result.email,roundTripString,"payment confirmation",subject2)
+                   handleSend(userEmail,roundTripString,"payment confirmation",subject2)
                    navigate("/existingUser");
               }}>Return to Home Page</Button>
                </Stack>
