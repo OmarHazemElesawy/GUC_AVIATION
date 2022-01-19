@@ -1,5 +1,5 @@
 
-GIU Aviation:
+GUC Aviation:
 -------------
 This project an implemetation of a website for an airline company. 
 It has the basic functionalities for such website. 
