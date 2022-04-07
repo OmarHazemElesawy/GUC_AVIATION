@@ -83,58 +83,25 @@ This Project code was mainly written in Javascript with some HTML/CSS.
 
 Installation/ Startup:
 ---------------------
-1)You start by douwnloading the project from github and importing into your favourite IDE.
+1) You start by douwnloading the project from github and importing into your favourite IDE.
 
-2)After downloading you delete the package-lock.json from both the client and server folders.
+2) After downloading you delete the package-lock.json from both the client and server folders.
 
-3)In split terminals cd client & cd server.
+3) In split terminals cd client & cd server.
 
-4)npm install in both terminals to install dependencies and to create the package-lock.json files again.
+4) npm install in both terminals to install dependencies and to create the package-lock.json files again.
 
-5)To startup the website ; npm start in both the cilent and server terminal.
+5) To startup the website ; npm start in both the cilent and server terminal.
 
-6)You should find a new tab opened in your default browser where you can use the website.
+6) You should find a new tab opened in your default browser where you can use the website.
 
-7)For node mailer you will find the email and the password for a testing email account(sender email) to change it just edit .env file with desired email.
+7) For node mailer you will find the email and the password for a testing email account(sender email) to change it just edit .env file with desired email.
 
-8)For stripe , to monitor payments; you can log in to stripe account that you can find also in the .env file there you will find email/password.
+8) For stripe , to monitor payments; you can log in to stripe account that you can find also in the .env file there you will find email/password.
 
-9)If you want to change stripe account you can do that,but, you need to change the public key found in the stripeContainer.js file in the client folder,
+9) If you want to change stripe account you can do that,but, you need to change the public key found in the stripeContainer.js file in the client folder,
  and also you need to change the secret key in the .env file.
 
-
-Members's contributions milestone 1:
-------------------------------------
-1) Fadi Saber/46-9988:
-    Requirments: 3-4
-2) khaled Ashraf/46-10603:
-    Requirments: 6-10
-3) Omar Khaled/46-1152:
-    Requirments: 8-9
-4) Omar Elesawy/46-2838:
-    Requirments: 5-7
-    
-Members's contributions milestone 2:
-------------------------------------
-1) Fadi Saber/46-9988:
-    Requirments: 11-12-13-19
-2) khaled Ashraf/46-10603:
-    Requirments: 14-15-16-20
-3) Omar Khaled/46-1152:
-    Requirments:21-27-27.1-29-29.1
-4) Omar Elesawy/46-2838:
-    Requirments:17-18-22-24-26
-
-Members's contributions milestone 3:
-------------------------------------
-1) Fadi Saber/46-9988:
-    Requirments: 31-32-33-40-43-44-45
-2) khaled Ashraf/46-10603:
-    Requirments: 34-35-36-46-41-47-48
-3) Omar Khaled/46-1152:
-    Requirments: 37-38-49-50-39-51-52
-4) Omar Elesawy/46-2838:
-    Requirments:23-25-28-30-30.1-42-53-54-55
 
 Credits:
 --------
