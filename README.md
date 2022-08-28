@@ -83,7 +83,7 @@ This Project code was mainly written in Javascript with some HTML/CSS.
 
 Installation/ Startup:
 ---------------------
-1) You start by douwnloading the project from github and importing into your favourite IDE.
+1) You start by downloading the project from github and importing into your favourite IDE.
 
 2) After downloading you delete the package-lock.json from both the client and server folders.
 
