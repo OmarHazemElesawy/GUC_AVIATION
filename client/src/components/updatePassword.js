@@ -12,6 +12,7 @@ function UpdatePassword() {
     const navigate=useNavigate();
     const userProfile=JSON.parse(localStorage.getItem('profile'));
     let oldPassword;
+    let confirmPassword;
     const [user,setUser]=useState({
         password:'',
          });
@@ -42,8 +43,8 @@ function UpdatePassword() {
         </AppBar>
         <h3>
           Your Old Password:
-          <br/>
           {oldPassword}
+          <br/>
         </h3>
           <Box
       component="form"
@@ -53,16 +54,28 @@ function UpdatePassword() {
       noValidate
       autoComplete="off"
     >
+         <TextField id="outlined-basic" label="confirm password" variant="outlined" required fullWidth onChange={(event)=>{
+        confirmPassword=event.target.value}
+      }/>
     <TextField id="outlined-basic" label="Password" variant="outlined" required fullWidth value={user.password}onChange={(event)=>{
         setUser({ ...user,password:event.target.value});
       }}/>
-      
+    
       <div className="Button">
       <Stack spacing={20} size="large" direction="column" alignItems="center" alignSelf="center">
         <Button variant="contained" onClick={()=>{const confirmBox = window.confirm("Are you sure you want to update Password?")
                 if(confirmBox===true){
+                  if(oldPassword===confirmPassword){
+                  
                   updatePassword(id);
-                  navigate("/ExistingUser")}}}>Update Password</Button>
+                  navigate("/ExistingUser")
+                }
+                  else{
+                    // window.confirm("old password is not correct ")
+                    window.confirm(`${confirmPassword}`)
+                  }
+                }
+                  }}>Update Password</Button>
           
     </Stack>
     </div>
