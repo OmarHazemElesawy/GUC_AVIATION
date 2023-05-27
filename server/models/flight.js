@@ -13,6 +13,5 @@ const flightSchema = mongoose.Schema({
     arrivalTerminal:String,
 
 });
-//flight number, departure and arrival times, dates, number of Economy seats, number of Business class seats, and airport
 const flight=mongoose.model('flight',flightSchema);
 export default flight;
