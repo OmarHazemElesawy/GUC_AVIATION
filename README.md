@@ -95,13 +95,9 @@ Installation/ Startup:
 
 6) You should find a new tab opened in your default browser where you can use the website.
 
-7) For node mailer you will find the email and the password for a testing email account(sender email) to change it just edit .env file with desired email.
+7) For node mailer you will need to setup the an email and password to use.
 
-8) For stripe , to monitor payments; you can log in to stripe account that you can find also in the .env file there you will find email/password.
-
-9) If you want to change stripe account you can do that,but, you need to change the public key found in the stripeContainer.js file in the client folder,
- and also you need to change the secret key in the .env file.
-
+8) For stripe , to monitor payments; you can setup new stripe credentials (API_KEYS).
 
 Credits:
 --------
